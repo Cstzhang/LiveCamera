@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+inhibit_all_warnings!
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, ‘9.0’
+
+targetsArray = [‘LiveCamera’]
+# 循环
+targetsArray.each do |t|
+    target t do
+        pod 'MJRefresh', '~> 3.1.12'
+        pod 'Masonry', '~> 1.1.0'
+        pod 'AFNetworking', '~> 3.2.0'
+        pod 'SDWebImage', '~> 4.3.1'
+        pod 'YYModel', '~> 1.0.4'
+        pod 'MBProgressHUD', '~> 1.1.0'
+        pod 'YYCache', '~> 1.0.4'
+        pod 'ZLPhotoBrowser', '~> 2.6.4'
+        pod 'QMUIKit', '~> 2.7.1'
+    end
+
+end

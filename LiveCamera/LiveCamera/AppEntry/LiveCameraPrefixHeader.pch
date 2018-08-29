@@ -1,0 +1,68 @@
+//
+//  OpsseeBabyHeader.pch
+//  opsseeBaby
+//
+//  Created by zhangzb on 2018/2/27.
+//  Copyright © 2018年 Guangzhou Shirui Electronics Co., Ltd. All rights reserved.
+//
+
+#ifndef OpsseeBabyHeader_pch
+#define OpsseeBabyHeader_pch
+
+#pragma 公用类头文件
+//UI宏
+#import "ACMacros.h"
+//API宏
+#import "APIMacros.h"
+//Notification宏
+#import "NotificationMacros.h"
+//第三方配置宏
+#import "VendorMarcos.h"
+//工具宏
+#import "UtilsMacros.h"
+//工具方法
+#import "UtilitesMethods.h"
+//AppDelegate视图分类
+#import "AppDelegate+ViewController.h"
+//AppDelegate服务分类
+#import "AppDelegate+AppService.h"
+//UIColor分类
+#import "UIColor+Additions.h"
+#import "ZBDataEntity.h"
+#import "ZBNetManager.h"
+//UIView分类
+#import "UIView+Extension.h"
+//本地存储
+#import "UserDefaultUtil.h"
+//UIImage分类
+#import "UIImage+Additions.h"
+
+//红点
+#import "UITabBar+CustomBadge.h"
+#import "UIFont+MyFont.h"
+
+#pragma 第三方头文件
+//UI组件
+#import <QMUIKit/QMUIKit.h>
+//图片
+#import <SDWebImage/UIImageView+WebCache.h>
+ #import <SDWebImage/UIButton+WebCache.h>
+//网络
+#import <AFNetworking.h>
+#import "AFNetworkActivityIndicatorManager.h"
+//刷新
+#import <MJRefresh.h>
+//Model
+#import <YYModel.h>
+//适配
+#import <Masonry.h>
+//提示框
+#import <MBProgressHUD.h>
+#import "MBProgressHUD+ZBAdditions.h"
+//Cache
+#import <YYCache.h>
+
+#import "QDUIHelper.h"
+#import "QDCommonUI.h"
+#import "QDThemeManager.h"
+#endif /* OpsseeBabyHeader_pch */
