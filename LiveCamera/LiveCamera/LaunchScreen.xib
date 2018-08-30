@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MMT-IV-3Mg" userLabel="launch_background">
-                    <rect key="frame" x="0.0" y="20" width="375" height="627"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TVI-BL-ku8" userLabel="launch_logo">
                     <rect key="frame" x="81" y="220" width="212" height="62"/>
@@ -36,7 +36,7 @@
                 <constraint firstItem="MMT-IV-3Mg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KQf-Rk-1DA"/>
                 <constraint firstItem="iIx-jH-Jfn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Vqc-TB-JY2"/>
                 <constraint firstItem="MMT-IV-3Mg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XHo-Eg-YMf"/>
-                <constraint firstItem="MMT-IV-3Mg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="fmI-Ca-Ay7"/>
+                <constraint firstItem="MMT-IV-3Mg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fmI-Ca-Ay7"/>
                 <constraint firstItem="MMT-IV-3Mg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="maB-Lk-mu1"/>
                 <constraint firstItem="TVI-BL-ku8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="200" id="ycw-uc-s87"/>
             </constraints>

@@ -9,5 +9,5 @@
 #ifndef VendorMarcos_h
 #define VendorMarcos_h
 
-#define UM_Appkey @"5abb46cca40fa36ab3000366"
+
 #endif /* VendorMarcos_h */

@@ -36,22 +36,8 @@
 		FF3A28AF213634A900EB94B8 /* AppDelegate+AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A2892213634A800EB94B8 /* AppDelegate+AppService.m */; };
 		FF3A28B0213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A2894213634A800EB94B8 /* AppDelegate+ViewController.m */; };
 		FF3A28B1213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A2894213634A800EB94B8 /* AppDelegate+ViewController.m */; };
-		FF3A28B2213634A900EB94B8 /* UITabBar+CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A2897213634A800EB94B8 /* UITabBar+CustomBadge.m */; };
-		FF3A28B3213634A900EB94B8 /* UITabBar+CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A2897213634A800EB94B8 /* UITabBar+CustomBadge.m */; };
-		FF3A28B4213634A900EB94B8 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A289A213634A800EB94B8 /* UIView+Extension.m */; };
-		FF3A28B5213634A900EB94B8 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A289A213634A800EB94B8 /* UIView+Extension.m */; };
-		FF3A28B6213634A900EB94B8 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A289D213634A900EB94B8 /* UIImage+Additions.m */; };
-		FF3A28B7213634A900EB94B8 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A289D213634A900EB94B8 /* UIImage+Additions.m */; };
 		FF3A28B8213634A900EB94B8 /* UIViewController+swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28A1213634A900EB94B8 /* UIViewController+swizzling.m */; };
 		FF3A28B9213634A900EB94B8 /* UIViewController+swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28A1213634A900EB94B8 /* UIViewController+swizzling.m */; };
-		FF3A28BA213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28A4213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m */; };
-		FF3A28BB213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28A4213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m */; };
-		FF3A28BC213634A900EB94B8 /* UIImagePickerController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28A7213634A900EB94B8 /* UIImagePickerController+Additions.m */; };
-		FF3A28BD213634A900EB94B8 /* UIImagePickerController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28A7213634A900EB94B8 /* UIImagePickerController+Additions.m */; };
-		FF3A28BE213634A900EB94B8 /* UIFont+MyFont.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28AA213634A900EB94B8 /* UIFont+MyFont.m */; };
-		FF3A28BF213634A900EB94B8 /* UIFont+MyFont.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28AA213634A900EB94B8 /* UIFont+MyFont.m */; };
-		FF3A28C0213634A900EB94B8 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28AD213634A900EB94B8 /* UIColor+Additions.m */; };
-		FF3A28C1213634A900EB94B8 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28AD213634A900EB94B8 /* UIColor+Additions.m */; };
 		FF3A28C52136374A00EB94B8 /* ViewModelClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28C42136374A00EB94B8 /* ViewModelClass.m */; };
 		FF3A28C62136374A00EB94B8 /* ViewModelClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28C42136374A00EB94B8 /* ViewModelClass.m */; };
 		FF3A28CB213641B700EB94B8 /* UtilitesMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28CA213641B700EB94B8 /* UtilitesMethods.m */; };
@@ -70,6 +56,12 @@
 		FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */; };
 		FF3A28F72136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
 		FF3A28F82136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
+		FFAD34D2213797C2002FFD6E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D0213797C1002FFD6E /* UserModel.m */; };
+		FFAD34D3213797C2002FFD6E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D0213797C1002FFD6E /* UserModel.m */; };
+		FFAD34D621379809002FFD6E /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D521379809002FFD6E /* LoginViewModel.m */; };
+		FFAD34D721379809002FFD6E /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D521379809002FFD6E /* LoginViewModel.m */; };
+		FFAD34DB2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34DA2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m */; };
+		FFAD34DC2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34DA2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,28 +114,13 @@
 		FF3A288A2136345600EB94B8 /* UtilsMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsMacros.h; sourceTree = "<group>"; };
 		FF3A288B2136345600EB94B8 /* NotificationMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationMacros.h; sourceTree = "<group>"; };
 		FF3A288C2136345700EB94B8 /* VendorMarcos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorMarcos.h; sourceTree = "<group>"; };
-		FF3A288D2136345F00EB94B8 /* ACMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMacros.h; sourceTree = "<group>"; };
 		FF3A288E2136345F00EB94B8 /* APIMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIMacros.h; sourceTree = "<group>"; };
 		FF3A2891213634A800EB94B8 /* AppDelegate+AppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+AppService.h"; sourceTree = "<group>"; };
 		FF3A2892213634A800EB94B8 /* AppDelegate+AppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+AppService.m"; sourceTree = "<group>"; };
 		FF3A2893213634A800EB94B8 /* AppDelegate+ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+ViewController.h"; sourceTree = "<group>"; };
 		FF3A2894213634A800EB94B8 /* AppDelegate+ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+ViewController.m"; sourceTree = "<group>"; };
-		FF3A2896213634A800EB94B8 /* UITabBar+CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+CustomBadge.h"; sourceTree = "<group>"; };
-		FF3A2897213634A800EB94B8 /* UITabBar+CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+CustomBadge.m"; sourceTree = "<group>"; };
-		FF3A2899213634A800EB94B8 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		FF3A289A213634A800EB94B8 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		FF3A289C213634A900EB94B8 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
-		FF3A289D213634A900EB94B8 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		FF3A28A0213634A900EB94B8 /* UIViewController+swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+swizzling.h"; sourceTree = "<group>"; };
 		FF3A28A1213634A900EB94B8 /* UIViewController+swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+swizzling.m"; sourceTree = "<group>"; };
-		FF3A28A3213634A900EB94B8 /* MBProgressHUD+ZBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ZBAdditions.h"; sourceTree = "<group>"; };
-		FF3A28A4213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ZBAdditions.m"; sourceTree = "<group>"; };
-		FF3A28A6213634A900EB94B8 /* UIImagePickerController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Additions.h"; sourceTree = "<group>"; };
-		FF3A28A7213634A900EB94B8 /* UIImagePickerController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Additions.m"; sourceTree = "<group>"; };
-		FF3A28A9213634A900EB94B8 /* UIFont+MyFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MyFont.h"; sourceTree = "<group>"; };
-		FF3A28AA213634A900EB94B8 /* UIFont+MyFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MyFont.m"; sourceTree = "<group>"; };
-		FF3A28AC213634A900EB94B8 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
-		FF3A28AD213634A900EB94B8 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
 		FF3A28C32136374A00EB94B8 /* ViewModelClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewModelClass.h; sourceTree = "<group>"; };
 		FF3A28C42136374A00EB94B8 /* ViewModelClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewModelClass.m; sourceTree = "<group>"; };
 		FF3A28C72136414700EB94B8 /* LiveCameraPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveCameraPrefixHeader.pch; sourceTree = "<group>"; };
@@ -163,6 +140,12 @@
 		FF3A28E42136903400EB94B8 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
 		FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		FFAD34D0213797C1002FFD6E /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		FFAD34D1213797C1002FFD6E /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		FFAD34D421379809002FFD6E /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
+		FFAD34D521379809002FFD6E /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
+		FFAD34D92137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ZBAdditions.h"; sourceTree = "<group>"; };
+		FFAD34DA2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ZBAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,7 +263,6 @@
 		FF3A28532136323B00EB94B8 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				FF3A288D2136345F00EB94B8 /* ACMacros.h */,
 				FF3A288E2136345F00EB94B8 /* APIMacros.h */,
 				FF3A288B2136345600EB94B8 /* NotificationMacros.h */,
 				FF3A288A2136345600EB94B8 /* UtilsMacros.h */,
@@ -319,9 +301,9 @@
 		FF3A2857213632E200EB94B8 /* LoginRegister */ = {
 			isa = PBXGroup;
 			children = (
-				FF3A285B2136332400EB94B8 /* LoginViewController.h */,
-				FF3A285C2136332400EB94B8 /* LoginViewController.m */,
-				FF3A285D2136332400EB94B8 /* LoginViewController.xib */,
+				FFAD34CF21379797002FFD6E /* ViewModel */,
+				FFAD34CE2137978F002FFD6E /* Model */,
+				FFAD34CD21379786002FFD6E /* View */,
 			);
 			path = LoginRegister;
 			sourceTree = "<group>";
@@ -393,15 +375,8 @@
 		FF3A288F213634A100EB94B8 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				FF3A28A2213634A900EB94B8 /* Alert */,
+				FFAD34D82137CCCA002FFD6E /* Alert */,
 				FF3A2890213634A800EB94B8 /* AppDelegate */,
-				FF3A289E213634A900EB94B8 /* NSString */,
-				FF3A28AB213634A900EB94B8 /* UIColor */,
-				FF3A28A8213634A900EB94B8 /* UIFont */,
-				FF3A289B213634A900EB94B8 /* UIImage */,
-				FF3A28A5213634A900EB94B8 /* UIImagePickerController */,
-				FF3A2895213634A800EB94B8 /* UITabBar */,
-				FF3A2898213634A800EB94B8 /* UIView */,
 				FF3A289F213634A900EB94B8 /* ViewCategories */,
 			);
 			path = Categories;
@@ -418,40 +393,6 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		FF3A2895213634A800EB94B8 /* UITabBar */ = {
-			isa = PBXGroup;
-			children = (
-				FF3A2896213634A800EB94B8 /* UITabBar+CustomBadge.h */,
-				FF3A2897213634A800EB94B8 /* UITabBar+CustomBadge.m */,
-			);
-			path = UITabBar;
-			sourceTree = "<group>";
-		};
-		FF3A2898213634A800EB94B8 /* UIView */ = {
-			isa = PBXGroup;
-			children = (
-				FF3A2899213634A800EB94B8 /* UIView+Extension.h */,
-				FF3A289A213634A800EB94B8 /* UIView+Extension.m */,
-			);
-			path = UIView;
-			sourceTree = "<group>";
-		};
-		FF3A289B213634A900EB94B8 /* UIImage */ = {
-			isa = PBXGroup;
-			children = (
-				FF3A289C213634A900EB94B8 /* UIImage+Additions.h */,
-				FF3A289D213634A900EB94B8 /* UIImage+Additions.m */,
-			);
-			path = UIImage;
-			sourceTree = "<group>";
-		};
-		FF3A289E213634A900EB94B8 /* NSString */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NSString;
-			sourceTree = "<group>";
-		};
 		FF3A289F213634A900EB94B8 /* ViewCategories */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,42 +400,6 @@
 				FF3A28A1213634A900EB94B8 /* UIViewController+swizzling.m */,
 			);
 			path = ViewCategories;
-			sourceTree = "<group>";
-		};
-		FF3A28A2213634A900EB94B8 /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				FF3A28A3213634A900EB94B8 /* MBProgressHUD+ZBAdditions.h */,
-				FF3A28A4213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
-		FF3A28A5213634A900EB94B8 /* UIImagePickerController */ = {
-			isa = PBXGroup;
-			children = (
-				FF3A28A6213634A900EB94B8 /* UIImagePickerController+Additions.h */,
-				FF3A28A7213634A900EB94B8 /* UIImagePickerController+Additions.m */,
-			);
-			path = UIImagePickerController;
-			sourceTree = "<group>";
-		};
-		FF3A28A8213634A900EB94B8 /* UIFont */ = {
-			isa = PBXGroup;
-			children = (
-				FF3A28A9213634A900EB94B8 /* UIFont+MyFont.h */,
-				FF3A28AA213634A900EB94B8 /* UIFont+MyFont.m */,
-			);
-			path = UIFont;
-			sourceTree = "<group>";
-		};
-		FF3A28AB213634A900EB94B8 /* UIColor */ = {
-			isa = PBXGroup;
-			children = (
-				FF3A28AC213634A900EB94B8 /* UIColor+Additions.h */,
-				FF3A28AD213634A900EB94B8 /* UIColor+Additions.m */,
-			);
-			path = UIColor;
 			sourceTree = "<group>";
 		};
 		FF3A28C22136374A00EB94B8 /* ViewModel */ = {
@@ -548,6 +453,44 @@
 				FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		FFAD34CD21379786002FFD6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF3A285B2136332400EB94B8 /* LoginViewController.h */,
+				FF3A285C2136332400EB94B8 /* LoginViewController.m */,
+				FF3A285D2136332400EB94B8 /* LoginViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FFAD34CE2137978F002FFD6E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FFAD34D1213797C1002FFD6E /* UserModel.h */,
+				FFAD34D0213797C1002FFD6E /* UserModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FFAD34CF21379797002FFD6E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FFAD34D421379809002FFD6E /* LoginViewModel.h */,
+				FFAD34D521379809002FFD6E /* LoginViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FFAD34D82137CCCA002FFD6E /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				FFAD34D92137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.h */,
+				FFAD34DA2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m */,
+			);
+			name = Alert;
+			path = "../../../../../tmp/未命名文件夹/Alert";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -659,29 +602,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LiveCamera/Pods-LiveCamera-resources.sh",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/QMUIKit/QMUIKit/QMUIResources/QMUIResources.bundle",
-				"${PODS_ROOT}/ZLPhotoBrowser/PhotoBrowser/resource/ZLPhotoActionSheet.xib",
-				"${PODS_ROOT}/ZLPhotoBrowser/PhotoBrowser/resource/ZLPhotoBrowserCell.xib",
-				"${PODS_ROOT}/ZLPhotoBrowser/PhotoBrowser/resource/ZLPhotoBrowser.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_amatorka.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_miss_etikate.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_soft_elegance_1.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_soft_elegance_2.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QMUIResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZLPhotoActionSheet.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZLPhotoBrowserCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZLPhotoBrowser.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -714,13 +647,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF3A28B0213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */,
+				FFAD34DB2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */,
 				FF3A28632136333200EB94B8 /* LiveViewController.m in Sources */,
 				FF3A28EE2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */,
 				FF3A28DC21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
 				FF3A28862136343F00EB94B8 /* RootNavigationController.m in Sources */,
 				FF3A287F2136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
-				FF3A28B2213634A900EB94B8 /* UITabBar+CustomBadge.m in Sources */,
-				FF3A28B4213634A900EB94B8 /* UIView+Extension.m in Sources */,
 				FF3A28B8213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
 				FF3A285E2136332400EB94B8 /* LoginViewController.m in Sources */,
 				FF3A28882136343F00EB94B8 /* RootTabBarController.m in Sources */,
@@ -729,17 +661,14 @@
 				FF3A28AE213634A900EB94B8 /* AppDelegate+AppService.m in Sources */,
 				FF3A287D2136343900EB94B8 /* ZBNetManager.m in Sources */,
 				FF3A28C52136374A00EB94B8 /* ViewModelClass.m in Sources */,
-				FF3A28BC213634A900EB94B8 /* UIImagePickerController+Additions.m in Sources */,
-				FF3A28BA213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m in Sources */,
-				FF3A28C0213634A900EB94B8 /* UIColor+Additions.m in Sources */,
+				FFAD34D2213797C2002FFD6E /* UserModel.m in Sources */,
 				FF3A286D2136334600EB94B8 /* PhotoListViewController.m in Sources */,
 				FF3A28DA21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
-				FF3A28B6213634A900EB94B8 /* UIImage+Additions.m in Sources */,
 				FF3A28D0213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,
+				FFAD34D621379809002FFD6E /* LoginViewModel.m in Sources */,
 				FF3A28792136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
 				FF3A28EC2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF3A283C2136310200EB94B8 /* main.m in Sources */,
-				FF3A28BE213634A900EB94B8 /* UIFont+MyFont.m in Sources */,
 				FF3A287B2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A282E2136310000EB94B8 /* AppDelegate.m in Sources */,
 				FF3A28DE21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
@@ -750,22 +679,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAD34DC2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */,
 				FF3A28DD21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
 				FF3A28DF21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
 				FF3A28CC213641B700EB94B8 /* UtilitesMethods.m in Sources */,
-				FF3A28B3213634A900EB94B8 /* UITabBar+CustomBadge.m in Sources */,
-				FF3A28BD213634A900EB94B8 /* UIImagePickerController+Additions.m in Sources */,
-				FF3A28B7213634A900EB94B8 /* UIImage+Additions.m in Sources */,
 				FF3A28ED2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF3A28892136343F00EB94B8 /* RootTabBarController.m in Sources */,
-				FF3A28B5213634A900EB94B8 /* UIView+Extension.m in Sources */,
 				FF3A28B9213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
 				FF3A28462136310200EB94B8 /* LiveCameraTests.m in Sources */,
 				FF3A28C62136374A00EB94B8 /* ViewModelClass.m in Sources */,
-				FF3A28BF213634A900EB94B8 /* UIFont+MyFont.m in Sources */,
-				FF3A28C1213634A900EB94B8 /* UIColor+Additions.m in Sources */,
+				FFAD34D721379809002FFD6E /* LoginViewModel.m in Sources */,
 				FF3A28872136343F00EB94B8 /* RootNavigationController.m in Sources */,
-				FF3A28BB213634A900EB94B8 /* MBProgressHUD+ZBAdditions.m in Sources */,
 				FF3A28B1213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */,
 				FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */,
 				FF3A28802136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
@@ -773,6 +697,7 @@
 				FF3A287C2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A28DB21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
 				FF3A287A2136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
+				FFAD34D3213797C2002FFD6E /* UserModel.m in Sources */,
 				FF3A28D1213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,
 				FF3A287E2136343900EB94B8 /* ZBNetManager.m in Sources */,
 			);

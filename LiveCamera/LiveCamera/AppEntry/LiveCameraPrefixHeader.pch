@@ -10,8 +10,6 @@
 #define OpsseeBabyHeader_pch
 
 #pragma 公用类头文件
-//UI宏
-#import "ACMacros.h"
 //API宏
 #import "APIMacros.h"
 //Notification宏
@@ -27,19 +25,15 @@
 //AppDelegate服务分类
 #import "AppDelegate+AppService.h"
 //UIColor分类
-#import "UIColor+Additions.h"
 #import "ZBDataEntity.h"
 #import "ZBNetManager.h"
-//UIView分类
-#import "UIView+Extension.h"
+#import "MBProgressHUD+ZBAdditions.h"
+
+
 //本地存储
 #import "UserDefaultUtil.h"
-//UIImage分类
-#import "UIImage+Additions.h"
+#import "UserModel.h"
 
-//红点
-#import "UITabBar+CustomBadge.h"
-#import "UIFont+MyFont.h"
 
 #pragma 第三方头文件
 //UI组件
@@ -56,13 +50,15 @@
 #import <YYModel.h>
 //适配
 #import <Masonry.h>
-//提示框
-#import <MBProgressHUD.h>
-#import "MBProgressHUD+ZBAdditions.h"
 //Cache
 #import <YYCache.h>
-
+// UI
 #import "QDUIHelper.h"
 #import "QDCommonUI.h"
 #import "QDThemeManager.h"
+
+//YT
+@import GoogleSignIn;
+
+
 #endif /* OpsseeBabyHeader_pch */

@@ -40,7 +40,7 @@
     PhotoListViewController *photoListViewController = [[PhotoListViewController alloc] init];
     photoListViewController.hidesBottomBarWhenPushed = NO;
     RootNavigationController *photoListNavController = [[RootNavigationController alloc] initWithRootViewController:photoListViewController];
-    photoListNavController.tabBarItem = [QDUIHelper tabBarItemWithTitle:@"Components" image:[UIImageMake(@"ic_tab_photos") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"ic_tab_photos_selected") tag:1];
+    photoListNavController.tabBarItem = [QDUIHelper tabBarItemWithTitle:@"PhotoAlbum" image:[UIImageMake(@"ic_tab_photos") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"ic_tab_photos_selected") tag:1];
     
 
     

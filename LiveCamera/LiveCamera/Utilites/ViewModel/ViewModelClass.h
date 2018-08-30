@@ -10,7 +10,7 @@
 //定义返回请求数据的block类型
 typedef void (^ReturnValueBlock) (id returnValue);
 typedef void (^ErrorCodeBlock) (NSString * error);
-typedef void (^FailureBlock)(long errorCode);
+typedef void (^FailureBlock)(NSError* error);
 typedef void (^NetWorkBlock)(BOOL netConnetState);
 
 @interface ViewModelClass : NSObject

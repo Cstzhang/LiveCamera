@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoListViewController : UIViewController
+@interface PhotoListViewController : QMUICommonViewController
 
 @end

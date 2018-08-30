@@ -14,8 +14,28 @@ targetsArray.each do |t|
         pod 'YYModel', '~> 1.0.4'
         pod 'MBProgressHUD', '~> 1.1.0'
         pod 'YYCache', '~> 1.0.4'
-        pod 'ZLPhotoBrowser', '~> 2.6.4'
         pod 'QMUIKit', '~> 2.7.1'
+        pod 'GoogleSignIn'
+        pod 'FBSDKCoreKit'
+        pod 'FBSDKLoginKit'
+        pod 'FBSDKShareKit'
     end
 
 end
+
+#sing AFNetworking (3.2.1)
+#Installing Bolts (1.9.0)
+#Installing FBSDKCoreKit (4.34.0)
+#Installing FBSDKLoginKit (4.34.0)
+#Installing FBSDKShareKit (4.34.0)
+#Installing GTMOAuth2 (1.1.6)
+#Installing GTMSessionFetcher (1.1.15)
+#Installing GoogleSignIn (4.1.2)
+#Installing GoogleToolboxForMac (2.1.4)
+#Using MBProgressHUD (1.1.0)
+#Using MJRefresh (3.1.15.3)
+#Using Masonry (1.1.0)
+#Using QMUIKit (2.7.1)
+#Using SDWebImage (4.3.3)
+#Using YYCache (1.0.4)
+#Using YYModel (1.0.4)

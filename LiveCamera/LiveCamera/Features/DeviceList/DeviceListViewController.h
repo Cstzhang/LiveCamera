@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DeviceListViewController : UIViewController
+@interface DeviceListViewController : QMUICommonViewController
 
 @end

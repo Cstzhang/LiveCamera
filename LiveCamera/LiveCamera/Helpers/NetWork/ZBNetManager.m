@@ -84,26 +84,7 @@ static NSMutableArray *tasks;
     ZBNetManagerShare.timeoutInterval = 15;
     /*! 打开状态栏的等待菊花 */
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    /*! 设置返回数据类型为 json, 分别设置请求以及相应的序列化器 */
-    /*!
-     根据服务器的设定不同还可以设置：
-     json：[AFJSONResponseSerializer serializer](常用)
-     http：[AFHTTPResponseSerializer serializer]
-     */
-    //    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
-    //    /*! 这里是去掉了键值对里空对象的键值 */
-    ////    response.removesKeysWithNullValues = YES;
-    //    ZBNetManagerShare.sessionManager.responseSerializer = response;
-    
-    /* 设置请求服务器数类型式为 json */
-    /*!
-     根据服务器的设定不同还可以设置：
-     json：[AFJSONRequestSerializer serializer](常用)
-     http：[AFHTTPRequestSerializer serializer]
-     */
-    //    AFJSONRequestSerializer *request = [AFJSONRequestSerializer serializer];
-    //    ZBNetManagerShare.sessionManager.requestSerializer = request;
-    /*! 设置apikey ------类似于自己应用中的tokken---此处仅仅作为测试使用*/
+
     //如果cookie里面有值，就插入
     if ([UserDefaultUtil valueForKey:SHIRO_COOKIE]) {
         [ZBNetManagerShare.sessionManager.requestSerializer
@@ -113,28 +94,12 @@ static NSMutableArray *tasks;
     /*! 复杂的参数类型 需要使用json传值-设置请求内容的类型*/
  
 
-   
-    
     /*! 设置响应数据的基本类型 */
     ZBNetManagerShare.sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/css", @"text/xml", @"text/plain", @"application/javascript", @"application/x-www-form-urlencoded", @"image/*", nil];
     
     // 配置自建证书的Https请求
     [self zb_setupSecurityPolicy];
 }
-
-//+ (void)setCookieAry:(NSArray *)array {
-//    for (NSString *cookieStr in array) {
-//        if ([cookieStr rangeOfString:@"shiroCookie"].location != NSNotFound) {
-//            NSArray *CookAry = [cookieStr componentsSeparatedByString:@";"];
-//            for (NSString *cookie in CookAry) {
-//                if ([cookie rangeOfString:@"shiroCookie"].location != NSNotFound) {
-//                    [UserDefaultUtil setObject:cookie forKey:@"shiroCookie"];
-//                }
-//            }
-//        }
-//    }
-//
-//}
 
 + (void)saveCookie {
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
@@ -143,7 +108,6 @@ static NSMutableArray *tasks;
         if ([cookie.name isEqualToString:SHIRO_COOKIE]) {
             [UserDefaultUtil setObject:[NSString stringWithFormat:@"%@=%@",SHIRO_COOKIE,cookie.value] forKey:SHIRO_COOKIE];
         }
-//        NSLog(@"\n\n-------- %@",cookie);
     }
 }
 /**
@@ -237,17 +201,7 @@ static NSMutableArray *tasks;
             break;
     }
 
-    //AFHTTPSessionManager *scc = ZBNetManagerShare.sessionManager;
-//    AFHTTPResponseSerializer *scc2 = scc.responseSerializer;
-//    AFHTTPRequestSerializer *scc3 = scc.requestSerializer;
-//    NSTimeInterval timeoutInterval = ZBNetManagerShare.timeoutInterval;
-////
-//    NSString *isCache = isNeedCache ? @"开启":@"关闭";
-//    CGFloat allCacheSize = [ZBNetManagerCache zb_getAllHttpCacheSize];
-    
-//    DSLog(@"\n******************** 请求参数 ***************************");
-//    DSLog(@"\n请求头: %@\n超时时间设置：%.1f 秒【默认：30秒】\nAFHTTPResponseSerializer：%@【默认：AFJSONResponseSerializer】\nAFHTTPRequestSerializer：%@【默认：AFJSONRequestSerializer】\n请求方式: %@\n请求URL: %@\n请求param: %@\n是否启用缓存：%@【默认：开启】\n目前总缓存大小：%.6fM\n", ZBNetManagerShare.sessionManager.requestSerializer.HTTPRequestHeaders, timeoutInterval, scc2, scc3, requestType, URLString, parameters, isCache, allCacheSize);
-//    DSLog(@"\n********************************************************");
+
     if ([UserDefaultUtil valueForKey:SHIRO_COOKIE]) {
         [ZBNetManagerShare.sessionManager.requestSerializer
          setValue:[UserDefaultUtil valueForKey:SHIRO_COOKIE] forHTTPHeaderField:@"Cookie"];
@@ -306,14 +260,6 @@ static NSMutableArray *tasks;
             });
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-//            NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-//            NSString *cookieheader = response.allHeaderFields[@"Set-Cookie"];
-//            if (cookieheader.length>0) {
-//                NSArray *cookies = [cookieheader componentsSeparatedByString:@","];
-//                if (cookies.count>0) {
-//                    [self setCookieAry:cookies];
-//                }
-//            }
             [self saveCookie];
             if (successBlock)
             {

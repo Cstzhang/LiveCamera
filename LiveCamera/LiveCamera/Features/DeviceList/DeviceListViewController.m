@@ -7,7 +7,7 @@
 //
 
 #import "DeviceListViewController.h"
-
+#import "LoginViewController.h"
 @interface DeviceListViewController ()
 
 @end
@@ -16,23 +16,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"DeviceList";
-    // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setupNavigationItems {
+    [super setupNavigationItems];
+    self.title = @"Device List";
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self jumpTologin];
+    
 }
-*/
+
+-(void)jumpTologin{
+    LoginViewController *loginVc=[[LoginViewController alloc]init];
+    loginVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:loginVc animated:YES completion:nil];
+
+}
 
 @end
