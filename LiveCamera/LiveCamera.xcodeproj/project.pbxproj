@@ -56,6 +56,10 @@
 		FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */; };
 		FF3A28F72136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
 		FF3A28F82136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
+		FF95886F21391BD1003D317B /* SUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886B21391BD0003D317B /* SUCache.m */; };
+		FF95887021391BD1003D317B /* SUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886B21391BD0003D317B /* SUCache.m */; };
+		FF95887121391BD1003D317B /* SUCacheItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886E21391BD1003D317B /* SUCacheItem.m */; };
+		FF95887221391BD1003D317B /* SUCacheItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886E21391BD1003D317B /* SUCacheItem.m */; };
 		FFAD34D2213797C2002FFD6E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D0213797C1002FFD6E /* UserModel.m */; };
 		FFAD34D3213797C2002FFD6E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D0213797C1002FFD6E /* UserModel.m */; };
 		FFAD34D621379809002FFD6E /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D521379809002FFD6E /* LoginViewModel.m */; };
@@ -144,6 +148,10 @@
 		FF3A28E42136903400EB94B8 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
 		FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		FF95886B21391BD0003D317B /* SUCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCache.m; sourceTree = "<group>"; };
+		FF95886C21391BD1003D317B /* SUCacheItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCacheItem.h; sourceTree = "<group>"; };
+		FF95886D21391BD1003D317B /* SUCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCache.h; sourceTree = "<group>"; };
+		FF95886E21391BD1003D317B /* SUCacheItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCacheItem.m; sourceTree = "<group>"; };
 		FFAD34D0213797C1002FFD6E /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		FFAD34D1213797C1002FFD6E /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		FFAD34D421379809002FFD6E /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
@@ -259,6 +267,7 @@
 		FF3A28522136323300EB94B8 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				FF95886A21391BB3003D317B /* SUCache */,
 				FF3A28D321368D8700EB94B8 /* QDUtilites */,
 				FF3A28CD213641DF00EB94B8 /* UserDefault */,
 				FF3A28C8213641B700EB94B8 /* Methods */,
@@ -460,6 +469,17 @@
 				FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		FF95886A21391BB3003D317B /* SUCache */ = {
+			isa = PBXGroup;
+			children = (
+				FF95886D21391BD1003D317B /* SUCache.h */,
+				FF95886B21391BD0003D317B /* SUCache.m */,
+				FF95886C21391BD1003D317B /* SUCacheItem.h */,
+				FF95886E21391BD1003D317B /* SUCacheItem.m */,
+			);
+			path = SUCache;
 			sourceTree = "<group>";
 		};
 		FFAD34CD21379786002FFD6E /* View */ = {
@@ -690,6 +710,7 @@
 				FF3A28862136343F00EB94B8 /* RootNavigationController.m in Sources */,
 				FF3A287F2136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
 				FF3A28B8213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
+				FF95887121391BD1003D317B /* SUCacheItem.m in Sources */,
 				FF3A285E2136332400EB94B8 /* LoginViewController.m in Sources */,
 				FF3A28882136343F00EB94B8 /* RootTabBarController.m in Sources */,
 				FF3A28682136333C00EB94B8 /* DeviceListViewController.m in Sources */,
@@ -706,6 +727,7 @@
 				FF3A28EC2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF3A283C2136310200EB94B8 /* main.m in Sources */,
 				FFAD34E32137E74A002FFD6E /* DeviceViewCell.m in Sources */,
+				FF95886F21391BD1003D317B /* SUCache.m in Sources */,
 				FF3A287B2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A282E2136310000EB94B8 /* AppDelegate.m in Sources */,
 				FF3A28DE21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
@@ -721,6 +743,7 @@
 				FF3A28DF21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
 				FF3A28CC213641B700EB94B8 /* UtilitesMethods.m in Sources */,
 				FF3A28ED2136903500EB94B8 /* QDThemeManager.m in Sources */,
+				FF95887021391BD1003D317B /* SUCache.m in Sources */,
 				FF3A28892136343F00EB94B8 /* RootTabBarController.m in Sources */,
 				FFAD34E42137E74A002FFD6E /* DeviceViewCell.m in Sources */,
 				FF3A28B9213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
@@ -734,6 +757,7 @@
 				FF3A28AF213634A900EB94B8 /* AppDelegate+AppService.m in Sources */,
 				FF3A287C2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A28DB21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
+				FF95887221391BD1003D317B /* SUCacheItem.m in Sources */,
 				FF3A287A2136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
 				FFAD34D3213797C2002FFD6E /* UserModel.m in Sources */,
 				FF3A28D1213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,

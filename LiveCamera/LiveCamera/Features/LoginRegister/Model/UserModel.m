@@ -75,8 +75,6 @@ static UserModel *sharedUserInfoContext = nil;
     _YTaccessToken  = nil;
     _YTclientID     = nil;
 
-    [GIDSignIn.sharedInstance signOut];
-    
     [UserDefaultUtil removeObjectForKey:@"YTuserID"];
     [UserDefaultUtil removeObjectForKey:@"FBuserID"];
     [UserDefaultUtil removeObjectForKey:@"fullName"];
@@ -90,6 +88,12 @@ static UserModel *sharedUserInfoContext = nil;
     [UserDefaultUtil removeObjectForKey:@"YTclientID"];
     //清除用户cookie
     [UserDefaultUtil removeObjectForKey:SHIRO_COOKIE];
+    
+    [GIDSignIn.sharedInstance signOut];
+    
+    FBSDKLoginManager *FBlogin = [[FBSDKLoginManager alloc] init];
+    
+    [FBlogin logOut];
 }
 
 /** 重启APP的时候重新给单例的属性赋值 */
@@ -112,7 +116,16 @@ static UserModel *sharedUserInfoContext = nil;
 }
 
 - (BOOL)isFBLogin{
-    return YES;
+    NSInteger slot = 0;
+    FBSDKAccessToken *token = [SUCache itemForSlot:slot].token;
+    if (token) {
+        return YES;
+    }
+    return NO ;
+}
+
+- (BOOL)isLogin{
+    return [self isYTLogin] || [self isFBLogin];
 }
 
 @end

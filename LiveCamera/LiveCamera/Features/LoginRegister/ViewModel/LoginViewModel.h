@@ -22,4 +22,6 @@
 
 - (void)FBSignInServerWithResult:(FBSDKLoginManagerLoginResult *)result viewController:(UIViewController *)viewController;
 
+- (void)FBautoLoginWithToken:(FBSDKAccessToken *)token  viewController:(UIViewController *)viewController;
+
 @end

@@ -19,6 +19,26 @@
 
 @implementation LoginViewModel
 
+- (void)FBautoLoginWithToken:(FBSDKAccessToken *)token  viewController:(UIViewController *)viewController{
+    self.LoginVc = viewController;
+    [FBSDKAccessToken setCurrentAccessToken:token];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        //token过期，删除存储的token和profile
+        if (error) {
+            NSLog(@"The user token is no longer valid.");
+            NSInteger slot = 0;
+            [SUCache deleteItemInSlot:slot];
+            [FBSDKAccessToken setCurrentAccessToken:nil];
+            [FBSDKProfile setCurrentProfile:nil];
+        }
+        //做登录完成的操作
+        else {
+            [self.LoginVc dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+}
+
 - (void)FBSignInServerWithResult:(FBSDKLoginManagerLoginResult *)result
                   viewController:(UIViewController *)viewController{
     self.result = result;

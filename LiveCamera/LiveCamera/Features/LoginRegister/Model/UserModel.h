@@ -56,5 +56,6 @@ typedef NS_ENUM(NSUInteger,LoginType){
 - (BOOL)isYTLogin;
 
 - (BOOL)isFBLogin;
+- (BOOL)isLogin;
 
 @end

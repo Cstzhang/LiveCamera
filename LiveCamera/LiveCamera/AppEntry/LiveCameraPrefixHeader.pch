@@ -33,7 +33,7 @@
 //本地存储
 #import "UserDefaultUtil.h"
 #import "UserModel.h"
-
+#import "SUCache.h"
 
 #pragma 第三方头文件
 //UI组件

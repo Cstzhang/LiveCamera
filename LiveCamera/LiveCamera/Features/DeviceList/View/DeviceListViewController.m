@@ -59,7 +59,7 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 }
 #pragma mark - TEST
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    if (![USER_INFO isYTLogin]) {
+    if (![USER_INFO isLogin]) {
         [self jumpTologin];
     }
 }
