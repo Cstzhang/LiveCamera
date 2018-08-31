@@ -8,6 +8,11 @@
 
 #ifndef UtilsMacros_h
 #define UtilsMacros_h
+
+//设计屏幕宽度 IPHONE 6 的尺寸作为基准
+#define NORM_SCREEN_WIDTH 375
+
+#define HEAD_TABBAR_HEIGHT 113
 //系统版本号
 #define kSystemVersion [[UIDevice currentDevice] systemVersion]
 //APP版本号

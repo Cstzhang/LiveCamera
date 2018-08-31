@@ -62,6 +62,10 @@
 		FFAD34D721379809002FFD6E /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D521379809002FFD6E /* LoginViewModel.m */; };
 		FFAD34DB2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34DA2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m */; };
 		FFAD34DC2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34DA2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m */; };
+		FFAD34E32137E74A002FFD6E /* DeviceViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34E12137E74A002FFD6E /* DeviceViewCell.m */; };
+		FFAD34E42137E74A002FFD6E /* DeviceViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34E12137E74A002FFD6E /* DeviceViewCell.m */; };
+		FFAD34E52137E74A002FFD6E /* DeviceViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFAD34E22137E74A002FFD6E /* DeviceViewCell.xib */; };
+		FFAD34E62137E74A002FFD6E /* DeviceViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFAD34E22137E74A002FFD6E /* DeviceViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +150,9 @@
 		FFAD34D521379809002FFD6E /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		FFAD34D92137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ZBAdditions.h"; sourceTree = "<group>"; };
 		FFAD34DA2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ZBAdditions.m"; sourceTree = "<group>"; };
+		FFAD34E02137E74A002FFD6E /* DeviceViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceViewCell.h; sourceTree = "<group>"; };
+		FFAD34E12137E74A002FFD6E /* DeviceViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceViewCell.m; sourceTree = "<group>"; };
+		FFAD34E22137E74A002FFD6E /* DeviceViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,9 +328,9 @@
 		FF3A2859213632F600EB94B8 /* DeviceList */ = {
 			isa = PBXGroup;
 			children = (
-				FF3A28652136333C00EB94B8 /* DeviceListViewController.h */,
-				FF3A28662136333C00EB94B8 /* DeviceListViewController.m */,
-				FF3A28672136333C00EB94B8 /* DeviceListViewController.xib */,
+				FFAD34DF2137E6B8002FFD6E /* Model */,
+				FFAD34DE2137E6B2002FFD6E /* ViewModel */,
+				FFAD34DD2137E6A3002FFD6E /* View */,
 			);
 			path = DeviceList;
 			sourceTree = "<group>";
@@ -493,6 +500,33 @@
 			path = "../../../../../tmp/未命名文件夹/Alert";
 			sourceTree = "<group>";
 		};
+		FFAD34DD2137E6A3002FFD6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF3A28652136333C00EB94B8 /* DeviceListViewController.h */,
+				FF3A28662136333C00EB94B8 /* DeviceListViewController.m */,
+				FF3A28672136333C00EB94B8 /* DeviceListViewController.xib */,
+				FFAD34E02137E74A002FFD6E /* DeviceViewCell.h */,
+				FFAD34E12137E74A002FFD6E /* DeviceViewCell.m */,
+				FFAD34E22137E74A002FFD6E /* DeviceViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FFAD34DE2137E6B2002FFD6E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FFAD34DF2137E6B8002FFD6E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -581,6 +615,7 @@
 				FF3A28362136310200EB94B8 /* Assets.xcassets in Resources */,
 				FF3A28642136333200EB94B8 /* LiveViewController.xib in Resources */,
 				FF3A28692136333C00EB94B8 /* DeviceListViewController.xib in Resources */,
+				FFAD34E52137E74A002FFD6E /* DeviceViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +623,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAD34E62137E74A002FFD6E /* DeviceViewCell.xib in Resources */,
 				FF3A28F82136961C00EB94B8 /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,6 +705,7 @@
 				FF3A28792136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
 				FF3A28EC2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF3A283C2136310200EB94B8 /* main.m in Sources */,
+				FFAD34E32137E74A002FFD6E /* DeviceViewCell.m in Sources */,
 				FF3A287B2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A282E2136310000EB94B8 /* AppDelegate.m in Sources */,
 				FF3A28DE21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
@@ -685,6 +722,7 @@
 				FF3A28CC213641B700EB94B8 /* UtilitesMethods.m in Sources */,
 				FF3A28ED2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF3A28892136343F00EB94B8 /* RootTabBarController.m in Sources */,
+				FFAD34E42137E74A002FFD6E /* DeviceViewCell.m in Sources */,
 				FF3A28B9213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
 				FF3A28462136310200EB94B8 /* LiveCameraTests.m in Sources */,
 				FF3A28C62136374A00EB94B8 /* ViewModelClass.m in Sources */,

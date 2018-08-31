@@ -9,7 +9,6 @@
 #import "ViewModelClass.h"
 
 
-
 @interface LoginViewModel : ViewModelClass
 
 /**
@@ -19,5 +18,8 @@
  @param viewController 控制器
  */
 - (void)YTSignInServerWithUser:(GIDGoogleUser *)user viewController:(UIViewController *)viewController;
+
+
+- (void)FBSignInServerWithResult:(FBSDKLoginManagerLoginResult *)result viewController:(UIViewController *)viewController;
 
 @end

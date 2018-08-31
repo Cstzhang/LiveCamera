@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+typedef NS_ENUM(NSUInteger,LoginType){
+    LoginTypeYouTube,
+    LoginTypeFacebook,
+};
 @interface UserModel : NSObject
 
-@property (nonatomic,strong) NSString *userID;
+@property (nonatomic,strong) NSString *YTuserID;
+
+@property (nonatomic,strong) NSString *FBuserID;
 
 @property (nonatomic,strong) NSString *fullName;
 
@@ -20,16 +25,15 @@
 
 @property (nonatomic,strong) NSString *email;
 
-@property (nonatomic,strong) NSString *idToken;
+@property (nonatomic,strong) NSString *YTidToken;//TokenString
 
-@property (nonatomic,strong) NSString *refreshToken;
+@property (nonatomic,strong) NSString *FBidToken;
 
-@property (nonatomic,strong) NSString *accessToken;
+@property (nonatomic,strong) NSString *YTrefreshToken;
 
-@property (nonatomic,strong) NSString *clientID;
+@property (nonatomic,strong) NSString *YTaccessToken;
 
-@property(nonatomic,assign)BOOL  isYTSinIn;
-@property(nonatomic,assign)BOOL  isFBSinIn;
+@property (nonatomic,strong) NSString *YTclientID;
 
 
 
@@ -46,7 +50,11 @@
  *  保存登录的信息
  *  @param data 用户登录成功返回的数据
  */
--(void)saveYTLoginInfoWith:(id)data;
+-(void)saveYTLoginInfoWith:(id)data tpye:(LoginType)type;
 
+
+- (BOOL)isYTLogin;
+
+- (BOOL)isFBLogin;
 
 @end

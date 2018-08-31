@@ -27,6 +27,7 @@
 // ============================= API ===========================================
 //注册
 #define API_LOGIN                @"/opssee-api/V1_0/directseedinglogin"
+#define API_DEVICELIST           @"/opssee-api/V1_0/querybondeddevicelist"
 
 
 #endif /* APIMacros_h */

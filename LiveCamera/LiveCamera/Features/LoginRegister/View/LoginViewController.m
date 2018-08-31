@@ -51,6 +51,7 @@
     [self.FBLoginButton addTarget:self action:@selector(handleFBButtonLoginEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.FBLoginButton];
     
+ 
 }
 
 
@@ -78,15 +79,13 @@
 
 - (void)handleFBButtonLoginEvent{
    NSLog(@"FB 点击登录");
+    [self facebookSignIn];
 }
-
-
-
 
 #pragma mark -  callBack func
 
 - (void)youTubeSignIn{
-    if (USER_INFO.isYTSinIn) {
+    if ([USER_INFO isYTLogin]) {
         NSLog(@"已经登录 无需再登录");
         [self dismissViewControllerAnimated:YES completion:nil];
     }else if(_signIn.hasAuthInKeychain){
@@ -98,13 +97,41 @@
     }
 }
 
+- (void)facebookSignIn{
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    login.loginBehavior = FBSDKLoginBehaviorNative;
+
+    [login logInWithPublishPermissions:@[ @"manage_pages", @"publish_pages"]
+           fromViewController:nil
+           handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                    if (error) {
+                       NSLog(@"facebook auth failed");
+                    }else if (result.isCancelled) {
+                       NSLog(@"facebook auth canceled");
+                    }else {
+                        [self.viewModel setBlockWithReturnBlock:^(id returnValue) {
+                            NSLog(@"login success %@",returnValue);
+                        } WithErrorBlock:^(NSString *error) {
+                            [MBProgressHUD showErrorMessage:error];
+                        } WithFailureBlock:^(NSError *error) {
+                            [MBProgressHUD showErrorMessage:error.domain];
+                        }];
+                        [self.viewModel FBSignInServerWithResult:result viewController:self];
+                    }
+    }];
+    
+
+}
+
+
+
 - (void)SignInServer:(GIDGoogleUser *)user{
     [self.viewModel setBlockWithReturnBlock:^(id returnValue) {
-        
+        NSLog(@"login success %@",returnValue);
     } WithErrorBlock:^(NSString *error) {
-        
+        [MBProgressHUD showErrorMessage:error];
     } WithFailureBlock:^(NSError *error) {
-        
+        [MBProgressHUD showErrorMessage:error.domain];
     }];
     
     [self.viewModel YTSignInServerWithUser:user viewController:self];
@@ -149,5 +176,48 @@
     }
 }
 
+
+/*
+ 
+ [self.fbLoginManager logInWithPublishPermissions:@[@"publish_actions", @"manage_pages", @"publish_pages"]
+ fromViewController:nil
+ handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+ if (error) {
+ NSLog(@"facebook auth failed");
+ }else if (result.isCancelled) {
+ NSLog(@"facebook auth canceled");
+ }else {
+ FBSDKGraphRequest *UserIDRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+ parameters:@{@"fields": @"id, name"}
+ HTTPMethod:@"GET"];
+ [UserIDRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id requestResult, NSError *requestError) {
+ if (requestError) {
+ NSLog(@"request fb user id failed");
+ }else {
+ NSDictionary *userInfo = (NSDictionary *)requestResult;
+ NSLog(@"facebook user info: %@", userInfo);
+ userId = userInfo[@"id"];
+ NSDictionary *param = @{
+ @"description":@"宇宙超级无敌巨搞笑直播",
+ @"title":@"Just enjoy yourself!"
+ };
+ FBSDKGraphRequest *liveRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/live_videos", userId]
+ parameters:param
+ HTTPMethod:@"POST"];
+ [liveRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *liveConnection, id liveRequest, NSError *liveError) {
+ NSDictionary *streamInfo = (NSDictionary *)liveRequest;
+ NSLog(@"facebook live info: %@", streamInfo);
+ liveVideoId = [streamInfo objectForKey:@"id"];
+ NSString *rtmpUrl = streamInfo[@"stream_url"];
+ callback(rtmpUrl);
+ self.fbrtmpUrl = rtmpUrl;
+ }];
+ }
+ }];
+ }
+ }];
+ 
+ }
+ */
 
 @end

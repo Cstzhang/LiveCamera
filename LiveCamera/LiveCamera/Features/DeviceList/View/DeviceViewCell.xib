@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="148" id="KGk-i7-Jjw" customClass="DeviceViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="367" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="367" height="143.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUf-Uf-vKq">
+                        <rect key="frame" x="20" y="12" width="99" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-yg-1Ap">
+                        <rect key="frame" x="41" y="110.5" width="38" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mirror" translatesAutoresizingMaskIntoConstraints="NO" id="ZTr-s0-nPO">
+                        <rect key="frame" x="270" y="12" width="77" height="120"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_camera_connected" translatesAutoresizingMaskIntoConstraints="NO" id="a8k-rA-KVz">
+                        <rect key="frame" x="20" y="113.5" width="16" height="12"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="a8k-rA-KVz" firstAttribute="leading" secondItem="nUf-Uf-vKq" secondAttribute="leading" id="0eU-8B-d2M"/>
+                    <constraint firstItem="ZTr-s0-nPO" firstAttribute="top" secondItem="nUf-Uf-vKq" secondAttribute="top" id="7hS-5d-QUS"/>
+                    <constraint firstItem="rA9-yg-1Ap" firstAttribute="leading" secondItem="a8k-rA-KVz" secondAttribute="trailing" constant="5" id="FC4-Bx-XlR"/>
+                    <constraint firstAttribute="bottom" secondItem="a8k-rA-KVz" secondAttribute="bottom" constant="18" id="GMk-6D-FVW"/>
+                    <constraint firstAttribute="trailing" secondItem="ZTr-s0-nPO" secondAttribute="trailing" constant="20" id="ISL-ny-CAj"/>
+                    <constraint firstItem="nUf-Uf-vKq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="SBI-2u-h9A"/>
+                    <constraint firstItem="nUf-Uf-vKq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="mOR-nf-cjg"/>
+                    <constraint firstAttribute="bottom" secondItem="rA9-yg-1Ap" secondAttribute="bottom" constant="15" id="wpk-on-ThC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="20"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="deviceNameLabel" destination="nUf-Uf-vKq" id="fec-qq-uTO"/>
+                <outlet property="statusImageView" destination="a8k-rA-KVz" id="P9l-Eo-BnK"/>
+                <outlet property="statusLabel" destination="rA9-yg-1Ap" id="zUN-q9-TBo"/>
+            </connections>
+            <point key="canvasLocation" x="-5.5" y="-111"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_camera_connected" width="16" height="12"/>
+        <image name="mirror" width="77" height="120"/>
+    </resources>
+</document>

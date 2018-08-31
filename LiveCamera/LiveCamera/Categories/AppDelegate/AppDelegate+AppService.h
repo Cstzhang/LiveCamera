@@ -21,7 +21,7 @@
 /**
  第一次启动
  */
-- (void)firstStart;
+-(BOOL)firstStart;
 
 /**
  *  获取已经用户信息

@@ -21,7 +21,10 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [QDUIHelper qmuiEmotions];
     });
-    
+    //启动网络状态监听
+    [self startNetworkMonitoring];
+    //获取用户信息
+    [self getUserInformation];
     
 }
 /**
@@ -65,14 +68,16 @@
     }];
 }
 
--(void)firstStart{
+- (BOOL)firstStart{
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"statusSwitch"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-//        DSLog(@"第一次启动");
+        DSLog(@"第一次启动");
+        return YES;
     }else{
-//        DSLog(@"不是第一次启动");
+        DSLog(@"不是第一次启动");
+        return NO;
     }
     
 }
@@ -80,11 +85,12 @@
 /**
  *  重新获取用户信息 读取用户状态和配置信息到单例中
  */
--(void)getUserInformation{
-    //个人信息
-//    [USER_INFO  restart];
+- (void)getUserInformation{
     //是否第一次启动
-    [self firstStart];
+    if (![self firstStart]){
+        //个人信息
+        [USER_INFO  restart];
+    };
 }
 
 

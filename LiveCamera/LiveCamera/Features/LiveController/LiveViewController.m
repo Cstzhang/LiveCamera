@@ -16,7 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)setupNavigationItems {
+    [super setupNavigationItems];
+    self.title = @"Live Controller";
 }
 
 - (void)didReceiveMemoryWarning {
