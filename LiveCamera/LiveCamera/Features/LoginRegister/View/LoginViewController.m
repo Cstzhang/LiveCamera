@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "LoginViewModel.h"
+
 @interface LoginViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
 
 @property (strong, nonatomic) QMUIGhostButton *YTLoginButton;
@@ -18,7 +19,6 @@
 
 @property (strong, nonatomic) GIDSignIn *YTSignIn;
 
-@property (strong, nonatomic) FBSDKLoginManager *FBSignIn;
 @end
 
 @implementation LoginViewController
@@ -35,7 +35,6 @@
                                                object:nil];
 }
 
-
 - (void)initSubviews{
     [super initSubviews];
     
@@ -43,7 +42,7 @@
     self.YTLoginButton.titleLabel.font = UIFontMake(14);
     [self.YTLoginButton setTitle:@"Connect with YouTube" forState:UIControlStateNormal];
     [self.YTLoginButton setImage:UIImageMake(@"ic_登陆_youtube") forState:UIControlStateNormal];
-    self.YTLoginButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 6);
+    self.YTLoginButton.imageEdgeInsets = UIEdgeInsetsMake(0, 14, 0, 8);
     self.YTLoginButton.adjustsImageWithGhostColor = YES;
     [self.YTLoginButton addTarget:self action:@selector(handleYTButtonLoginEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.YTLoginButton];
@@ -53,7 +52,7 @@
     self.FBLoginButton.titleLabel.font = UIFontMake(14);
     [self.FBLoginButton setTitle:@"Connect with FaceBook" forState:UIControlStateNormal];
     [self.FBLoginButton setImage:UIImageMake(@"ic_登陆_facebook") forState:UIControlStateNormal];
-    self.FBLoginButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 6);
+    self.FBLoginButton.imageEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 8);
     self.FBLoginButton.adjustsImageWithGhostColor = YES;
     [self.FBLoginButton addTarget:self action:@selector(handleFBButtonLoginEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.FBLoginButton];
@@ -110,36 +109,11 @@
         [self.viewModel FBautoLoginWithToken:token viewController:self];
     }
     else {
-        [self fbLoginEvent];
+        [self.viewModel FBlogin:self];
     }
 }
 
-- (void)fbLoginEvent{
- 
-    [self.FBSignIn logInWithPublishPermissions:@[ @"manage_pages", @"publish_pages"]
-                    fromViewController:nil
-                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                   if (error) {
-                                       NSLog(@"facebook auth failed");
-                                   }else if (result.isCancelled) {
-                                       NSLog(@"facebook auth canceled");
-                                   }else {
-                                       [self.viewModel setBlockWithReturnBlock:^(id returnValue) {
-                                           NSLog(@"login success %@",returnValue);
-                                           [MBProgressHUD hideHUD];
-                                       } WithErrorBlock:^(NSString *error) {
-                                           [MBProgressHUD hideHUD];
-                                           [MBProgressHUD showErrorMessage:error];
-                                           
-                                       } WithFailureBlock:^(NSError *error) {
-                                           [MBProgressHUD hideHUD];
-                                           [MBProgressHUD showErrorMessage:error.domain];
-                                       }];
-                                           [MBProgressHUD showActivityMessageInView:@""];
-                                       [self.viewModel FBSignInServerWithResult:result viewController:self];
-                                   }
-                               }];
-}
+
 
 - (void)SignInServer:(GIDGoogleUser *)user{
     [self.viewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -170,22 +144,17 @@
 
 
 
-- (FBSDKLoginManager *)FBSignIn{
-    if (!_FBSignIn) {
-        _FBSignIn = [[FBSDKLoginManager alloc] init];
-        _FBSignIn.loginBehavior = FBSDKLoginBehaviorNative;
-    }
-    return _FBSignIn;
-}
 
 - (GIDSignIn *)YTSignIn{
     if (!_YTSignIn) {
         _YTSignIn = [GIDSignIn sharedInstance];
         _YTSignIn.delegate = self;
         _YTSignIn.uiDelegate = self;
-        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-        _YTSignIn.clientID  = [infoDictionary objectForKey:@"CLIENT_ID"];
-        _YTSignIn.scopes  = @[@"https://www.googleapis.com/auth/youtube"];
+        _YTSignIn.clientID  = CLIENT_ID;
+        _YTSignIn.scopes  =  @[@"https://www.googleapis.com/auth/youtube.upload",
+                               @"https://www.googleapis.com/auth/youtube",
+                               @"https://www.googleapis.com/auth/youtube.force-ssl",
+                               @"https://www.googleapis.com/auth/youtube.readonly"];
     }
     return _YTSignIn;
 }

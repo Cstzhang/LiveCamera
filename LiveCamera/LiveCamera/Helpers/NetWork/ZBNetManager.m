@@ -90,7 +90,12 @@ static NSMutableArray *tasks;
         [ZBNetManagerShare.sessionManager.requestSerializer
          setValue:[UserDefaultUtil valueForKey:SHIRO_COOKIE] forHTTPHeaderField:@"Cookie"];
     }
-    
+    if ([UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]) {
+        NSString *authValue = [NSString stringWithFormat:@"Bearer %@", [UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]];
+        
+        [ZBNetManagerShare.sessionManager.requestSerializer setValue: authValue forHTTPHeaderField:@"Authorization"];
+    }
+//
     /*! 复杂的参数类型 需要使用json传值-设置请求内容的类型*/
  
 
@@ -200,12 +205,29 @@ static NSMutableArray *tasks;
         default:
             break;
     }
-
-
     if ([UserDefaultUtil valueForKey:SHIRO_COOKIE]) {
         [ZBNetManagerShare.sessionManager.requestSerializer
          setValue:[UserDefaultUtil valueForKey:SHIRO_COOKIE] forHTTPHeaderField:@"Cookie"];
     }
+    NSLog(@"[UserDefaultUtil valueForKey:YT_ACCESS_TOKEN] %@",[UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]);
+    if ([UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]) {
+        
+        NSString *authValue = [NSString stringWithFormat:@"Bearer %@", [UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]];
+        
+        [ZBNetManagerShare.sessionManager.requestSerializer setValue: authValue forHTTPHeaderField:@"Authorization"];
+    }
+    AFHTTPSessionManager *scc = ZBNetManagerShare.sessionManager;
+        AFHTTPResponseSerializer *scc2 = scc.responseSerializer;
+        AFHTTPRequestSerializer *scc3 = scc.requestSerializer;
+        NSTimeInterval timeoutInterval = ZBNetManagerShare.timeoutInterval;
+    //
+        NSString *isCache = isNeedCache ? @"开启":@"关闭";
+        CGFloat allCacheSize = [ZBNetManagerCache zb_getAllHttpCacheSize];
+    
+        DSLog(@"\n******************** 请求参数 ***************************");
+        DSLog(@"\n请求头: %@\n超时时间设置：%.1f 秒【默认：30秒】\nAFHTTPResponseSerializer：%@【默认：AFJSONResponseSerializer】\nAFHTTPRequestSerializer：%@【默认：AFJSONRequestSerializer】\n请求方式: %@\n请求URL: %@\n请求param: %@\n是否启用缓存：%@【默认：开启】\n目前总缓存大小：%.6fM\n", ZBNetManagerShare.sessionManager.requestSerializer.HTTPRequestHeaders, timeoutInterval, scc2, scc3, requestType, URLString, parameters, isCache, allCacheSize);
+        DSLog(@"\n********************************************************");
+  
     ZBURLSessionTask *sessionTask = nil;
     // 读取缓存
     id responseCacheData = [ZBNetManagerCache zb_httpCacheWithUrlString:urlString parameters:parameters];
@@ -261,6 +283,7 @@ static NSMutableArray *tasks;
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
             [self saveCookie];
+            
             if (successBlock)
             {
                 successBlock(responseObject);

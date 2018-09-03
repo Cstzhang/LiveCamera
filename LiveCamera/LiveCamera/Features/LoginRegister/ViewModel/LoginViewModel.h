@@ -20,7 +20,11 @@
 - (void)YTSignInServerWithUser:(GIDGoogleUser *)user viewController:(UIViewController *)viewController;
 
 
+- (void)FBlogin:(UIViewController *)viewController;
+
+
 - (void)FBSignInServerWithResult:(FBSDKLoginManagerLoginResult *)result viewController:(UIViewController *)viewController;
+
 
 - (void)FBautoLoginWithToken:(FBSDKAccessToken *)token  viewController:(UIViewController *)viewController;
 

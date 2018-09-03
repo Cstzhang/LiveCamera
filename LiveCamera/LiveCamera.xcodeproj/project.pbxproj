@@ -60,6 +60,8 @@
 		FF95887021391BD1003D317B /* SUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886B21391BD0003D317B /* SUCache.m */; };
 		FF95887121391BD1003D317B /* SUCacheItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886E21391BD1003D317B /* SUCacheItem.m */; };
 		FF95887221391BD1003D317B /* SUCacheItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886E21391BD1003D317B /* SUCacheItem.m */; };
+		FF958941213947FB003D317B /* LiveViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF958940213947FB003D317B /* LiveViewModel.m */; };
+		FF9589422139480F003D317B /* LiveViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF958940213947FB003D317B /* LiveViewModel.m */; };
 		FFAD34D2213797C2002FFD6E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D0213797C1002FFD6E /* UserModel.m */; };
 		FFAD34D3213797C2002FFD6E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D0213797C1002FFD6E /* UserModel.m */; };
 		FFAD34D621379809002FFD6E /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD34D521379809002FFD6E /* LoginViewModel.m */; };
@@ -152,6 +154,8 @@
 		FF95886C21391BD1003D317B /* SUCacheItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCacheItem.h; sourceTree = "<group>"; };
 		FF95886D21391BD1003D317B /* SUCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCache.h; sourceTree = "<group>"; };
 		FF95886E21391BD1003D317B /* SUCacheItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCacheItem.m; sourceTree = "<group>"; };
+		FF95893F213947FB003D317B /* LiveViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveViewModel.h; sourceTree = "<group>"; };
+		FF958940213947FB003D317B /* LiveViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveViewModel.m; sourceTree = "<group>"; };
 		FFAD34D0213797C1002FFD6E /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		FFAD34D1213797C1002FFD6E /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		FFAD34D421379809002FFD6E /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
@@ -327,9 +331,9 @@
 		FF3A2858213632EC00EB94B8 /* LiveController */ = {
 			isa = PBXGroup;
 			children = (
-				FF3A28602136333200EB94B8 /* LiveViewController.h */,
-				FF3A28612136333200EB94B8 /* LiveViewController.m */,
-				FF3A28622136333200EB94B8 /* LiveViewController.xib */,
+				FF95893E213944C0003D317B /* Model */,
+				FF95893D213944BA003D317B /* ViewModel */,
+				FF95893C213944B1003D317B /* View */,
 			);
 			path = LiveController;
 			sourceTree = "<group>";
@@ -480,6 +484,32 @@
 				FF95886E21391BD1003D317B /* SUCacheItem.m */,
 			);
 			path = SUCache;
+			sourceTree = "<group>";
+		};
+		FF95893C213944B1003D317B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF3A28602136333200EB94B8 /* LiveViewController.h */,
+				FF3A28612136333200EB94B8 /* LiveViewController.m */,
+				FF3A28622136333200EB94B8 /* LiveViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF95893D213944BA003D317B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FF95893F213947FB003D317B /* LiveViewModel.h */,
+				FF958940213947FB003D317B /* LiveViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FF95893E213944C0003D317B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FFAD34CD21379786002FFD6E /* View */ = {
@@ -722,6 +752,7 @@
 				FF3A286D2136334600EB94B8 /* PhotoListViewController.m in Sources */,
 				FF3A28DA21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
 				FF3A28D0213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,
+				FF958941213947FB003D317B /* LiveViewModel.m in Sources */,
 				FFAD34D621379809002FFD6E /* LoginViewModel.m in Sources */,
 				FF3A28792136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
 				FF3A28EC2136903500EB94B8 /* QDThemeManager.m in Sources */,
@@ -738,6 +769,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF9589422139480F003D317B /* LiveViewModel.m in Sources */,
 				FFAD34DC2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */,
 				FF3A28DD21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
 				FF3A28DF21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
@@ -893,12 +925,89 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P76M9BE8DQ;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LiveCamera/AppEntry/LiveCameraPrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LiveCamera/AppEntry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"Bolts\"",
+					"-l\"FBSDKCoreKit\"",
+					"-l\"FBSDKLoginKit\"",
+					"-l\"FBSDKShareKit\"",
+					"-l\"GTMOAuth2\"",
+					"-l\"GTMSessionFetcher\"",
+					"-l\"GoogleToolboxForMac\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"QMUIKit\"",
+					"-l\"SDWebImage\"",
+					"-l\"YYCache\"",
+					"-l\"YYModel\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"NodeMediaClient\"",
+					"-framework",
+					"\"Photos\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"VideoToolbox\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-Wl,-no_compact_unwind",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bigfish.LiveCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -913,12 +1022,89 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P76M9BE8DQ;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LiveCamera/AppEntry/LiveCameraPrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LiveCamera/AppEntry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"Bolts\"",
+					"-l\"FBSDKCoreKit\"",
+					"-l\"FBSDKLoginKit\"",
+					"-l\"FBSDKShareKit\"",
+					"-l\"GTMOAuth2\"",
+					"-l\"GTMSessionFetcher\"",
+					"-l\"GoogleToolboxForMac\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"QMUIKit\"",
+					"-l\"SDWebImage\"",
+					"-l\"YYCache\"",
+					"-l\"YYModel\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"NodeMediaClient\"",
+					"-framework",
+					"\"Photos\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"VideoToolbox\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-Wl,-no_compact_unwind",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bigfish.LiveCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";

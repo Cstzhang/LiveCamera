@@ -59,7 +59,10 @@
 
 //YT
 @import GoogleSignIn;
+//FB
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+//CLIENT
+#import <NodeMediaClient/NodeMediaClient.h>
 
 #endif /* OpsseeBabyHeader_pch */

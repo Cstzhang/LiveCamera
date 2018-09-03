@@ -19,6 +19,7 @@ targetsArray.each do |t|
         pod 'FBSDKCoreKit'
         pod 'FBSDKLoginKit'
         pod 'FBSDKShareKit'
+        pod 'NodeMediaClient'
     end
 
 end
@@ -39,3 +40,4 @@ end
 #Using SDWebImage (4.3.3)
 #Using YYCache (1.0.4)
 #Using YYModel (1.0.4)
+Installing NodeMediaClient (2.4.4)

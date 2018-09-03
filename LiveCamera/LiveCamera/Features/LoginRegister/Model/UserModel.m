@@ -26,28 +26,28 @@ static UserModel *sharedUserInfoContext = nil;
  *  保存登录的信息
  *  @param data 用户登录成功返回的数据
  */
--(void)saveYTLoginInfoWith:(id)data tpye:(LoginType)type{
+-(void)saveYTLoginInfoWith:(id)data tpye:(ThirdType)type{
     switch (type) {
-        case LoginTypeFacebook:
-            _FBuserID       = [data valueForKey:@"userID"];
+        case ThirdTypeFacebook:
+            _FBuserID       = [data valueForKey:@"userId"];
             _FBidToken      = [data valueForKey:@"idToken"];
             [UserDefaultUtil setValue:_FBuserID forKey:@"FBuserID"];
             [UserDefaultUtil setValue:_FBidToken forKey:@"FBidToken"];
             break;
-        case LoginTypeYouTube:
-            _YTuserID       = [data valueForKey:@"userID"];
+        case ThirdTypeYouTube:
+            _YTuserID       = [data valueForKey:@"userId"];
             _YTidToken      = [data valueForKey:@"idToken"];
             _YTrefreshToken = [data valueForKey:@"refreshToken"];
             _YTaccessToken  = [data valueForKey:@"accessToken"];
             _YTclientID     = [data valueForKey:@"clientID"];
-            [UserDefaultUtil setValue:_YTuserID forKey:@"YTuserID"];
+            [UserDefaultUtil setValue:_YTidToken forKey:YT_IDTOKEN];
             [UserDefaultUtil setValue:_YTidToken forKey:@"YTidToken"];
             [UserDefaultUtil setValue:_YTrefreshToken forKey:@"YTrefreshToken"];
-            [UserDefaultUtil setValue:_YTaccessToken forKey:@"YTaccessToken"];
+            [UserDefaultUtil setValue:_YTaccessToken forKey:YT_ACCESS_TOKEN];
             [UserDefaultUtil setValue:_YTclientID forKey:@"YTclientID"];
             break;
     }
-   
+    _placeUserId  = [data valueForKey:@"placeUserId"];
     _fullName     = [data valueForKey:@"fullName"];
     _givenName    = [data valueForKey:@"givenName"];
     _familyName   = [data valueForKey:@"familyName"];
@@ -57,7 +57,7 @@ static UserModel *sharedUserInfoContext = nil;
     [UserDefaultUtil setValue:_givenName forKey:@"givenName"];
     [UserDefaultUtil setValue:_familyName forKey:@"familyName"];
     [UserDefaultUtil setValue:_email forKey:@"email"];
-  
+    [UserDefaultUtil setValue:_placeUserId forKey:@"placeUserId"];
 
 }
 
@@ -74,18 +74,19 @@ static UserModel *sharedUserInfoContext = nil;
     _YTrefreshToken = nil;
     _YTaccessToken  = nil;
     _YTclientID     = nil;
-
+    _placeUserId    = nil;
     [UserDefaultUtil removeObjectForKey:@"YTuserID"];
     [UserDefaultUtil removeObjectForKey:@"FBuserID"];
     [UserDefaultUtil removeObjectForKey:@"fullName"];
     [UserDefaultUtil removeObjectForKey:@"givenName"];
     [UserDefaultUtil removeObjectForKey:@"familyName"];
     [UserDefaultUtil removeObjectForKey:@"email"];
-    [UserDefaultUtil removeObjectForKey:@"YTidToken"];
+    [UserDefaultUtil removeObjectForKey:YT_IDTOKEN];
     [UserDefaultUtil removeObjectForKey:@"FBidToken"];
     [UserDefaultUtil removeObjectForKey:@"YTrefreshToken"];
-    [UserDefaultUtil removeObjectForKey:@"YTaccessToken"];
+    [UserDefaultUtil removeObjectForKey:YT_ACCESS_TOKEN];
     [UserDefaultUtil removeObjectForKey:@"YTclientID"];
+    [UserDefaultUtil removeObjectForKey:@"placeUserId"];
     //清除用户cookie
     [UserDefaultUtil removeObjectForKey:SHIRO_COOKIE];
     
@@ -100,15 +101,16 @@ static UserModel *sharedUserInfoContext = nil;
 -(void)restart{
     _YTuserID       = [UserDefaultUtil valueForKey:@"YTuserID"];
     _FBuserID       = [UserDefaultUtil valueForKey:@"FBuserID"];
-    _fullName     = [UserDefaultUtil valueForKey:@"fullName"];
-    _givenName    = [UserDefaultUtil valueForKey:@"givenName"];
-    _familyName   = [UserDefaultUtil valueForKey:@"familyName"];
-    _email        = [UserDefaultUtil valueForKey:@"email"];
-    _YTidToken      = [UserDefaultUtil valueForKey:@"YTidToken"];
+    _fullName       = [UserDefaultUtil valueForKey:@"fullName"];
+    _givenName      = [UserDefaultUtil valueForKey:@"givenName"];
+    _familyName     = [UserDefaultUtil valueForKey:@"familyName"];
+    _email          = [UserDefaultUtil valueForKey:@"email"];
+    _YTidToken      = [UserDefaultUtil valueForKey:YT_IDTOKEN];
     _FBidToken      = [UserDefaultUtil valueForKey:@"FBidToken"];
     _YTrefreshToken = [UserDefaultUtil valueForKey:@"YTrefreshToken"];
-    _YTaccessToken  = [UserDefaultUtil valueForKey:@"YTaccessToken"];
+    _YTaccessToken  = [UserDefaultUtil valueForKey:YT_ACCESS_TOKEN];
     _YTclientID     = [UserDefaultUtil valueForKey:@"YTclientID"];
+    _placeUserId    = [UserDefaultUtil valueForKey:@"placeUserId"];
 }
 
 - (BOOL)isYTLogin{
@@ -125,7 +127,8 @@ static UserModel *sharedUserInfoContext = nil;
 }
 
 - (BOOL)isLogin{
-    return [self isYTLogin] || [self isFBLogin];
+    return NO;
+//    return [self isYTLogin] || [self isFBLogin];
 }
 
 @end

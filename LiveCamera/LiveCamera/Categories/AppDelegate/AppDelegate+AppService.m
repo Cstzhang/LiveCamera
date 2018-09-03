@@ -15,12 +15,12 @@
  */
 - (void)systemConfigration{
     // QD自定义的全局样式渲染
-    [QDCommonUI renderGlobalAppearances];
+//    [QDCommonUI renderGlobalAppearances];
     
     // 预加载 QQ 表情，避免第一次使用时卡顿
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [QDUIHelper qmuiEmotions];
-    });
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        [QDUIHelper qmuiEmotions];
+//    });
     //启动网络状态监听
     [self startNetworkMonitoring];
     //获取用户信息

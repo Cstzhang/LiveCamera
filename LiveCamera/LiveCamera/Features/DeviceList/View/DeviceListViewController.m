@@ -26,6 +26,11 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 #pragma mark - UI
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //facebook监听
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_accessTokenChanged:)
+                                                 name:FBSDKAccessTokenDidChangeNotification
+                                               object:nil];
 }
 
 
@@ -39,6 +44,7 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
     _devicesTableView.separatorStyle = NO;
     _devicesTableView.tableFooterView.backgroundColor = [UIColor clearColor];
     _devicesTableView.tableHeaderView.backgroundColor = [UIColor clearColor];
+    _devicesTableView.showsVerticalScrollIndicator = NO;//滑动条
     //注册
     [_devicesTableView registerNib:[UINib nibWithNibName:cellReuseIdentifier bundle:nil] forCellReuseIdentifier:cellReuseIdentifier];
     _devicesTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(onRefresh)];
@@ -79,6 +85,8 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     LiveViewController *LiveVC = [[LiveViewController alloc]init];
+//    LiveVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [self presentViewController:LiveVC animated:YES completion:nil];
     [self.navigationController pushViewController:LiveVC animated:YES];
 }
 
@@ -120,4 +128,20 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
     [self.devicesTableView.mj_footer endRefreshingWithNoMoreData];
 }
 
+#pragma mark - Notification
+- (void)_accessTokenChanged:(NSNotification *)notification
+{
+    FBSDKAccessToken *token = notification.userInfo[FBSDKAccessTokenChangeNewKey];
+    if (!token) {
+        [FBSDKAccessToken setCurrentAccessToken:nil];
+        [FBSDKProfile setCurrentProfile:nil];
+    } else {
+        NSInteger slot = 0;
+        SUCacheItem *item = [SUCache itemForSlot:slot] ?: [[SUCacheItem alloc] init];
+        if (![item.token isEqualToAccessToken:token]) {
+            item.token = token;
+            [SUCache saveItem:item slot:slot];
+        }
+    }
+}
 @end

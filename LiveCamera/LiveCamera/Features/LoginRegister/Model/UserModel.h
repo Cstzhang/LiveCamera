@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef NS_ENUM(NSUInteger,LoginType){
-    LoginTypeYouTube,
-    LoginTypeFacebook,
+typedef NS_ENUM(NSUInteger,ThirdType){
+    ThirdTypeFacebook = 1,
+    ThirdTypeYouTube = 2,
 };
 @interface UserModel : NSObject
 
@@ -35,6 +35,7 @@ typedef NS_ENUM(NSUInteger,LoginType){
 
 @property (nonatomic,strong) NSString *YTclientID;
 
+@property (nonatomic,strong) NSString *placeUserId;
 
 
 /** share方法 */
@@ -50,7 +51,7 @@ typedef NS_ENUM(NSUInteger,LoginType){
  *  保存登录的信息
  *  @param data 用户登录成功返回的数据
  */
--(void)saveYTLoginInfoWith:(id)data tpye:(LoginType)type;
+-(void)saveYTLoginInfoWith:(id)data tpye:(ThirdType)type;
 
 
 - (BOOL)isYTLogin;

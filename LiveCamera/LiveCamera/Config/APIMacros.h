@@ -29,5 +29,17 @@
 #define API_LOGIN                @"/opssee-api/V1_0/directseedinglogin"
 #define API_DEVICELIST           @"/opssee-api/V1_0/querybondeddevicelist"
 
+// =========================YouTube API ========================================
+#define YT_API_CREATE_BROADCAST  @"https://www.googleapis.com/youtube/v3/liveBroadcasts?part=id,snippet,contentDetails,status"
+
+#define YT_API_CREATE_LIVESTREAM  @"https://www.googleapis.com/youtube/v3/liveStreams?part=id,snippet,cdn,status"
+
+#define YT_API_CREATE_BIND  @"https://www.googleapis.com/youtube/v3/liveBroadcasts/bind?part=id,snippet,contentDetails,status"
+#define YT_API_LIVEBROADCASTS @"https://www.googleapis.com/youtube/v3/liveBroadcasts?broadcastStatus=upcoming&maxResults=50&part=id,snippet,contentDetails"
+#define YT_API_GET_BROADCASTS @"https://www.googleapis.com/youtube/v3/liveBroadcasts?part=id,snippet,contentDetails,status"
+
+#define YT_API_GET_LIVESTREAM @"https://www.googleapis.com/youtube/v3/liveStreams?part=id,snippet,cdn,status"
+
+#define YT_API_GET_TRABSUTION @"https://www.googleapis.com/youtube/v3/liveBroadcasts/transition?part=id,snippet,contentDetails,status"
 
 #endif /* APIMacros_h */
