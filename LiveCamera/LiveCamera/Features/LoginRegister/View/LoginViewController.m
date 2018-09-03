@@ -127,7 +127,7 @@
         [MBProgressHUD showErrorMessage:error.domain];
     }];
      [MBProgressHUD showActivityMessageInView:@""];
-    [self.viewModel YTSignInServerWithUser:user viewController:self];
+     [self.viewModel YTSignInServerWithUser:user viewController:self];
     
 }
 

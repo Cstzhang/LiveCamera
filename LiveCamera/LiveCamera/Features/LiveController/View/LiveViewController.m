@@ -12,7 +12,7 @@
 #import "LoginViewController.h"
 static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
 
-@interface LiveViewController ()
+@interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (nonatomic, strong) NodePlayer *clientPlayer;
 @property (nonatomic, strong) NSUserDefaults *defaults;
 @property (strong, nonatomic) QMUIGhostButton *YTLiveButton;
@@ -21,11 +21,13 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 @property (strong, nonatomic) LiveViewModel *liveViewModel;
 @property (strong, nonatomic) LoginViewModel *loginViewModel;
 @property (strong, nonatomic) NodeStreamer *nodeStreamer;
-
+@property (strong, nonatomic) GIDSignIn *YTSignIn;
+@property (copy, nonatomic) NSMutableString *broadCastId;
 @end
 
 @implementation LiveViewController
 
+#pragma mark - UI
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.clientPlayer start];
@@ -35,8 +37,6 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
                                                  name:FBSDKAccessTokenDidChangeNotification
                                                object:nil];
 }
-
-
 - (void)initSubviews{
     [super initSubviews];
     self.YTLiveButton = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorRed];
@@ -82,12 +82,11 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     self.recordButton.frame = CGRectFlatMake(buttonMinX,  buttonMinY - buttonSize.height, buttonSize.width, buttonSize.height);
 }
 
-
-
-
 -(void)viewWillDisappear:(BOOL)animated{
+    [self finishYoutuLive];
     [self.clientPlayer stop];
     [self.nodeStreamer stopStreaming];
+   
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
@@ -99,19 +98,13 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 
 
 
+
 #pragma mark - Button event
 - (IBAction)backButtonEvent:(id)sender {
-//    [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 
--(void)jumpTologin{
-    LoginViewController *loginVc=[[LoginViewController alloc]init];
-    loginVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:loginVc animated:YES completion:nil];
-    
-}
 /**
  start youtube live stream
  */
@@ -143,38 +136,36 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
             [MBProgressHUD hideHUD];
             NSDictionary * broadCastDict = returnValue[@"broadCastDict"];
             NSDictionary * streamDict = returnValue[@"streamDict"];
-//            NSString* broadcastStatus = broadCastDict[@"status"][@"lifeCycleStatus"];
-//            NSString* streamStatus = streamDict[@"status"][@"streamStatus"];
-//            NSString* healthStatus = streamDict[@"status"][@"healthStatus"][@"status"];
             NSString* ingestionAddress = streamDict[@"cdn"][@"ingestionInfo"][@"ingestionAddress"];
             NSString* streamName = streamDict[@"cdn"][@"ingestionInfo"][@"streamName"];
             NSString *outUrl = [NSString stringWithFormat:@"%@/%@",ingestionAddress,streamName];
             //开始推流
             [weakSelf startPushRTMPWithURL:outUrl];
+            //开启计时，3秒后 获取直播间状态，如果是测试状态 ，改成直播状态即可 循环获取知道直播状态为liveStarting
             [weakSelf countdownToLive:broadCastDict status:@"testing"];
-            //开启计时，10秒后 获取直播间状态，如果是测试状态 ，改成直播状态即可
-            
           
         } WithErrorBlock:^(NSString *error) {
             [MBProgressHUD hideHUD];
             NSLog(@"===需要登录============== ");
-//                [weakSelf jumpTologin];
+            [weakSelf loginYoutube];
         } WithFailureBlock:^(NSError *error) {
             [MBProgressHUD hideHUD];
             if (error.code == -1011) {
                  NSLog(@"-================error.code ================- %ld",(long)error.code);
                  NSLog(@"===需要登录==============");
+                  [weakSelf loginYoutube];
             }
             NSLog(@"error.code  %ld",(long)error.code);
-//                [weakSelf jumpTologin];
+
         }];
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showActivityMessageInWindow:@""];
         //creat createBroadcast bind
         [self.liveViewModel createBroadcastWith:ThirdTypeYouTube BroadcastInfoDic:broadcastParameters LiveStreamInfoDic:liveStreamParameters];
         
     }else{
-//        [self jumpTologin];
         NSLog(@"===需要登录==============");
+        [self loginYoutube];
     }
 
 }
@@ -185,56 +176,94 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
  */
 - (void)countdownToLive:(NSDictionary *)broadCastDict status:(NSString *)status{
     ZBWeak;
-    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC));
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC));
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-        [weakSelf changeYouTubeLiveStatus:broadCastDict status:status];
+        if ([status isEqualToString:@"live"]){
+            [weakSelf startFacebookLive:broadCastDict];
+        }else{
+           [weakSelf changeYouTubeLiveStatus:broadCastDict status:status];
+        }
+       
     });
     
 }
 
+
+/**
+ turn  youtube live status to testStarting
+
+ @param broadCastDict broadcast id
+ @param status testing
+ */
 - (void)changeYouTubeLiveStatus:(NSDictionary *)broadCastDict status:(NSString *)status{
     ZBWeak;
     [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
-        [MBProgressHUD hideHUD];
+     
         NSString *lifeCycleStatus =returnValue[@"status"][@"lifeCycleStatus"];
         NSLog(@"lifeCycleStatus %@",lifeCycleStatus);
         if ([lifeCycleStatus isEqualToString:@"testStarting"]) {
             [weakSelf countdownToLive:broadCastDict status:@"live"];
         }else if ([lifeCycleStatus isEqualToString:@"ready"] || [lifeCycleStatus isEqualToString:@"active"] ){
             [weakSelf countdownToLive:broadCastDict status:@"testing"];
-        }else if ([lifeCycleStatus isEqualToString:@"liveStarting"]){
-            NSLog(@"!!!开始正式直播！！！！！！！！！！！！！！！");
         }
     } WithErrorBlock:^(NSString *error) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showTipMessageInWindow:error timer:1.5];
         [weakSelf countdownToLive:broadCastDict status:@"testing"];
     } WithFailureBlock:^(NSError *error) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
         [weakSelf countdownToLive:broadCastDict status:@"testing"];
     }];
+    [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];
     [self.liveViewModel transitionYouTubeBroadcastWith:broadCastDict[@"id"] status:status];
-    // [weakSelf.liveViewModel transitionYouTubeBroadcastWith:broadCastDict[@"id"] status:@"live"];
 }
 
+/**
+ turn  youtube live status to liveStarting
+ 
+ @param broadCastDict broadcast id
+ */
 - (void)startFacebookLive:(NSDictionary *)broadCastDict{
-    //    ZBWeak;
+        ZBWeak;
     [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
-        [MBProgressHUD hideHUD];
-        
+       NSString *lifeCycleStatus =returnValue[@"status"][@"lifeCycleStatus"];
+       if ([lifeCycleStatus isEqualToString:@"liveStarting"]){
+            [MBProgressHUD hideHUD];
+            NSLog(@"!!!开始正式直播！！！！！！！！！！！！！！！");
+            weakSelf.broadCastId = broadCastDict[@"id"];
+            [MBProgressHUD showTipMessageInWindow:@"直播开始" timer:2];
+       }else{
+           [weakSelf countdownToLive:broadCastDict status:@"live"];
+       }
     } WithErrorBlock:^(NSString *error) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showTipMessageInWindow:error timer:1.5];
+        [weakSelf countdownToLive:broadCastDict status:@"live"];
+
     } WithFailureBlock:^(NSError *error) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
+        [weakSelf countdownToLive:broadCastDict status:@"live"];
     }];
+     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];
     [self.liveViewModel transitionYouTubeBroadcastWith:broadCastDict[@"id"] status:@"live"];
 }
 
+
+- (void)finishYoutuLive{
+
+    [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
+        NSString *lifeCycleStatus =returnValue[@"status"][@"lifeCycleStatus"];
+
+        [MBProgressHUD hideHUD];
+        NSLog(@"直播结束: %@",lifeCycleStatus);
+        [MBProgressHUD showTipMessageInWindow:@"直播结束" timer:2];
+
+    } WithErrorBlock:^(NSString *error) {
+          [MBProgressHUD hideHUD];
+        
+    } WithFailureBlock:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+    }];
+    [MBProgressHUD hideHUD];
+    [MBProgressHUD showActivityMessageInWindow:@""];
+    [self.liveViewModel transitionYouTubeBroadcastWith:self.broadCastId status:@"complete"];
+}
 
 /**
  start facebook live stream
@@ -261,7 +290,6 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
         [MBProgressHUD showActivityMessageInWindow:@""];
         [self.liveViewModel createBroadcastWith:ThirdTypeFacebook BroadcastInfoDic:param LiveStreamInfoDic:nil];
     }else{
-//        [self jumpTologin];
         [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
             NSLog(@"login success %@",returnValue);
             [MBProgressHUD hideHUD];
@@ -324,6 +352,19 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     return _nodeStreamer;
 }
 
+- (GIDSignIn *)YTSignIn{
+    if (!_YTSignIn) {
+        _YTSignIn = [GIDSignIn sharedInstance];
+        _YTSignIn.delegate = self;
+        _YTSignIn.uiDelegate = self;
+        _YTSignIn.clientID  = CLIENT_ID;
+        _YTSignIn.scopes  =  @[@"https://www.googleapis.com/auth/youtube.upload",
+                               @"https://www.googleapis.com/auth/youtube",
+                               @"https://www.googleapis.com/auth/youtube.force-ssl",
+                               @"https://www.googleapis.com/auth/youtube.readonly"];
+    }
+    return _YTSignIn;
+}
 
 #pragma mark - live streamer
 
@@ -348,4 +389,41 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
         }
     }
 }
+
+#pragma mark - youtube login
+
+- (void)loginYoutube{
+    [self.YTSignIn signIn];
+}
+- (void)SignInServer:(GIDGoogleUser *)user{
+    [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+        NSLog(@"login success %@",returnValue);
+        [MBProgressHUD hideHUD];
+    } WithErrorBlock:^(NSString *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:error];
+    } WithFailureBlock:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:error.domain];
+    }];
+    [MBProgressHUD showActivityMessageInView:@""];
+    [self.loginViewModel YTSignInServerWithUser:user viewController:self];
+    
+}
+
+#pragma mark - Third login delegate
+// The sign-in flow has finished and was successful if |error| is |nil|.
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error{
+    if (error != nil) {
+        NSLog(@"error %@",error);
+        [MBProgressHUD showErrorMessage:@"登录失败,请检查网络"];
+    }else{
+        [self SignInServer:user];
+    }
+}
+
+
+
 @end

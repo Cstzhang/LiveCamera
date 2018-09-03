@@ -204,7 +204,7 @@
     [ZBNetManager zb_request_POSTWithEntity:entity successBlock:^(id response) {
         completion(YES,response);
     } failureBlock:^(NSError *error) {
-        NSLog(@" bindLiveStream  error  \n  %@ ",error);
+        NSLog(@" listUpcomingVideosCompletion  error  \n  %@ ",error);
         completion(NO,nil);
     } progressBlock:nil];
     
@@ -243,7 +243,7 @@
     [ZBNetManager zb_request_POSTWithEntity:entity successBlock:^(id response) {
         completion(YES,response);
     } failureBlock:^(NSError *error) {
-        NSLog(@" bindLiveStream  error  \n  %@ ",error);
+        NSLog(@" transitionBroadcastdictionary  error  \n  %@ ",error);
         completion(NO,nil);
     } progressBlock:nil];
 }
@@ -268,12 +268,12 @@
             completion(YES,broadResponse,liveResponse);
             
         } failureBlock:^(NSError *error) {
-            NSLog(@" bindLiveStream  error %@ ",error);
+            NSLog(@" getBroadCasstRequest  error %@ ",error);
             completion(NO,nil,nil);
         } progressBlock:nil];
         
     } failureBlock:^(NSError *error) {
-        NSLog(@" bindLiveStream  error %@ ",error);
+        NSLog(@" getBroadCasstRequest  error %@ ",error);
         completion(NO,nil,nil);
     } progressBlock:nil];
     
