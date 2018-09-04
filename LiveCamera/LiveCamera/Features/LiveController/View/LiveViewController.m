@@ -11,7 +11,7 @@
 #import "LiveViewModel.h"
 #import "LoginViewController.h"
 static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
-
+//static NSString *inputUrl =@"rtsp://172.18.220.227/main";
 @interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (nonatomic, strong) NodePlayer *clientPlayer;
 @property (nonatomic, strong) NSUserDefaults *defaults;
@@ -83,7 +83,9 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    [self finishYoutuLive];
+    if(_clientPlayer && _nodeStreamer && _broadCastId){
+         [self finishYoutuLive];
+    }
     [self.clientPlayer stop];
     [self.nodeStreamer stopStreaming];
    
@@ -94,6 +96,9 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if(_clientPlayer){
+     [self.clientPlayer start];
+    }
 }
 
 
@@ -258,7 +263,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
           [MBProgressHUD hideHUD];
         
     } WithFailureBlock:^(NSError *error) {
-            [MBProgressHUD hideHUD];
+          [MBProgressHUD hideHUD];
     }];
     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];

@@ -62,4 +62,25 @@
  @return 版本号相等,返回0; v1小于v2,返回-1; 否则返回1.
  */
 + (NSInteger)compareVersion:(NSString *)v1 to:(NSString *)v2;
+
+// 获取当前wifi名称代码
++ (NSString *)getWifiName;
+
+
+/**
+ 生成二维码
+
+ @param urlStr 需要生成二维码的字符串
+ @param codeSize 尺寸
+ @return 二维码图片
+ */
++(UIImage *)imageOfQRFromURL:(NSString *)urlStr codeSize:(CGFloat)codeSize;
+/**
+ *  读取图片中的二维码
+ *
+ *  @param image 图片
+ *
+ *  @return 图片中的二维码数据集合 CIQRCodeFeature对象
+ */
++ (NSArray *)readQRCodeFromImage:(UIImage *)image;
 @end

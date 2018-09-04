@@ -17,6 +17,7 @@
 
 #else
 //do sth.
+#define SERVER @"http://cms.opssee.com.cn:8088"
 
 #endif
 
@@ -26,8 +27,16 @@
 
 // ============================= API ===========================================
 //注册
-#define API_LOGIN                @"/opssee-api/V1_0/directseedinglogin"
-#define API_DEVICELIST           @"/opssee-api/V1_0/querybondeddevicelist"
+#define API_LOGIN                  @"/opssee-api/V1_0/directseedinglogin"
+
+#define API_LOGIN_OUT              @"/opssee-api/V1_0/directseedinglogout"
+
+#define API_DEVICELIST             @"/opssee-api/V1_0/querybondeddevicelist"
+
+#define API_BIND_DEVICE            @"/opssee-api/V1_0/bondeddevices"
+
+#define API_CANCEL_BIND_DEVICE     @"/opssee-api/V1_0/cancelbondeddevices"
+
 
 // =========================YouTube API ========================================
 #define YT_API_CREATE_BROADCAST  @"https://www.googleapis.com/youtube/v3/liveBroadcasts?part=id,snippet,contentDetails,status"

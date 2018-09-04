@@ -127,8 +127,8 @@ static UserModel *sharedUserInfoContext = nil;
 }
 
 - (BOOL)isLogin{
-    return NO;
-//    return [self isYTLogin] || [self isFBLogin];
+//    return NO;
+    return [self isYTLogin] || [self isFBLogin];
 }
 
 @end

@@ -56,6 +56,16 @@
 		FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */; };
 		FF3A28F72136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
 		FF3A28F82136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
+		FF912280213E277200F155BE /* DeviceListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF91227F213E277200F155BE /* DeviceListViewModel.m */; };
+		FF912281213E278400F155BE /* DeviceListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF91227F213E277200F155BE /* DeviceListViewModel.m */; };
+		FF912289213E326800F155BE /* AddWIFIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF912287213E326800F155BE /* AddWIFIViewController.m */; };
+		FF91228A213E326800F155BE /* AddWIFIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF912287213E326800F155BE /* AddWIFIViewController.m */; };
+		FF91228B213E326800F155BE /* AddWIFIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF912288213E326800F155BE /* AddWIFIViewController.xib */; };
+		FF91228C213E326800F155BE /* AddWIFIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF912288213E326800F155BE /* AddWIFIViewController.xib */; };
+		FF912290213E5D3700F155BE /* GenerateQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF91228E213E5D3700F155BE /* GenerateQRCodeViewController.m */; };
+		FF912291213E5D3700F155BE /* GenerateQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF91228E213E5D3700F155BE /* GenerateQRCodeViewController.m */; };
+		FF912292213E5D3700F155BE /* GenerateQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF91228F213E5D3700F155BE /* GenerateQRCodeViewController.xib */; };
+		FF912293213E5D3700F155BE /* GenerateQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF91228F213E5D3700F155BE /* GenerateQRCodeViewController.xib */; };
 		FF95886F21391BD1003D317B /* SUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886B21391BD0003D317B /* SUCache.m */; };
 		FF95887021391BD1003D317B /* SUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886B21391BD0003D317B /* SUCache.m */; };
 		FF95887121391BD1003D317B /* SUCacheItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95886E21391BD1003D317B /* SUCacheItem.m */; };
@@ -150,6 +160,14 @@
 		FF3A28E42136903400EB94B8 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
 		FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		FF91227E213E277200F155BE /* DeviceListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceListViewModel.h; sourceTree = "<group>"; };
+		FF91227F213E277200F155BE /* DeviceListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewModel.m; sourceTree = "<group>"; };
+		FF912286213E326800F155BE /* AddWIFIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddWIFIViewController.h; sourceTree = "<group>"; };
+		FF912287213E326800F155BE /* AddWIFIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddWIFIViewController.m; sourceTree = "<group>"; };
+		FF912288213E326800F155BE /* AddWIFIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWIFIViewController.xib; sourceTree = "<group>"; };
+		FF91228D213E5D3700F155BE /* GenerateQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenerateQRCodeViewController.h; sourceTree = "<group>"; };
+		FF91228E213E5D3700F155BE /* GenerateQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateQRCodeViewController.m; sourceTree = "<group>"; };
+		FF91228F213E5D3700F155BE /* GenerateQRCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenerateQRCodeViewController.xib; sourceTree = "<group>"; };
 		FF95886B21391BD0003D317B /* SUCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCache.m; sourceTree = "<group>"; };
 		FF95886C21391BD1003D317B /* SUCacheItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCacheItem.h; sourceTree = "<group>"; };
 		FF95886D21391BD1003D317B /* SUCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCache.h; sourceTree = "<group>"; };
@@ -251,6 +269,7 @@
 		FF3A28502136321700EB94B8 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				FF912282213E31D300F155BE /* AddDevice */,
 				FF3A286F2136335300EB94B8 /* Base */,
 				FF3A2859213632F600EB94B8 /* DeviceList */,
 				FF3A285A213632FF00EB94B8 /* PhotoList */,
@@ -475,6 +494,43 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		FF912282213E31D300F155BE /* AddDevice */ = {
+			isa = PBXGroup;
+			children = (
+				FF912285213E31FB00F155BE /* ViewModel */,
+				FF912284213E31F400F155BE /* Model */,
+				FF912283213E31EE00F155BE /* View */,
+			);
+			path = AddDevice;
+			sourceTree = "<group>";
+		};
+		FF912283213E31EE00F155BE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF912286213E326800F155BE /* AddWIFIViewController.h */,
+				FF912287213E326800F155BE /* AddWIFIViewController.m */,
+				FF912288213E326800F155BE /* AddWIFIViewController.xib */,
+				FF91228D213E5D3700F155BE /* GenerateQRCodeViewController.h */,
+				FF91228E213E5D3700F155BE /* GenerateQRCodeViewController.m */,
+				FF91228F213E5D3700F155BE /* GenerateQRCodeViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF912284213E31F400F155BE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FF912285213E31FB00F155BE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		FF95886A21391BB3003D317B /* SUCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +622,8 @@
 		FFAD34DE2137E6B2002FFD6E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FF91227E213E277200F155BE /* DeviceListViewModel.h */,
+				FF91227F213E277200F155BE /* DeviceListViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -660,7 +718,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF3A286E2136334600EB94B8 /* PhotoListViewController.xib in Resources */,
+				FF91228B213E326800F155BE /* AddWIFIViewController.xib in Resources */,
 				FF3A285F2136332400EB94B8 /* LoginViewController.xib in Resources */,
+				FF912292213E5D3700F155BE /* GenerateQRCodeViewController.xib in Resources */,
 				FF3A28F72136961C00EB94B8 /* LaunchScreen.xib in Resources */,
 				FF3A28362136310200EB94B8 /* Assets.xcassets in Resources */,
 				FF3A28642136333200EB94B8 /* LiveViewController.xib in Resources */,
@@ -675,6 +735,8 @@
 			files = (
 				FFAD34E62137E74A002FFD6E /* DeviceViewCell.xib in Resources */,
 				FF3A28F82136961C00EB94B8 /* LaunchScreen.xib in Resources */,
+				FF912293213E5D3700F155BE /* GenerateQRCodeViewController.xib in Resources */,
+				FF91228C213E326800F155BE /* AddWIFIViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,9 +799,11 @@
 				FF3A28632136333200EB94B8 /* LiveViewController.m in Sources */,
 				FF3A28EE2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */,
 				FF3A28DC21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
+				FF912280213E277200F155BE /* DeviceListViewModel.m in Sources */,
 				FF3A28862136343F00EB94B8 /* RootNavigationController.m in Sources */,
 				FF3A287F2136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
 				FF3A28B8213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
+				FF912289213E326800F155BE /* AddWIFIViewController.m in Sources */,
 				FF95887121391BD1003D317B /* SUCacheItem.m in Sources */,
 				FF3A285E2136332400EB94B8 /* LoginViewController.m in Sources */,
 				FF3A28882136343F00EB94B8 /* RootTabBarController.m in Sources */,
@@ -750,6 +814,7 @@
 				FF3A28C52136374A00EB94B8 /* ViewModelClass.m in Sources */,
 				FFAD34D2213797C2002FFD6E /* UserModel.m in Sources */,
 				FF3A286D2136334600EB94B8 /* PhotoListViewController.m in Sources */,
+				FF912290213E5D3700F155BE /* GenerateQRCodeViewController.m in Sources */,
 				FF3A28DA21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
 				FF3A28D0213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,
 				FF958941213947FB003D317B /* LiveViewModel.m in Sources */,
@@ -769,6 +834,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF912281213E278400F155BE /* DeviceListViewModel.m in Sources */,
 				FF9589422139480F003D317B /* LiveViewModel.m in Sources */,
 				FFAD34DC2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */,
 				FF3A28DD21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
@@ -781,6 +847,8 @@
 				FF3A28B9213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
 				FF3A28462136310200EB94B8 /* LiveCameraTests.m in Sources */,
 				FF3A28C62136374A00EB94B8 /* ViewModelClass.m in Sources */,
+				FF912291213E5D3700F155BE /* GenerateQRCodeViewController.m in Sources */,
+				FF91228A213E326800F155BE /* AddWIFIViewController.m in Sources */,
 				FFAD34D721379809002FFD6E /* LoginViewModel.m in Sources */,
 				FF3A28872136343F00EB94B8 /* RootNavigationController.m in Sources */,
 				FF3A28B1213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */,
