@@ -10,6 +10,7 @@
 #import "LoginViewModel.h"
 #import "LiveViewModel.h"
 #import "LoginViewController.h"
+//#import "RecordVideoHandle.h"
 typedef NS_ENUM(NSUInteger,LiveStatus){
     LiveStatusWait,//初始状态
     LiveStatusYTPrepare,//准备直播
@@ -19,6 +20,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 };
 static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
 //static NSString *inputUrl =@"rtsp://172.18.220.227/main";
+
 @interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (nonatomic, strong) NodePlayer *clientPlayer;
 @property (nonatomic, strong) NSUserDefaults *defaults;
@@ -34,6 +36,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 @property (strong, nonatomic) GIDSignIn *YTSignIn;
 @property (copy, nonatomic)   NSMutableString *broadCastId;
 @property (nonatomic) LiveStatus currentLiveStatus;
+
 @end
 
 
@@ -91,14 +94,14 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     self.livingButton = [[UIButton alloc]init];
     [self.livingButton setImage:[UIImage imageNamed:@"ic_直播中"] forState:UIControlStateNormal];
     self.livingButton.clipsToBounds = YES;
-    self.livingButton.layer.cornerRadius = 40;
+    self.livingButton.layer.cornerRadius = 25;
     [self.livingButton addTarget:self action:@selector(handleCloseLivingEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview: self.livingButton];
     
     self.recordingButton = [[UIButton alloc]init];
     [self.recordingButton setImage:[UIImage imageNamed:@"ic_录制视频"] forState:UIControlStateNormal];
     self.recordingButton.clipsToBounds = YES;
-    self.recordingButton.layer.cornerRadius = 40;
+    self.recordingButton.layer.cornerRadius = 25;
     [self.recordingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview: self.recordingButton];
     
@@ -109,7 +112,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     CGFloat buttonMinY =  (CGRectGetHeight(self.view.bounds) - (20* kHScaleFit)) ;
     CGFloat buttonSpacing = 18 * kHScaleFit;
     CGSize  buttonSize = CGSizeMake(240 * kWScaleFit, 40 * kHScaleFit);
-    CGSize  livebuttonSize = CGSizeMake(80 * kWScaleFit, 80 * kHScaleFit);
+    CGSize  livebuttonSize = CGSizeMake(50 , 50 );
     CGFloat buttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), buttonSize.width);
     CGFloat livebuttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), livebuttonSize.width);
     
@@ -182,14 +185,15 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 }
 
 - (void)handleCloseRecordingEvent{
-//    [self stopLive];
+    [self stopLive];// stop record
     self.currentLiveStatus = LiveStatusWait;
 }
 
 - (void)handleRCButtonLiveEvent{
+    [self startRecord];
     self.currentLiveStatus = LiveStatusRecord;
     
-    
+
 }
 
 - (void)setCurrentLiveStatus:(LiveStatus)currentLiveStatus{
@@ -294,7 +298,6 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
             [MBProgressHUD hideHUD];
             [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
         }];
-//        [MBProgressHUD showActivityMessageInWindow:@""];
         [self.loginViewModel FBlogin:self];
     }
 }
@@ -431,26 +434,30 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 }
 
 
-- (void)finishYoutuLive{
 
+
+
+#pragma mark - stop func
+
+- (void)finishYoutuLive{
+    
     [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
         NSString *lifeCycleStatus =returnValue[@"status"][@"lifeCycleStatus"];
-
+        
         [MBProgressHUD hideHUD];
         NSLog(@"直播结束: %@",lifeCycleStatus);
         [MBProgressHUD showTipMessageInWindow:@"直播结束" timer:2];
-
+        
     } WithErrorBlock:^(NSString *error) {
-          [MBProgressHUD hideHUD];
+        [MBProgressHUD hideHUD];
         
     } WithFailureBlock:^(NSError *error) {
-          [MBProgressHUD hideHUD];
+        [MBProgressHUD hideHUD];
     }];
     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];
     [self.liveViewModel transitionYouTubeBroadcastWith:self.broadCastId status:@"complete"];
 }
-
 
 - (void)stopPlayer{
     [self.clientPlayer stop];
@@ -462,6 +469,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
         [self finishYoutuLive];
     }
     [self.nodeStreamer stopStreaming];
+  
 }
 
 
@@ -511,13 +519,24 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     }
     return _YTSignIn;
 }
+#pragma mark - start recording video
+
+-  (void)startRecord{
+    NSLog(@"=====  startRecord =====");
+    NSString *fileName = [UtilitesMethods getCurrentTime];
+    [self.nodeStreamer startNativeRateStreaming:inputUrl
+                                         output:[NSString stringWithFormat:@"/Users/bigfish/Desktop/Documents/%@.flv",fileName]];
+
+}
+
 
 #pragma mark - live streamer
 
 - (void)startPushRTMPWithURL:(NSString *)stream_url{
-    
-    [self.nodeStreamer startStreamingWithInput:inputUrl output:stream_url];
-    
+    NSLog(@"=====  startPushRTMP =====");
+    [self.nodeStreamer startStreamingWithInput:inputUrl
+                                        output:stream_url];
+
 }
 #pragma mark - Notification
 - (void)_accessTokenChanged:(NSNotification *)notification
@@ -541,6 +560,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 - (void)loginYoutube{
     [self.YTSignIn signIn];
 }
+
 - (void)SignInServer:(GIDGoogleUser *)user{
     [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
         NSLog(@"login success %@",returnValue);
@@ -568,6 +588,11 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
         [self SignInServer:user];
     }
 }
+
+#pragma mark - save Image Video
+
+
+
 
 
 

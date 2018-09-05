@@ -56,6 +56,19 @@
 		FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */; };
 		FF3A28F72136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
 		FF3A28F82136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
+		FF44E230213FBD2800B4625F /* BroadCastHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E22F213FBD2800B4625F /* BroadCastHandle.m */; };
+		FF44E231213FBD2800B4625F /* BroadCastHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E22F213FBD2800B4625F /* BroadCastHandle.m */; };
+		FF44E23C213FBF9800B4625F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */; };
+		FF44E23D213FBF9800B4625F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */; };
+		FF44E240213FC08300B4625F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */; };
+		FF44E241213FC08300B4625F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */; };
+		FF44E334213FCD9800B4625F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E333213FCD9800B4625F /* libiconv.tbd */; };
+		FF44E336213FCD9E00B4625F /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E335213FCD9E00B4625F /* libbz2.tbd */; };
+		FF44E338213FCDA300B4625F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E337213FCDA300B4625F /* libz.tbd */; };
+		FF44E33A213FCDAD00B4625F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E339213FCDAD00B4625F /* AudioToolbox.framework */; };
+		FF44E33C213FCDB500B4625F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E33B213FCDB500B4625F /* CoreGraphics.framework */; };
+		FF44E33E213FCDC200B4625F /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E33D213FCDC200B4625F /* VideoToolbox.framework */; };
+		FF44E340213FCDC900B4625F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E33F213FCDC900B4625F /* CoreMedia.framework */; };
 		FF912280213E277200F155BE /* DeviceListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF91227F213E277200F155BE /* DeviceListViewModel.m */; };
 		FF912281213E278400F155BE /* DeviceListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF91227F213E277200F155BE /* DeviceListViewModel.m */; };
 		FF912289213E326800F155BE /* AddWIFIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF912287213E326800F155BE /* AddWIFIViewController.m */; };
@@ -160,6 +173,19 @@
 		FF3A28E42136903400EB94B8 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
 		FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		FF44E22E213FBD2800B4625F /* BroadCastHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BroadCastHandle.h; sourceTree = "<group>"; };
+		FF44E22F213FBD2800B4625F /* BroadCastHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BroadCastHandle.m; sourceTree = "<group>"; };
+		FF44E23A213FBF9800B4625F /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		FF44E23F213FC08200B4625F /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		FF44E333213FCD9800B4625F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		FF44E335213FCD9E00B4625F /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		FF44E337213FCDA300B4625F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		FF44E339213FCDAD00B4625F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FF44E33B213FCDB500B4625F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FF44E33D213FCDC200B4625F /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		FF44E33F213FCDC900B4625F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FF91227E213E277200F155BE /* DeviceListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceListViewModel.h; sourceTree = "<group>"; };
 		FF91227F213E277200F155BE /* DeviceListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewModel.m; sourceTree = "<group>"; };
 		FF912286213E326800F155BE /* AddWIFIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddWIFIViewController.h; sourceTree = "<group>"; };
@@ -198,6 +224,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF44E340213FCDC900B4625F /* CoreMedia.framework in Frameworks */,
+				FF44E33E213FCDC200B4625F /* VideoToolbox.framework in Frameworks */,
+				FF44E33C213FCDB500B4625F /* CoreGraphics.framework in Frameworks */,
+				FF44E33A213FCDAD00B4625F /* AudioToolbox.framework in Frameworks */,
+				FF44E338213FCDA300B4625F /* libz.tbd in Frameworks */,
+				FF44E336213FCD9E00B4625F /* libbz2.tbd in Frameworks */,
+				FF44E334213FCD9800B4625F /* libiconv.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +240,13 @@
 		595DBD95658BFCC22B69A261 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF44E33F213FCDC900B4625F /* CoreMedia.framework */,
+				FF44E33D213FCDC200B4625F /* VideoToolbox.framework */,
+				FF44E33B213FCDB500B4625F /* CoreGraphics.framework */,
+				FF44E339213FCDAD00B4625F /* AudioToolbox.framework */,
+				FF44E337213FCDA300B4625F /* libz.tbd */,
+				FF44E335213FCD9E00B4625F /* libbz2.tbd */,
+				FF44E333213FCD9800B4625F /* libiconv.tbd */,
 				AA896D5CA9C4F25FF6F78E68 /* libPods-LiveCamera.a */,
 			);
 			name = Frameworks;
@@ -290,6 +330,7 @@
 		FF3A28522136323300EB94B8 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				FF44E22D213FBD1100B4625F /* BroadCast */,
 				FF95886A21391BB3003D317B /* SUCache */,
 				FF3A28D321368D8700EB94B8 /* QDUtilites */,
 				FF3A28CD213641DF00EB94B8 /* UserDefault */,
@@ -492,6 +533,19 @@
 				FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		FF44E22D213FBD1100B4625F /* BroadCast */ = {
+			isa = PBXGroup;
+			children = (
+				FF44E23F213FC08200B4625F /* GCDAsyncSocket.h */,
+				FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */,
+				FF44E23A213FBF9800B4625F /* AsyncUdpSocket.h */,
+				FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */,
+				FF44E22E213FBD2800B4625F /* BroadCastHandle.h */,
+				FF44E22F213FBD2800B4625F /* BroadCastHandle.m */,
+			);
+			path = BroadCast;
 			sourceTree = "<group>";
 		};
 		FF912282213E31D300F155BE /* AddDevice */ = {
@@ -800,6 +854,7 @@
 				FF3A28EE2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */,
 				FF3A28DC21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
 				FF912280213E277200F155BE /* DeviceListViewModel.m in Sources */,
+				FF44E23C213FBF9800B4625F /* AsyncUdpSocket.m in Sources */,
 				FF3A28862136343F00EB94B8 /* RootNavigationController.m in Sources */,
 				FF3A287F2136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
 				FF3A28B8213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
@@ -817,6 +872,8 @@
 				FF912290213E5D3700F155BE /* GenerateQRCodeViewController.m in Sources */,
 				FF3A28DA21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
 				FF3A28D0213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,
+				FF44E240213FC08300B4625F /* GCDAsyncSocket.m in Sources */,
+				FF44E230213FBD2800B4625F /* BroadCastHandle.m in Sources */,
 				FF958941213947FB003D317B /* LiveViewModel.m in Sources */,
 				FFAD34D621379809002FFD6E /* LoginViewModel.m in Sources */,
 				FF3A28792136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
@@ -842,8 +899,10 @@
 				FF3A28CC213641B700EB94B8 /* UtilitesMethods.m in Sources */,
 				FF3A28ED2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF95887021391BD1003D317B /* SUCache.m in Sources */,
+				FF44E231213FBD2800B4625F /* BroadCastHandle.m in Sources */,
 				FF3A28892136343F00EB94B8 /* RootTabBarController.m in Sources */,
 				FFAD34E42137E74A002FFD6E /* DeviceViewCell.m in Sources */,
+				FF44E241213FC08300B4625F /* GCDAsyncSocket.m in Sources */,
 				FF3A28B9213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
 				FF3A28462136310200EB94B8 /* LiveCameraTests.m in Sources */,
 				FF3A28C62136374A00EB94B8 /* ViewModelClass.m in Sources */,
@@ -854,6 +913,7 @@
 				FF3A28B1213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */,
 				FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */,
 				FF3A28802136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
+				FF44E23D213FBF9800B4625F /* AsyncUdpSocket.m in Sources */,
 				FF3A28AF213634A900EB94B8 /* AppDelegate+AppService.m in Sources */,
 				FF3A287C2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A28DB21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
@@ -994,12 +1054,43 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P76M9BE8DQ;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/AES",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LiveCamera/AppEntry/LiveCameraPrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMOAuth2\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/NodeMediaClient\"",
+					"\"${PODS_ROOT}/Headers/Public/QMUIKit\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/YYCache\"",
+					"\"${PODS_ROOT}/Headers/Public/YYModel\"",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/LiveCamera/AppEntry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1091,12 +1182,43 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P76M9BE8DQ;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/AES",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LiveCamera/AppEntry/LiveCameraPrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKShareKit\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMOAuth2\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/NodeMediaClient\"",
+					"\"${PODS_ROOT}/Headers/Public/QMUIKit\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/YYCache\"",
+					"\"${PODS_ROOT}/Headers/Public/YYModel\"",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/LiveCamera/AppEntry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1186,11 +1308,23 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P76M9BE8DQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/AES",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
+				);
 				INFOPLIST_FILE = LiveCameraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bigfish.LiveCameraTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1205,11 +1339,23 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P76M9BE8DQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/AES",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
+				);
 				INFOPLIST_FILE = LiveCameraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bigfish.LiveCameraTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

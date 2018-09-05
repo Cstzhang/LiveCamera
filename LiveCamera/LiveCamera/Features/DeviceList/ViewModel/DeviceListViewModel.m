@@ -12,8 +12,8 @@
 
 - (void)fetchDeviceList{
     NSDictionary *params = @{
-                                 @"placeUserId":USER_INFO.placeUserId
-                                 };
+                             @"placeUserId":USER_INFO.placeUserId
+                             };
     ZBDataEntity *entity = [ZBDataEntity new];
     entity.urlString = [NSString stringWithFormat:@"%@%@",SERVER,API_DEVICELIST];
     entity.needCache = NO;

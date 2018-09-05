@@ -8,7 +8,7 @@
 
 #ifndef OpsseeBabyHeader_pch
 #define OpsseeBabyHeader_pch
-
+#ifdef __OBJC__
 #pragma 公用类头文件
 //API宏
 #import "APIMacros.h"
@@ -40,7 +40,7 @@
 #import <QMUIKit/QMUIKit.h>
 //图片
 #import <SDWebImage/UIImageView+WebCache.h>
- #import <SDWebImage/UIButton+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
 //网络
 #import <AFNetworking.h>
 #import "AFNetworkActivityIndicatorManager.h"
@@ -58,11 +58,17 @@
 #import "QDThemeManager.h"
 
 //YT
-@import GoogleSignIn;
+//@import GoogleSignIn;
+#import <GoogleSignIn/GoogleSignIn.h>
 //FB
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 //CLIENT
 #import <NodeMediaClient/NodeMediaClient.h>
+
+
+#endif
+
+
 
 #endif /* OpsseeBabyHeader_pch */

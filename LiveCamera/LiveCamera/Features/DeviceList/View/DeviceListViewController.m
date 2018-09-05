@@ -12,6 +12,8 @@
 #import "LiveViewController.h"
 #import "DeviceListViewModel.h"
 #import "AddWIFIViewController.h"
+#import "BroadCastHandle.h"
+
 static int CELL_H=148;
 static  CGFloat footViewH = 50;
 static NSString *cellReuseIdentifier = @"DeviceViewCell";
@@ -29,6 +31,8 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 @property (strong, nonatomic) NSMutableArray *deviceArray;
 
+@property (strong, nonatomic) BroadCastHandle *broadCastHandle;
+
 @end
 
 @implementation DeviceListViewController
@@ -44,6 +48,15 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
                                                object:nil];
     
     [self requestDeviceListData];
+
+    self.broadCastHandle = [BroadCastHandle shared];
+    [self.broadCastHandle sendBroadCastWithPort:13702 andCallBack:^(id sender, UInt16 port) {
+        NSLog(@"=== sender %@",sender);
+        NSLog(@"=== port %hu",port);
+    }];
+
+    
+    
 }
 
 
@@ -215,5 +228,6 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
     }
     return _deviceArray;
 }
+
 
 @end

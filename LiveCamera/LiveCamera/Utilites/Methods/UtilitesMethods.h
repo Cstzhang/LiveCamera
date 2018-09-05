@@ -15,6 +15,7 @@
 + (CGFloat)adaptationIphone6Height:(CGFloat)height;
 
 /********************** NSString Utils ***********************/
++(NSString*)getCurrentTime;
 /**字符串转换成时间*/
 + (NSDate *)dateFromString:(NSString *)string;
 /**判断字符串是否为空*/
