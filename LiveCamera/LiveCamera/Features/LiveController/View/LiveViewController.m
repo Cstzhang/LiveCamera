@@ -10,6 +10,13 @@
 #import "LoginViewModel.h"
 #import "LiveViewModel.h"
 #import "LoginViewController.h"
+typedef NS_ENUM(NSUInteger,LiveStatus){
+    LiveStatusWait,//初始状态
+    LiveStatusYTPrepare,//准备直播
+    LiveStatusFBPrepare,//准备直播
+    LiveStatusLive,//直播中
+    LiveStatusRecord,//录屏中
+};
 static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
 //static NSString *inputUrl =@"rtsp://172.18.220.227/main";
 @interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
@@ -18,12 +25,18 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 @property (strong, nonatomic) QMUIGhostButton *YTLiveButton;
 @property (strong, nonatomic) QMUIGhostButton *FBLiveButton;
 @property (strong, nonatomic) QMUIGhostButton *recordButton;
+@property (strong, nonatomic) QMUIFillButton *beginLiveButton;
+@property (strong, nonatomic) UIButton  *livingButton;
+@property (strong, nonatomic) UIButton  *recordingButton;
 @property (strong, nonatomic) LiveViewModel *liveViewModel;
 @property (strong, nonatomic) LoginViewModel *loginViewModel;
 @property (strong, nonatomic) NodeStreamer *nodeStreamer;
 @property (strong, nonatomic) GIDSignIn *YTSignIn;
-@property (copy, nonatomic) NSMutableString *broadCastId;
+@property (copy, nonatomic)   NSMutableString *broadCastId;
+@property (nonatomic) LiveStatus currentLiveStatus;
 @end
+
+
 
 @implementation LiveViewController
 
@@ -36,7 +49,9 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
                                              selector:@selector(_accessTokenChanged:)
                                                  name:FBSDKAccessTokenDidChangeNotification
                                                object:nil];
+    self.currentLiveStatus = LiveStatusWait;
 }
+
 - (void)initSubviews{
     [super initSubviews];
     self.YTLiveButton = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorRed];
@@ -47,7 +62,6 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     self.YTLiveButton.adjustsImageWithGhostColor = YES;
     [self.YTLiveButton addTarget:self action:@selector(handleYTButtonLiveEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.YTLiveButton];
-    
     
     self.FBLiveButton = [[QMUIGhostButton alloc] initWithGhostColor:UIColorMake(70,115,214)];
     self.FBLiveButton.titleLabel.font = UIFontMake(14);
@@ -66,20 +80,50 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     self.recordButton.adjustsImageWithGhostColor = YES;
     [self.recordButton addTarget:self action:@selector(handleRCButtonLiveEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.recordButton];
+    
+    
+    self.beginLiveButton = [[QMUIFillButton alloc] initWithFillType:QMUIFillButtonColorRed];
+    self.beginLiveButton.titleLabel.font = UIFontMake(14);
+    [self.beginLiveButton setTitle:@"Begin To Live" forState:UIControlStateNormal];
+    [self.beginLiveButton addTarget:self action:@selector(handleBeginLiveEvent) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview: self.beginLiveButton];
+    
+    self.livingButton = [[UIButton alloc]init];
+    [self.livingButton setImage:[UIImage imageNamed:@"ic_直播中"] forState:UIControlStateNormal];
+    self.livingButton.clipsToBounds = YES;
+    self.livingButton.layer.cornerRadius = 40;
+    [self.livingButton addTarget:self action:@selector(handleCloseLivingEvent) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview: self.livingButton];
+    
+    self.recordingButton = [[UIButton alloc]init];
+    [self.recordingButton setImage:[UIImage imageNamed:@"ic_录制视频"] forState:UIControlStateNormal];
+    self.recordingButton.clipsToBounds = YES;
+    self.recordingButton.layer.cornerRadius = 40;
+    [self.livingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview: self.recordingButton];
+    
 }
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    CGFloat buttonMinY =  CGRectGetHeight(self.view.bounds) - 80;
-    CGFloat buttonSpacing = 20;
-    CGSize  buttonSize = CGSizeMake(240, 40);
+    CGFloat buttonMinY =  (CGRectGetHeight(self.view.bounds) - (20* kHScaleFit)) ;
+    CGFloat buttonSpacing = 18 * kHScaleFit;
+    CGSize  buttonSize = CGSizeMake(240 * kWScaleFit, 40 * kHScaleFit);
+    CGSize  livebuttonSize = CGSizeMake(80 * kWScaleFit, 80 * kHScaleFit);
     CGFloat buttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), buttonSize.width);
+    CGFloat livebuttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), livebuttonSize.width);
     
     self.YTLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height *3) - (buttonSpacing *2), buttonSize.width, buttonSize.height);
-    
+
     self.FBLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height *2) - buttonSpacing, buttonSize.width, buttonSize.height);
+
+    self.recordButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height ), buttonSize.width, buttonSize.height);
+
+    self.beginLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height ), buttonSize.width, buttonSize.height);
     
-    self.recordButton.frame = CGRectFlatMake(buttonMinX,  buttonMinY - buttonSize.height, buttonSize.width, buttonSize.height);
+    self.livingButton.frame = CGRectFlatMake(livebuttonMinX, buttonMinY - (livebuttonSize.height ), livebuttonSize.width , livebuttonSize.height);
+    
+    self.recordingButton.frame = CGRectFlatMake(livebuttonMinX, buttonMinY - (livebuttonSize.height ), livebuttonSize.width , livebuttonSize.height);
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -104,9 +148,112 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 
 
 
+
 #pragma mark - Button event
+
 - (IBAction)backButtonEvent:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)handleBeginLiveEvent{
+    self.currentLiveStatus = LiveStatusLive;
+    switch (self.currentLiveStatus) {
+        case LiveStatusFBPrepare:{
+            [self geginToFBLive];
+             break;
+        }
+            
+           
+        case LiveStatusYTPrepare:{
+            [self beginToYTLive];
+            
+            break;
+        }
+        case LiveStatusWait:
+            break;
+        case LiveStatusLive:
+            break;
+        case LiveStatusRecord:
+            break;
+    }
+}
+
+- (void)handleCloseLivingEvent{
+    
+    
+}
+
+- (void)handleCloseRecordingEvent{
+    
+    
+}
+
+- (void)handleRCButtonLiveEvent{
+    self.currentLiveStatus = LiveStatusRecord;
+    
+    
+}
+
+- (void)setCurrentLiveStatus:(LiveStatus)currentLiveStatus{
+    _currentLiveStatus = currentLiveStatus;
+    switch (currentLiveStatus) {
+        case LiveStatusWait:{
+            self.FBLiveButton.hidden =NO;
+            self.YTLiveButton.hidden =NO;
+            self.recordButton.hidden =NO;
+            self.beginLiveButton.hidden = YES;
+            self.livingButton.hidden = YES;
+            self.recordingButton.hidden = YES;
+            break;
+        }
+        case LiveStatusYTPrepare:{
+            self.FBLiveButton.hidden =YES;
+            self.YTLiveButton.hidden =YES;
+            self.recordButton.hidden =YES;
+            self.beginLiveButton.hidden = NO;
+            self.livingButton.hidden = YES;
+            self.recordingButton.hidden = YES;
+            break;
+        }
+        case LiveStatusFBPrepare:{
+            self.FBLiveButton.hidden =YES;
+            self.YTLiveButton.hidden =YES;
+            self.recordButton.hidden =YES;
+            self.beginLiveButton.hidden = NO;
+            self.livingButton.hidden = YES;
+            self.recordingButton.hidden = YES;
+            break;
+        }
+        case LiveStatusLive:{
+            self.FBLiveButton.hidden =YES;
+            self.YTLiveButton.hidden =YES;
+            self.recordButton.hidden =YES;
+            self.beginLiveButton.hidden = YES;
+            self.livingButton.hidden = NO;
+            self.recordingButton.hidden = YES;
+            break;
+        }
+        case LiveStatusRecord:{
+            self.FBLiveButton.hidden =YES;
+            self.YTLiveButton.hidden =YES;
+            self.recordButton.hidden =YES;
+            self.beginLiveButton.hidden = YES;
+            self.livingButton.hidden = YES;
+            self.recordingButton.hidden = NO;
+            break;
+        }
+            
+            
+    }
+}
+/**
+ start facebook live stream
+ */
+- (void)handleFBButtonLiveEvent{
+    self.currentLiveStatus = LiveStatusFBPrepare;
+
+    
 }
 
 
@@ -114,7 +261,51 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
  start youtube live stream
  */
 - (void)handleYTButtonLiveEvent{
-     //data
+    self.currentLiveStatus = LiveStatusYTPrepare;
+    
+}
+
+- (void)geginToFBLive{
+    NSDictionary *param = @{
+                            @"description":@"CVTE直播间",
+                            @"title":@"CVTE Hello World!",
+                            @"privacy":@{@"value":@"EVERYONE"},
+                            };
+    ZBWeak;
+    if ([USER_INFO isFBLogin]) {
+        [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
+            [MBProgressHUD hideHUD];
+            NSString *outUrl = returnValue[@"stream_url"];
+            [weakSelf startPushRTMPWithURL:outUrl];
+        } WithErrorBlock:^(NSString *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showTipMessageInWindow:error timer:1.5];
+        } WithFailureBlock:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
+        }];
+        [MBProgressHUD showActivityMessageInWindow:@""];
+        [self.liveViewModel createBroadcastWith:ThirdTypeFacebook BroadcastInfoDic:param LiveStreamInfoDic:nil];
+    }else{
+        [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+            NSLog(@"login success %@",returnValue);
+            [MBProgressHUD hideHUD];
+        } WithErrorBlock:^(NSString *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showTipMessageInWindow:error timer:1.5];
+        } WithFailureBlock:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
+        }];
+        [MBProgressHUD showActivityMessageInWindow:@""];
+        [self.loginViewModel FBlogin:self];
+    }
+}
+
+
+
+- (void)beginToYTLive{
+    //data
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
     NSTimeInterval secondsInEightHours = 3 * 60 ;
@@ -122,25 +313,25 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     NSString *dateString = [formatter stringFromDate:dateEightHoursAhead];
     NSString *time = [NSString stringWithFormat:@"%@+00:00",dateString];
     NSDictionary *broadcastParameters = @{ @"snippet": @{ @"title":@"CVTE Hello World!",
-                                                 @"scheduledStartTime":time,
-                                                 @"description":@"CVTE直播间"},
-                                  @"status": @{ @"privacyStatus": @"public" }
-
-                                };
+                                                          @"scheduledStartTime":time,
+                                                          @"description":@"CVTE直播间"},
+                                           @"status": @{ @"privacyStatus": @"public" }
+                                           
+                                           };
     NSDictionary *liveStreamParameters = @{
-                              @"snippet": @{ @"title": @"CVTE Hello World!",
-                                             @"description": @"CVTE直播间" },
-                                  @"cdn": @{ @"resolution": @"720p",
-                                             @"frameRate": @"60fps" ,
-                                             @"ingestionType":@"rtmp"},
-                        @"ingestionInfo": @{ @"streamName": @"CVTE" }
-                                          };
+                                           @"snippet": @{ @"title": @"CVTE Hello World!",
+                                                          @"description": @"CVTE直播间" },
+                                           @"cdn": @{ @"resolution": @"720p",
+                                                      @"frameRate": @"60fps" ,
+                                                      @"ingestionType":@"rtmp"},
+                                           @"ingestionInfo": @{ @"streamName": @"CVTE" }
+                                           };
     if ([UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]) {
         ZBWeak;
         [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
             [MBProgressHUD hideHUD];
-            NSDictionary * broadCastDict = returnValue[@"broadCastDict"];
-            NSDictionary * streamDict = returnValue[@"streamDict"];
+            NSDictionary *broadCastDict = returnValue[@"broadCastDict"];
+            NSDictionary *streamDict = returnValue[@"streamDict"];
             NSString* ingestionAddress = streamDict[@"cdn"][@"ingestionInfo"][@"ingestionAddress"];
             NSString* streamName = streamDict[@"cdn"][@"ingestionInfo"][@"streamName"];
             NSString *outUrl = [NSString stringWithFormat:@"%@/%@",ingestionAddress,streamName];
@@ -148,31 +339,23 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
             [weakSelf startPushRTMPWithURL:outUrl];
             //开启计时，3秒后 获取直播间状态，如果是测试状态 ，改成直播状态即可 循环获取知道直播状态为liveStarting
             [weakSelf countdownToLive:broadCastDict status:@"testing"];
-          
+            
         } WithErrorBlock:^(NSString *error) {
             [MBProgressHUD hideHUD];
-            NSLog(@"===需要登录============== ");
             [weakSelf loginYoutube];
         } WithFailureBlock:^(NSError *error) {
             [MBProgressHUD hideHUD];
-            if (error.code == -1011) {
-                 NSLog(@"-================error.code ================- %ld",(long)error.code);
-                 NSLog(@"===需要登录==============");
-                  [weakSelf loginYoutube];
-            }
-            NSLog(@"error.code  %ld",(long)error.code);
-
+            [weakSelf loginYoutube];
         }];
         [MBProgressHUD hideHUD];
         [MBProgressHUD showActivityMessageInWindow:@""];
         //creat createBroadcast bind
-        [self.liveViewModel createBroadcastWith:ThirdTypeYouTube BroadcastInfoDic:broadcastParameters LiveStreamInfoDic:liveStreamParameters];
-        
+        [self.liveViewModel createBroadcastWith:ThirdTypeYouTube
+                               BroadcastInfoDic:broadcastParameters
+                              LiveStreamInfoDic:liveStreamParameters];
     }else{
-        NSLog(@"===需要登录==============");
         [self loginYoutube];
     }
-
 }
 
 
@@ -270,57 +453,9 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     [self.liveViewModel transitionYouTubeBroadcastWith:self.broadCastId status:@"complete"];
 }
 
-/**
- start facebook live stream
- */
-- (void)handleFBButtonLiveEvent{
-    NSDictionary *param = @{
-                            @"description":@"CVTE直播间",
-                            @"title":@"CVTE Hello World!",
-                            @"privacy":@{@"value":@"EVERYONE"},
-                            };
-    ZBWeak;
-    if ([USER_INFO isFBLogin]) {
-        [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
-            [MBProgressHUD hideHUD];
-            NSString *outUrl = returnValue[@"stream_url"];
-            [weakSelf startPushRTMPWithURL:outUrl];
-        } WithErrorBlock:^(NSString *error) {
-            [MBProgressHUD hideHUD];
-            [MBProgressHUD showTipMessageInWindow:error timer:1.5];
-        } WithFailureBlock:^(NSError *error) {
-            [MBProgressHUD hideHUD];
-            [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
-        }];
-        [MBProgressHUD showActivityMessageInWindow:@""];
-        [self.liveViewModel createBroadcastWith:ThirdTypeFacebook BroadcastInfoDic:param LiveStreamInfoDic:nil];
-    }else{
-        [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
-            NSLog(@"login success %@",returnValue);
-            [MBProgressHUD hideHUD];
-        } WithErrorBlock:^(NSString *error) {
-            [MBProgressHUD hideHUD];
-            [MBProgressHUD showTipMessageInWindow:error timer:1.5];
-        } WithFailureBlock:^(NSError *error) {
-            [MBProgressHUD hideHUD];
-            [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
-        }];
-        [MBProgressHUD showActivityMessageInWindow:@""];
-        [self.loginViewModel FBlogin:self];
-    }
-   
-}
 
-- (void)handleRCButtonLiveEvent{
 
-    
-    
-    
-    
-    
-    
-    
-}
+
 
 
 
@@ -418,8 +553,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 
 #pragma mark - Third login delegate
 // The sign-in flow has finished and was successful if |error| is |nil|.
-- (void)signIn:(GIDSignIn *)signIn
-didSignInForUser:(GIDGoogleUser *)user
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user
      withError:(NSError *)error{
     if (error != nil) {
         NSLog(@"error %@",error);

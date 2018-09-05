@@ -13,6 +13,11 @@
 #define NORM_SCREEN_WIDTH 375
 
 #define HEAD_TABBAR_HEIGHT 113
+
+// 等比例适配系数
+#define kWScaleFit (SCREEN_WIDTH / 375.0f)
+#define kHScaleFit (SCREEN_HEIGHT / 667.0f)
+
 //系统版本号
 #define kSystemVersion [[UIDevice currentDevice] systemVersion]
 //APP版本号

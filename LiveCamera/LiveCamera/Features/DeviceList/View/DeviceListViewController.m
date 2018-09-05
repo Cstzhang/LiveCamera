@@ -152,7 +152,7 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 //    return self.deviceArray.count;
-    return 2;
+    return 1;
 }
 
 
