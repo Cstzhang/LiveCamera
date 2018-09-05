@@ -99,7 +99,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     [self.recordingButton setImage:[UIImage imageNamed:@"ic_录制视频"] forState:UIControlStateNormal];
     self.recordingButton.clipsToBounds = YES;
     self.recordingButton.layer.cornerRadius = 40;
-    [self.livingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
+    [self.recordingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview: self.recordingButton];
     
 }
@@ -127,12 +127,8 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    if(_clientPlayer && _nodeStreamer && _broadCastId){
-         [self finishYoutuLive];
-    }
-    [self.clientPlayer stop];
-    [self.nodeStreamer stopStreaming];
-   
+    [self stopLive];
+    [self stopPlayer];
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
@@ -157,17 +153,17 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 
 
 - (void)handleBeginLiveEvent{
-    self.currentLiveStatus = LiveStatusLive;
     switch (self.currentLiveStatus) {
         case LiveStatusFBPrepare:{
+            self.currentLiveStatus = LiveStatusLive;
             [self geginToFBLive];
              break;
         }
             
            
         case LiveStatusYTPrepare:{
+            self.currentLiveStatus = LiveStatusLive;
             [self beginToYTLive];
-            
             break;
         }
         case LiveStatusWait:
@@ -180,13 +176,14 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 }
 
 - (void)handleCloseLivingEvent{
-    
-    
+    [self stopLive];
+    self.currentLiveStatus = LiveStatusWait;
+ 
 }
 
 - (void)handleCloseRecordingEvent{
-    
-    
+//    [self stopLive];
+    self.currentLiveStatus = LiveStatusWait;
 }
 
 - (void)handleRCButtonLiveEvent{
@@ -252,7 +249,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
  */
 - (void)handleFBButtonLiveEvent{
     self.currentLiveStatus = LiveStatusFBPrepare;
-
+    
     
 }
 
@@ -297,7 +294,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
             [MBProgressHUD hideHUD];
             [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
         }];
-        [MBProgressHUD showActivityMessageInWindow:@""];
+//        [MBProgressHUD showActivityMessageInWindow:@""];
         [self.loginViewModel FBlogin:self];
     }
 }
@@ -305,6 +302,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 
 
 - (void)beginToYTLive{
+
     //data
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
@@ -454,9 +452,17 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 }
 
 
+- (void)stopPlayer{
+    [self.clientPlayer stop];
+}
 
 
-
+- (void)stopLive{
+    if(_clientPlayer && _nodeStreamer && _broadCastId){
+        [self finishYoutuLive];
+    }
+    [self.nodeStreamer stopStreaming];
+}
 
 
 #pragma mark - lazy func
