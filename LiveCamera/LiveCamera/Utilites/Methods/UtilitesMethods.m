@@ -458,4 +458,19 @@
     
 }
 
+
+    
++ (NSDictionary *)sdpSeparatedString:(NSString *)tmpString{
+    NSMutableArray *contentArr = (NSMutableArray *)[tmpString componentsSeparatedByString:@"\r\n"];
+    [contentArr removeObjectAtIndex:contentArr.count - 1];//去除最后一个
+    NSMutableDictionary *resultDic = [[NSMutableDictionary alloc]init];
+    for (NSString *string in contentArr) {
+        NSArray *tmpArr = [string componentsSeparatedByString:@"="];
+        [resultDic setObject:tmpArr[1] forKey:tmpArr[0]];
+    }
+    NSLog(@"resultDic %@",resultDic);
+    return resultDic;
+}
+
+
 @end

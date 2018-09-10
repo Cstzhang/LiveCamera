@@ -27,6 +27,9 @@
                     <rect key="frame" x="56" y="278" width="16" height="22"/>
                     <state key="normal" image="未选中"/>
                     <state key="selected" image="选中"/>
+                    <connections>
+                        <action selector="checkEvent:" destination="-1" eventType="touchUpInside" id="jyV-KZ-9kq"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGq-wj-Xqt">
                     <rect key="frame" x="56" y="339" width="263" height="42"/>

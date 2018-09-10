@@ -7,7 +7,7 @@
 //
 
 #import "DeviceListViewModel.h"
-
+#import "DeviceModel.h"
 @implementation DeviceListViewModel
 
 - (void)fetchDeviceList{
@@ -35,7 +35,13 @@
 - (void)fetchListSuccessWithDic:(NSDictionary *)returnValue{
     NSString * code = returnValue[@"code"];
     if ([code isEqualToString:@"0000"]) {
-        self.returnBlock(returnValue[@"info"]);
+        NSArray *resultDevice = returnValue[@"info"];
+        NSMutableArray *deviceArray = [[NSMutableArray alloc] initWithCapacity:resultDevice.count];
+        for (int i = 0; i < resultDevice.count; i ++) {
+            DeviceModel *model = [DeviceModel yy_modelWithJSON:resultDevice[i]];
+            [deviceArray addObject:model];
+        }
+        self.returnBlock(deviceArray);
     }else{
         [self errorWithMsg:returnValue[@"message"]];
     }

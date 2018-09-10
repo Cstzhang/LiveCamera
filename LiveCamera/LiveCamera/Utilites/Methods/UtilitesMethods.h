@@ -84,4 +84,14 @@
  *  @return 图片中的二维码数据集合 CIQRCodeFeature对象
  */
 + (NSArray *)readQRCodeFromImage:(UIImage *)image;
+
+
+/**
+ sdp string 解析
+
+ @param tmpString sdp string
+ @return 字典
+ */
++ (NSDictionary *)sdpSeparatedString:(NSString *)tmpString;
+
 @end

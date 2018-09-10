@@ -317,7 +317,7 @@ DEPENDENCIES:
   - Masonry (~> 1.1.0)
   - MBProgressHUD (~> 1.1.0)
   - MJRefresh (~> 3.1.12)
-  - NodeMediaClient
+  - NodeMediaClient (~> 2.4.4)
   - QMUIKit (~> 2.7.1)
   - SDWebImage (~> 4.3.1)
   - YYCache (~> 1.0.4)
@@ -362,6 +362,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 7e73a84a7352eaa425003de594a3262d70f731d3
+PODFILE CHECKSUM: 950bf9cdaf621bc0bbc5d2df781ff1aa8ffdf2b4
 
 COCOAPODS: 1.5.3

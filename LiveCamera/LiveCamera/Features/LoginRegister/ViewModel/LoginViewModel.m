@@ -79,6 +79,7 @@
                                          @"email":result[@"email"] ? result[@"email"] : @"" ,
                                          @"clientType":LOGIN_TYPE,
                                          @"thirdType":[NSString stringWithFormat:@"%lu",(unsigned long)ThirdTypeFacebook],
+                                         @"placeUserId":USER_INFO.placeUserId ?  USER_INFO.placeUserId : @"",
                                          };
 
             [self loginServer:parameters loginType:ThirdTypeFacebook];
@@ -112,6 +113,7 @@
                                  @"email":user.profile.email,
                                  @"clientType":LOGIN_TYPE,
                                  @"thirdType":[NSString stringWithFormat:@"%lu",(unsigned long)ThirdTypeYouTube],
+                                 @"placeUserId":USER_INFO.placeUserId ? USER_INFO.placeUserId : @"",
                                  };
     
    
@@ -183,7 +185,8 @@
         [self.LoginVc dismissViewControllerAnimated:YES completion:nil];
 
     }else{
-        [self errorWithMsg:returnValue[@"message"]];
+        [USER_INFO loginOutAndDeleteUsrInfo];
+        [self errorWithMsg:@"Sign fail"];
     }
 }
 

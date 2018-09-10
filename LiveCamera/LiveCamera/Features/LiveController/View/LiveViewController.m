@@ -18,8 +18,8 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     LiveStatusLive,//直播中
     LiveStatusRecord,//录屏中
 };
-static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
-//static NSString *inputUrl =@"rtsp://172.18.220.227/main";
+//static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
+static NSString *inputUrl =@"rtsp://192.168.154.237/main";
 
 @interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (nonatomic, strong) NodePlayer *clientPlayer;
@@ -478,6 +478,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
     if (!_clientPlayer) {
         _clientPlayer = [[NodePlayer alloc]init];
         _clientPlayer.playerView = self.view;
+        _clientPlayer.rtspTransport = RTSP_TRANSPORT_TCP;
         [_clientPlayer setInputUrl:inputUrl];
         [_clientPlayer setContentMode:1];
     }
@@ -522,10 +523,15 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 #pragma mark - start recording video
 
 -  (void)startRecord{
+    NSString *timeName = [UtilitesMethods getCurrentTime];
+    NSString *fileName = [NSString stringWithFormat:@"/Documents/%@.flv",timeName];
+    NSString * path =NSHomeDirectory();
+    
+    NSString * Pathimg =[path stringByAppendingString:fileName];
+    NSLog(@"=====  Pathimg ===== %@",Pathimg);
     NSLog(@"=====  startRecord =====");
-    NSString *fileName = [UtilitesMethods getCurrentTime];
     [self.nodeStreamer startNativeRateStreaming:inputUrl
-                                         output:[NSString stringWithFormat:@"/Users/bigfish/Desktop/Documents/%@.flv",fileName]];
+                                         output:Pathimg];
 
 }
 
@@ -533,7 +539,7 @@ static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch
 #pragma mark - live streamer
 
 - (void)startPushRTMPWithURL:(NSString *)stream_url{
-    NSLog(@"=====  startPushRTMP =====");
+    NSLog(@"=====  startPushRTMP ===== %@",stream_url);
     [self.nodeStreamer startStreamingWithInput:inputUrl
                                         output:stream_url];
 

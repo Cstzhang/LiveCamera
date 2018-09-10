@@ -26,6 +26,8 @@
     //获取用户信息
     [self getUserInformation];
     
+    //同步唯一设备标识 (如果标识已经存在则不会进行任何操作)
+    [HDeviceIdentifier syncDeviceIdentifier];
 }
 /**
  *  网络监测

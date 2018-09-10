@@ -8,10 +8,10 @@
 
 
 #import "DeviceViewCell.h"
+#import "DeviceModel.h"
 @interface DeviceViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 
 
@@ -41,5 +41,19 @@
     [super setFrame:frame];
 }
 
+- (void)setValueWithDic:(DeviceModel *) model{
+    self.deviceNameLabel.text = model.deviceName? model.deviceName:@"Device01";
+    if (model.isConnectd) {
+        self.statusLabel.text = @"Connected";
+        self.statusImageView.image = [UIImage imageNamed:@"ic_camera_connected"];
+    }else{
+        self.statusLabel.text = @"Not connected";
+        self.statusImageView.image = [UIImage imageNamed:@"ic_camera_loss_connected"];
+    }
+    
+}
 
+- (void)setStatus:(NSString *)status{
+    self.statusLabel.text = status;
+}
 @end

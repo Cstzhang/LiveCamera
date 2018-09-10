@@ -10,6 +10,11 @@
 #define APIMacros_h
 #define SHIRO_COOKIE @"SESSION"
 #define LOGIN_TYPE @2 //IOS
+#define broadCastType @"broadCastType" // 1,add  2 checkList
+#define broadCastTypeAdd @"broadCastTypeAdd"
+#define broadCastTypeCheckList @"broadCastTypeCheckList"
+#define broadCastDeviceArray @"broadCastDeviceArray"
+
 #ifdef DEBUG
 //do sth.
 #define SERVER @"http://172.18.223.207:80"
@@ -33,9 +38,10 @@
 
 #define API_DEVICELIST             @"/opssee-api/V1_0/querybondeddevicelist"
 
-#define API_BIND_DEVICE            @"/opssee-api/V1_0/bondeddevices"
+#define API_BIND_DEVICE            @"/opssee-api/V1_0/bondeddevice"
 
-#define API_CANCEL_BIND_DEVICE     @"/opssee-api/V1_0/cancelbondeddevices"
+#define API_CANCEL_BIND_DEVICE     @"/opssee-api/V1_0/cancelbondeddevice"
+
 
 
 // =========================YouTube API ========================================
@@ -50,5 +56,16 @@
 #define YT_API_GET_LIVESTREAM @"https://www.googleapis.com/youtube/v3/liveStreams?part=id,snippet,cdn,status"
 
 #define YT_API_GET_TRABSUTION @"https://www.googleapis.com/youtube/v3/liveBroadcasts/transition?part=id,snippet,contentDetails,status"
+
+
+// =========================QR API ========================================
+
+#define QR_BIND @"/v1/app/qrBind"
+
+#define QR_CHECK_VERSION @"/v1/system/checkVersion"
+
+#define QR_UP_GRADE @"/v1/system/upgrade"
+
+#define QR_SNAPSHOT @"/v1/snapshot"
 
 #endif /* APIMacros_h */

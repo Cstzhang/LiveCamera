@@ -28,7 +28,7 @@
 #import "ZBDataEntity.h"
 #import "ZBNetManager.h"
 #import "MBProgressHUD+ZBAdditions.h"
-
+#import "HDeviceIdentifier.h"
 
 //本地存储
 #import "UserDefaultUtil.h"

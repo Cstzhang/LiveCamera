@@ -114,7 +114,7 @@ static UserModel *sharedUserInfoContext = nil;
 }
 
 - (BOOL)isYTLogin{
-    return GIDSignIn.sharedInstance.currentUser;
+    return !(self.YTidToken == nil);
 }
 
 - (BOOL)isFBLogin{

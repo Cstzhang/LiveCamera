@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LiveViewController : QMUICommonViewController
-
+@property (copy, nonatomic) NSString *rtspUrl;
 @end

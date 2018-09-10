@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3F89A603B22E1DCA56BDBD09 /* libPods-LiveCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA896D5CA9C4F25FF6F78E68 /* libPods-LiveCamera.a */; };
+		FF132EAF2140CC9B0026948D /* BondedDeviceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF132EAE2140CC9B0026948D /* BondedDeviceViewModel.m */; };
+		FF132EB02140CC9B0026948D /* BondedDeviceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF132EAE2140CC9B0026948D /* BondedDeviceViewModel.m */; };
+		FF132EB3214104700026948D /* AddDeviceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF132EB2214104700026948D /* AddDeviceViewModel.m */; };
+		FF132EB4214104700026948D /* AddDeviceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF132EB2214104700026948D /* AddDeviceViewModel.m */; };
+		FF132EB7214131B10026948D /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF132EB6214131B10026948D /* DeviceModel.m */; };
+		FF132EB8214131B10026948D /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF132EB6214131B10026948D /* DeviceModel.m */; };
+		FF1D7F7B21436D9900B10EC9 /* BroadCastHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1D7F7A21436D9900B10EC9 /* BroadCastHandle.m */; };
+		FF1D7F7C21436D9900B10EC9 /* BroadCastHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1D7F7A21436D9900B10EC9 /* BroadCastHandle.m */; };
+		FF1D7F7F21436DF800B10EC9 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1D7F7E21436DF700B10EC9 /* AsyncUdpSocket.m */; };
+		FF1D7F8021436DF800B10EC9 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1D7F7E21436DF700B10EC9 /* AsyncUdpSocket.m */; };
 		FF3A282E2136310000EB94B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A282D2136310000EB94B8 /* AppDelegate.m */; };
 		FF3A28362136310200EB94B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28352136310200EB94B8 /* Assets.xcassets */; };
 		FF3A283C2136310200EB94B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A283B2136310200EB94B8 /* main.m */; };
@@ -56,12 +66,12 @@
 		FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */; };
 		FF3A28F72136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
 		FF3A28F82136961C00EB94B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */; };
-		FF44E230213FBD2800B4625F /* BroadCastHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E22F213FBD2800B4625F /* BroadCastHandle.m */; };
-		FF44E231213FBD2800B4625F /* BroadCastHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E22F213FBD2800B4625F /* BroadCastHandle.m */; };
-		FF44E23C213FBF9800B4625F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */; };
-		FF44E23D213FBF9800B4625F /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */; };
-		FF44E240213FC08300B4625F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */; };
-		FF44E241213FC08300B4625F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */; };
+		FF3F13B32146069D00FE3C43 /* PhotoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3F13B22146069D00FE3C43 /* PhotoViewModel.m */; };
+		FF3F13B42146069D00FE3C43 /* PhotoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3F13B22146069D00FE3C43 /* PhotoViewModel.m */; };
+		FF3F13BB21462BCD00FE3C43 /* HDeviceIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3F13B821462BCC00FE3C43 /* HDeviceIdentifier.m */; };
+		FF3F13BC21462BCD00FE3C43 /* HDeviceIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3F13B821462BCC00FE3C43 /* HDeviceIdentifier.m */; };
+		FF3F13BD21462BCD00FE3C43 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3F13BA21462BCD00FE3C43 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FF3F13BE21462BCD00FE3C43 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3F13BA21462BCD00FE3C43 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FF44E334213FCD9800B4625F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E333213FCD9800B4625F /* libiconv.tbd */; };
 		FF44E336213FCD9E00B4625F /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E335213FCD9E00B4625F /* libbz2.tbd */; };
 		FF44E338213FCDA300B4625F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44E337213FCDA300B4625F /* libz.tbd */; };
@@ -111,6 +121,16 @@
 		AA896D5CA9C4F25FF6F78E68 /* libPods-LiveCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveCamera.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB691E5CB95D61515F4D4025 /* Pods-LiveCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveCamera.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveCamera/Pods-LiveCamera.debug.xcconfig"; sourceTree = "<group>"; };
 		E0E60FF40E4C5878D521F01F /* Pods-LiveCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveCamera/Pods-LiveCamera.release.xcconfig"; sourceTree = "<group>"; };
+		FF132EAD2140CC9B0026948D /* BondedDeviceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BondedDeviceViewModel.h; sourceTree = "<group>"; };
+		FF132EAE2140CC9B0026948D /* BondedDeviceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BondedDeviceViewModel.m; sourceTree = "<group>"; };
+		FF132EB1214104700026948D /* AddDeviceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceViewModel.h; sourceTree = "<group>"; };
+		FF132EB2214104700026948D /* AddDeviceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceViewModel.m; sourceTree = "<group>"; };
+		FF132EB5214131B10026948D /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
+		FF132EB6214131B10026948D /* DeviceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceModel.m; sourceTree = "<group>"; };
+		FF1D7F7921436D9900B10EC9 /* BroadCastHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BroadCastHandle.h; sourceTree = "<group>"; };
+		FF1D7F7A21436D9900B10EC9 /* BroadCastHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BroadCastHandle.m; sourceTree = "<group>"; };
+		FF1D7F7D21436DF700B10EC9 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		FF1D7F7E21436DF700B10EC9 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		FF3A28292136310000EB94B8 /* LiveCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF3A282C2136310000EB94B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FF3A282D2136310000EB94B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -173,12 +193,12 @@
 		FF3A28E42136903400EB94B8 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		FF3A28E52136903400EB94B8 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
 		FF3A28F62136961C00EB94B8 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		FF44E22E213FBD2800B4625F /* BroadCastHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BroadCastHandle.h; sourceTree = "<group>"; };
-		FF44E22F213FBD2800B4625F /* BroadCastHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BroadCastHandle.m; sourceTree = "<group>"; };
-		FF44E23A213FBF9800B4625F /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
-		FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
-		FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
-		FF44E23F213FC08200B4625F /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		FF3F13B12146069D00FE3C43 /* PhotoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PhotoViewModel.h; path = LiveCamera/PhotoViewModel.h; sourceTree = SOURCE_ROOT; };
+		FF3F13B22146069D00FE3C43 /* PhotoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PhotoViewModel.m; path = LiveCamera/PhotoViewModel.m; sourceTree = SOURCE_ROOT; };
+		FF3F13B721462BCC00FE3C43 /* HDeviceIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDeviceIdentifier.h; sourceTree = "<group>"; };
+		FF3F13B821462BCC00FE3C43 /* HDeviceIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDeviceIdentifier.m; sourceTree = "<group>"; };
+		FF3F13B921462BCC00FE3C43 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		FF3F13BA21462BCD00FE3C43 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		FF44E333213FCD9800B4625F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		FF44E335213FCD9E00B4625F /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		FF44E337213FCDA300B4625F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -330,6 +350,7 @@
 		FF3A28522136323300EB94B8 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				FF3F13B621462BC300FE3C43 /* UUID */,
 				FF44E22D213FBD1100B4625F /* BroadCast */,
 				FF95886A21391BB3003D317B /* SUCache */,
 				FF3A28D321368D8700EB94B8 /* QDUtilites */,
@@ -411,6 +432,9 @@
 		FF3A285A213632FF00EB94B8 /* PhotoList */ = {
 			isa = PBXGroup;
 			children = (
+				FF3F13AF2146067500FE3C43 /* ViewModel */,
+				FF3F13AE2146066C00FE3C43 /* Model */,
+				FF3F13AD2146066700FE3C43 /* View */,
 				FF3A286A2136334600EB94B8 /* PhotoListViewController.h */,
 				FF3A286B2136334600EB94B8 /* PhotoListViewController.m */,
 				FF3A286C2136334600EB94B8 /* PhotoListViewController.xib */,
@@ -535,15 +559,47 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		FF3F13AD2146066700FE3C43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF3F13AE2146066C00FE3C43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FF3F13AF2146067500FE3C43 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FF3F13B12146069D00FE3C43 /* PhotoViewModel.h */,
+				FF3F13B22146069D00FE3C43 /* PhotoViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FF3F13B621462BC300FE3C43 /* UUID */ = {
+			isa = PBXGroup;
+			children = (
+				FF3F13B721462BCC00FE3C43 /* HDeviceIdentifier.h */,
+				FF3F13B821462BCC00FE3C43 /* HDeviceIdentifier.m */,
+				FF3F13B921462BCC00FE3C43 /* SFHFKeychainUtils.h */,
+				FF3F13BA21462BCD00FE3C43 /* SFHFKeychainUtils.m */,
+			);
+			path = UUID;
+			sourceTree = "<group>";
+		};
 		FF44E22D213FBD1100B4625F /* BroadCast */ = {
 			isa = PBXGroup;
 			children = (
-				FF44E23F213FC08200B4625F /* GCDAsyncSocket.h */,
-				FF44E23E213FC08200B4625F /* GCDAsyncSocket.m */,
-				FF44E23A213FBF9800B4625F /* AsyncUdpSocket.h */,
-				FF44E23B213FBF9800B4625F /* AsyncUdpSocket.m */,
-				FF44E22E213FBD2800B4625F /* BroadCastHandle.h */,
-				FF44E22F213FBD2800B4625F /* BroadCastHandle.m */,
+				FF1D7F7D21436DF700B10EC9 /* AsyncUdpSocket.h */,
+				FF1D7F7E21436DF700B10EC9 /* AsyncUdpSocket.m */,
+				FF1D7F7921436D9900B10EC9 /* BroadCastHandle.h */,
+				FF1D7F7A21436D9900B10EC9 /* BroadCastHandle.m */,
 			);
 			path = BroadCast;
 			sourceTree = "<group>";
@@ -581,6 +637,8 @@
 		FF912285213E31FB00F155BE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FF132EB1214104700026948D /* AddDeviceViewModel.h */,
+				FF132EB2214104700026948D /* AddDeviceViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -678,6 +736,8 @@
 			children = (
 				FF91227E213E277200F155BE /* DeviceListViewModel.h */,
 				FF91227F213E277200F155BE /* DeviceListViewModel.m */,
+				FF132EAD2140CC9B0026948D /* BondedDeviceViewModel.h */,
+				FF132EAE2140CC9B0026948D /* BondedDeviceViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -685,6 +745,8 @@
 		FFAD34DF2137E6B8002FFD6E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FF132EB5214131B10026948D /* DeviceModel.h */,
+				FF132EB6214131B10026948D /* DeviceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -849,18 +911,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF3A28B0213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */,
+				FF1D7F7F21436DF800B10EC9 /* AsyncUdpSocket.m in Sources */,
 				FFAD34DB2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */,
 				FF3A28632136333200EB94B8 /* LiveViewController.m in Sources */,
 				FF3A28EE2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */,
 				FF3A28DC21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
 				FF912280213E277200F155BE /* DeviceListViewModel.m in Sources */,
-				FF44E23C213FBF9800B4625F /* AsyncUdpSocket.m in Sources */,
 				FF3A28862136343F00EB94B8 /* RootNavigationController.m in Sources */,
 				FF3A287F2136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
 				FF3A28B8213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
 				FF912289213E326800F155BE /* AddWIFIViewController.m in Sources */,
 				FF95887121391BD1003D317B /* SUCacheItem.m in Sources */,
 				FF3A285E2136332400EB94B8 /* LoginViewController.m in Sources */,
+				FF3F13BD21462BCD00FE3C43 /* SFHFKeychainUtils.m in Sources */,
 				FF3A28882136343F00EB94B8 /* RootTabBarController.m in Sources */,
 				FF3A28682136333C00EB94B8 /* DeviceListViewController.m in Sources */,
 				FF3A28CB213641B700EB94B8 /* UtilitesMethods.m in Sources */,
@@ -872,17 +935,21 @@
 				FF912290213E5D3700F155BE /* GenerateQRCodeViewController.m in Sources */,
 				FF3A28DA21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
 				FF3A28D0213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,
-				FF44E240213FC08300B4625F /* GCDAsyncSocket.m in Sources */,
-				FF44E230213FBD2800B4625F /* BroadCastHandle.m in Sources */,
 				FF958941213947FB003D317B /* LiveViewModel.m in Sources */,
+				FF132EAF2140CC9B0026948D /* BondedDeviceViewModel.m in Sources */,
 				FFAD34D621379809002FFD6E /* LoginViewModel.m in Sources */,
+				FF132EB7214131B10026948D /* DeviceModel.m in Sources */,
 				FF3A28792136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
 				FF3A28EC2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF3A283C2136310200EB94B8 /* main.m in Sources */,
+				FF3F13B32146069D00FE3C43 /* PhotoViewModel.m in Sources */,
 				FFAD34E32137E74A002FFD6E /* DeviceViewCell.m in Sources */,
+				FF3F13BB21462BCD00FE3C43 /* HDeviceIdentifier.m in Sources */,
+				FF1D7F7B21436D9900B10EC9 /* BroadCastHandle.m in Sources */,
 				FF95886F21391BD1003D317B /* SUCache.m in Sources */,
 				FF3A287B2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A282E2136310000EB94B8 /* AppDelegate.m in Sources */,
+				FF132EB3214104700026948D /* AddDeviceViewModel.m in Sources */,
 				FF3A28DE21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -894,15 +961,18 @@
 				FF912281213E278400F155BE /* DeviceListViewModel.m in Sources */,
 				FF9589422139480F003D317B /* LiveViewModel.m in Sources */,
 				FFAD34DC2137CCCA002FFD6E /* MBProgressHUD+ZBAdditions.m in Sources */,
+				FF3F13B42146069D00FE3C43 /* PhotoViewModel.m in Sources */,
+				FF132EB8214131B10026948D /* DeviceModel.m in Sources */,
 				FF3A28DD21368D9A00EB94B8 /* QDUIHelper.m in Sources */,
 				FF3A28DF21368D9A00EB94B8 /* QDCommonUI.m in Sources */,
 				FF3A28CC213641B700EB94B8 /* UtilitesMethods.m in Sources */,
 				FF3A28ED2136903500EB94B8 /* QDThemeManager.m in Sources */,
 				FF95887021391BD1003D317B /* SUCache.m in Sources */,
-				FF44E231213FBD2800B4625F /* BroadCastHandle.m in Sources */,
 				FF3A28892136343F00EB94B8 /* RootTabBarController.m in Sources */,
+				FF132EB4214104700026948D /* AddDeviceViewModel.m in Sources */,
+				FF1D7F7C21436D9900B10EC9 /* BroadCastHandle.m in Sources */,
 				FFAD34E42137E74A002FFD6E /* DeviceViewCell.m in Sources */,
-				FF44E241213FC08300B4625F /* GCDAsyncSocket.m in Sources */,
+				FF3F13BE21462BCD00FE3C43 /* SFHFKeychainUtils.m in Sources */,
 				FF3A28B9213634A900EB94B8 /* UIViewController+swizzling.m in Sources */,
 				FF3A28462136310200EB94B8 /* LiveCameraTests.m in Sources */,
 				FF3A28C62136374A00EB94B8 /* ViewModelClass.m in Sources */,
@@ -913,13 +983,15 @@
 				FF3A28B1213634A900EB94B8 /* AppDelegate+ViewController.m in Sources */,
 				FF3A28EF2136903500EB94B8 /* QMUIConfigurationTemplate.m in Sources */,
 				FF3A28802136343900EB94B8 /* ZBNetManagerCache.m in Sources */,
-				FF44E23D213FBF9800B4625F /* AsyncUdpSocket.m in Sources */,
 				FF3A28AF213634A900EB94B8 /* AppDelegate+AppService.m in Sources */,
 				FF3A287C2136343900EB94B8 /* ZBDataEntity.m in Sources */,
 				FF3A28DB21368D9A00EB94B8 /* UIImageEffects.m in Sources */,
+				FF132EB02140CC9B0026948D /* BondedDeviceViewModel.m in Sources */,
+				FF3F13BC21462BCD00FE3C43 /* HDeviceIdentifier.m in Sources */,
 				FF95887221391BD1003D317B /* SUCacheItem.m in Sources */,
 				FF3A287A2136343900EB94B8 /* UIImage+CompressImage.m in Sources */,
 				FFAD34D3213797C2002FFD6E /* UserModel.m in Sources */,
+				FF1D7F8021436DF800B10EC9 /* AsyncUdpSocket.m in Sources */,
 				FF3A28D1213641DF00EB94B8 /* UserDefaultUtil.m in Sources */,
 				FF3A287E2136343900EB94B8 /* ZBNetManager.m in Sources */,
 			);
@@ -1079,8 +1151,6 @@
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/YYCache\"",
 					"\"${PODS_ROOT}/Headers/Public/YYModel\"",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LiveCamera/AppEntry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1088,10 +1158,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1207,8 +1274,6 @@
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/YYCache\"",
 					"\"${PODS_ROOT}/Headers/Public/YYModel\"",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LiveCamera/AppEntry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1216,10 +1281,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1312,20 +1374,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LiveCamera/Vendors/AES",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = LiveCameraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = bigfish.LiveCameraTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1343,20 +1399,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LiveCamera/Vendors/AES",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/include",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = LiveCameraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LiveCamera/Vendors/fflib/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = bigfish.LiveCameraTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

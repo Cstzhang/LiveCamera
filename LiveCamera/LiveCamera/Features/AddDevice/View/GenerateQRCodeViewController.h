@@ -10,4 +10,5 @@
 
 @interface GenerateQRCodeViewController : QMUICommonViewController
 
+@property (copy, nonatomic) NSString *qrUrl;
 @end
