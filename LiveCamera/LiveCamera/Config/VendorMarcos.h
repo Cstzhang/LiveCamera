@@ -13,6 +13,6 @@
 #define YT_IDTOKEN @"YTidToken"
 #define YT_ACCESS_TOKEN @"YTaccessToken"
 #define YT_SCOPES @"https://www.googleapis.com/auth/youtube"
-
+#define REQYEST_TOKEN @"RequestToken"
 
 #endif /* VendorMarcos_h */

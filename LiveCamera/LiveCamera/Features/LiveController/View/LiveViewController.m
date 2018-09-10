@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     LiveStatusRecord,//录屏中
 };
 //static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
-static NSString *inputUrl =@"rtsp://192.168.154.237/main";
+static NSString *inputUrl =@"rtsp://192.168.154.213/main";
 
 @interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (nonatomic, strong) NodePlayer *clientPlayer;

@@ -243,10 +243,10 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DeviceModel *model = self.deviceArray[indexPath.row];
-    if (model.isConnectd) {
+    if (!model.isConnectd) {
         LiveViewController *LiveVC = [[LiveViewController alloc]init];
         #pragma mark - 待完成
-        LiveVC.rtspUrl =@"";
+        LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@:%@/main",model.deviceIp,model.devicePort];
         [self.navigationController pushViewController:LiveVC animated:YES];
     }else{
         [MBProgressHUD showInfoMessage:@"设备连接失败"];

@@ -95,6 +95,9 @@ static NSMutableArray *tasks;
         
         [ZBNetManagerShare.sessionManager.requestSerializer setValue: authValue forHTTPHeaderField:@"Authorization"];
     }
+    if ([UserDefaultUtil valueForKey:REQYEST_TOKEN]) {
+        [ZBNetManagerShare.sessionManager.requestSerializer setValue: [UserDefaultUtil valueForKey:REQYEST_TOKEN] forHTTPHeaderField:@"RequestToken"];
+    }
 //
     /*! 复杂的参数类型 需要使用json传值-设置请求内容的类型*/
  
@@ -215,6 +218,10 @@ static NSMutableArray *tasks;
         NSString *authValue = [NSString stringWithFormat:@"Bearer %@", [UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]];
         
         [ZBNetManagerShare.sessionManager.requestSerializer setValue: authValue forHTTPHeaderField:@"Authorization"];
+    }
+    if ([UserDefaultUtil valueForKey:REQYEST_TOKEN]) {
+        
+        [ZBNetManagerShare.sessionManager.requestSerializer setValue: [UserDefaultUtil valueForKey:REQYEST_TOKEN] forHTTPHeaderField:@"RequestToken"];
     }
 //    AFHTTPSessionManager *scc = ZBNetManagerShare.sessionManager;
 //        AFHTTPResponseSerializer *scc2 = scc.responseSerializer;

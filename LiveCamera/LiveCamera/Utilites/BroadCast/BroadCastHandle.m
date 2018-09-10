@@ -51,7 +51,7 @@ static BroadCastHandle * manager = nil;
                         port:port
                  withTimeout:2000 tag:1];
     //启动接收线程 - n?秒超时（-1表示死等）
-    [self.udpSocket receiveWithTimeout:-1 tag:0];
+    [self.udpSocket receiveWithTimeout:timeout tag:0];
 
 }
 
@@ -81,7 +81,6 @@ static BroadCastHandle * manager = nil;
     result = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
     NSLog(@"============ didReceiveData result ============： \n%@",result);
     self.callBackBlock(result,port);
-    NSLog(@" closeBroadCast %@",[UserDefaultUtil objectForKey:@"closeBroadCast"]);
     return NO;
 
 }

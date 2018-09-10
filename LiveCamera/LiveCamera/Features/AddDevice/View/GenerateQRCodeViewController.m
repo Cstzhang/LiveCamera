@@ -10,7 +10,7 @@
 #import "AddDeviceViewModel.h"
 #import "BondedDeviceViewModel.h"
 #import "BroadCastHandle.h"
-
+#import <CommonCrypto/CommonDigest.h>
 @interface GenerateQRCodeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *qrImageView;
 
@@ -76,31 +76,66 @@
         
         weakSelf.broadCastHandle = [BroadCastHandle shared];
         
-        [weakSelf.broadCastHandle sendBroadCastWithPort:13702 timeout:30 andCallBack:^(id sender, UInt16 port) {
+        [weakSelf.broadCastHandle sendBroadCastWithPort:13702 timeout:180 andCallBack:^(id sender, UInt16 port) {
             NSString *result = sender;
             if ([result rangeOfString:@"c=4"].location != NSNotFound) {
                 NSDictionary *resultDic = [UtilitesMethods sdpSeparatedString:result];
-                NSLog(@"c=4   resultDic  %@ ",resultDic);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // 通知主线程刷新 神马的
-                    //            NSString *spw = resultDic[@"spw"];
-                    //            if ([spw isEqualToString:@"cvte123456"]) {
-                    self.deviveInfo = resultDic;
-                    self.devivePort = port;
-                     weakSelf.checkButton.enabled = YES;
-                     [weakSelf.broadCastHandle closeBroadCast];
-                    //            }
-                });
-                
+                NSString * oKey = [UserDefaultUtil objectForKey:@"qrKey"] ;
+                NSString * rkey = resultDic[@"key"];
+                if ( [oKey isEqualToString:rkey]) {
+                    NSLog(@"c=4   resultDic  %@ ",resultDic);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf saveRequstToken:resultDic[@"user"] pw:resultDic[@"pw"]];
+                        weakSelf.deviveInfo = resultDic;
+                        weakSelf.devivePort = port;
+                        weakSelf.checkButton.enabled = YES;
+                        [weakSelf.broadCastHandle closeBroadCast];
+                    });
+                }
             }
         }];
         
         [[NSRunLoop currentRunLoop] run];
         // 子线程执行任务（比如获取较大数据）
     });
+}
 
-  
+
+#pragma mark ------- MD5加密
+#pragma mark - 32位 小写
+- (NSString *) md5WithString:(NSString *) str{
+    const char *cStr = [str UTF8String];
+    // 设置字符加密后存储的空间
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    // 参数三：编码的加密机制
+    CC_MD5(cStr, (UInt32)strlen(cStr), digest);
+    NSMutableString *result = [[NSMutableString alloc] initWithCapacity:16];
+    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i ++) {
+        [result appendFormat:@"%02x",digest[i]];
+    }
+    NSLog(@"md5WithString %@",result);
+    return result;
+}
+
+
+
+//把字符串转成Base64编码
+
+- (NSString *)base64EncodeString:(NSString *)string
+
+{
     
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return [data base64EncodedStringWithOptions:0];
+    
+}
+
+
+- (void)saveRequstToken:(NSString *)name pw:(NSString *)pw{
+   
+    NSString * requstToken =  [self base64EncodeString:[NSString stringWithFormat:@"%@ %@",name,[self md5WithString:pw]]];
+    [UserDefaultUtil setObject:requstToken forKey:REQYEST_TOKEN];
 }
 
 
@@ -115,7 +150,7 @@
                              @"deviceOnvif":info[@"ip"],
                              @"devicePn":info[@"pn"],
                              };
-    self.deviveHost =[NSString stringWithFormat:@"%@:%hu",info[@"ip"],port];
+    self.deviveHost =[NSString stringWithFormat:@"http://%@:80",info[@"ip"]];
     ZBWeak;
     [self.addViewModel setBlockWithReturnBlock:^(id returnValue) {
         [MBProgressHUD hideHUD];

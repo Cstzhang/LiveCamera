@@ -10,7 +10,6 @@
 
 @implementation AddDeviceViewModel
 
-
 /**
  升级
  */
@@ -61,7 +60,7 @@
 - (void)qrBind:(NSString *)host{
     NSDictionary *params = @{
                              @"key":[UserDefaultUtil objectForKey:@"qrKey"],
-                             @"app_device_id":host,
+                             @"app_device_id":[HDeviceIdentifier deviceIdentifier],
                              };
     NSLog(@" qrBind  params %@ ",params);
     ZBDataEntity *entity = [ZBDataEntity new];
@@ -146,8 +145,8 @@
  @param returnValue 设备列表数据
  */
 - (void)fetchqrBindSuccessWithDic:(NSDictionary *)returnValue{
-    NSString * code = returnValue[@"code"];
-    if ([code isEqualToString:@"0"]) {
+    NSNumber * code = returnValue[@"code"];
+    if (code.intValue == 0) {
         self.returnBlock(returnValue[@"data"]);
     }else{
         [self errorWithMsg:returnValue[@"desc"]];
@@ -162,11 +161,11 @@
  @param returnValue 设备列表数据
  */
 - (void)fetchListSuccessWithDic:(NSDictionary *)returnValue{
-    NSString * code = returnValue[@"code"];
-    if ([code isEqualToString:@"0000"]) {
-        self.returnBlock(returnValue[@"info"]);
+    NSNumber * code = returnValue[@"code"];
+    if (code.intValue == 0) {
+        self.returnBlock(returnValue[@"data"]);
     }else{
-        [self errorWithMsg:@"Bind device failed"];
+        [self errorWithMsg:returnValue[@"desc"]];
     }
 }
 
