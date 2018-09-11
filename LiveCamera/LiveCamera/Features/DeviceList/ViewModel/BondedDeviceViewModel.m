@@ -59,8 +59,8 @@
  @param returnValue 设备列表数据
  */
 - (void)upgradeSuccessWithDic:(NSDictionary *)returnValue{
-    NSString * code = returnValue[@"code"];
-    if ([code isEqualToString:@"0"]) {
+    NSNumber * code = returnValue[@"code"];
+    if (code.intValue == 0) {
         self.returnBlock(returnValue[@"data"]);
     }else{
         [self errorWithMsg:returnValue[@"desc"]];
@@ -76,8 +76,8 @@
  @param returnValue 设备列表数据
  */
 - (void)checkVersionSuccessWithDic:(NSDictionary *)returnValue{
-    NSString * code = returnValue[@"code"];
-    if ([code isEqualToString:@"0"]) {
+    NSNumber * code = returnValue[@"code"];
+    if (code.intValue == 0) {
         self.returnBlock(returnValue[@"data"]);
     }else{
         [self errorWithMsg:returnValue[@"desc"]];

@@ -28,4 +28,7 @@
 @property (nonatomic,strong) NSString *updatePackageUrl;
 @property (nonatomic,strong) NSNumber *userId;
 @property (nonatomic,assign) BOOL isConnectd;
+@property (nonatomic,assign) BOOL needUpdate;
+@property (nonatomic,strong) NSString *needUpdate_version;
+@property (nonatomic,strong) NSString *version;
 @end

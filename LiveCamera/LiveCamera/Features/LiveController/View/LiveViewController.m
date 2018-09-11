@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     LiveStatusRecord,//录屏中
 };
 //static NSString *inputUrl =@"rtsp://admin:cvte123456@172.18.223.100:554/mpeg4/ch1/sub/av_stream";
-static NSString *inputUrl =@"rtsp://192.168.154.213/main";
+//static NSString *inputUrl =@"rtsp://192.168.154.213/main";
 
 @interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (nonatomic, strong) NodePlayer *clientPlayer;
@@ -179,7 +179,8 @@ static NSString *inputUrl =@"rtsp://192.168.154.213/main";
 }
 
 - (void)handleCloseLivingEvent{
-    [self stopLive];
+    [self.clientPlayer start];
+//    [self.clientPlayer stop];
     self.currentLiveStatus = LiveStatusWait;
  
 }
@@ -192,8 +193,6 @@ static NSString *inputUrl =@"rtsp://192.168.154.213/main";
 - (void)handleRCButtonLiveEvent{
     [self startRecord];
     self.currentLiveStatus = LiveStatusRecord;
-    
-
 }
 
 - (void)setCurrentLiveStatus:(LiveStatus)currentLiveStatus{
@@ -479,7 +478,7 @@ static NSString *inputUrl =@"rtsp://192.168.154.213/main";
         _clientPlayer = [[NodePlayer alloc]init];
         _clientPlayer.playerView = self.view;
         _clientPlayer.rtspTransport = RTSP_TRANSPORT_TCP;
-        [_clientPlayer setInputUrl:inputUrl];
+        [_clientPlayer setInputUrl:self.rtspUrl];
         [_clientPlayer setContentMode:1];
     }
     return _clientPlayer;
@@ -530,7 +529,7 @@ static NSString *inputUrl =@"rtsp://192.168.154.213/main";
     NSString * Pathimg =[path stringByAppendingString:fileName];
     NSLog(@"=====  Pathimg ===== %@",Pathimg);
     NSLog(@"=====  startRecord =====");
-    [self.nodeStreamer startNativeRateStreaming:inputUrl
+    [self.nodeStreamer startNativeRateStreaming:self.rtspUrl
                                          output:Pathimg];
 
 }
@@ -539,8 +538,9 @@ static NSString *inputUrl =@"rtsp://192.168.154.213/main";
 #pragma mark - live streamer
 
 - (void)startPushRTMPWithURL:(NSString *)stream_url{
+//    [self.clientPlayer stop];
     NSLog(@"=====  startPushRTMP ===== %@",stream_url);
-    [self.nodeStreamer startStreamingWithInput:inputUrl
+    [self.nodeStreamer startStreamingWithInput:self.rtspUrl
                                         output:stream_url];
 
 }

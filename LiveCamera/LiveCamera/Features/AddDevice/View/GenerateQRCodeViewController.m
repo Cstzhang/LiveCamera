@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.qrImageView.image = [UtilitesMethods imageOfQRFromURL:_qrUrl codeSize:175];
+    self.qrImageView.image = [UtilitesMethods imageOfQRFromURL:_qrUrl codeSize:288];
     self.checkButton.selected = NO;
     [self addDevicesbroadCast];
     self.checkButton.enabled = NO;
@@ -49,7 +49,6 @@
 
 - (IBAction)checkEvent:(id)sender {
     self.checkButton.selected =  !self.checkButton.selected;
-    
 }
 
 - (IBAction)addEvent:(id)sender {
@@ -57,12 +56,7 @@
         [MBProgressHUD showWarnMessage:@"请确认指示灯已经是绿色"];
         return;
     }
-
-   
     [self bindDevice:self.deviveInfo port:self.devivePort];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-    
-
 }
 
 
@@ -73,9 +67,7 @@
 
     ZBWeak;
     dispatch_async(dispatch_queue_create(0, 0), ^{
-        
         weakSelf.broadCastHandle = [BroadCastHandle shared];
-        
         [weakSelf.broadCastHandle sendBroadCastWithPort:13702 timeout:180 andCallBack:^(id sender, UInt16 port) {
             NSString *result = sender;
             if ([result rangeOfString:@"c=4"].location != NSNotFound) {
@@ -94,7 +86,6 @@
                 }
             }
         }];
-        
         [[NSRunLoop currentRunLoop] run];
         // 子线程执行任务（比如获取较大数据）
     });

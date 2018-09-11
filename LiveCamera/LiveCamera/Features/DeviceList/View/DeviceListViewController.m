@@ -22,7 +22,6 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 @property (strong, nonatomic) UITableView *devicesTableView;
 
-@property (strong, nonatomic) NSMutableArray *devicesArray;
 
 @property (strong, nonatomic) UIView *footView;
 
@@ -108,42 +107,71 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
     
 }
 
+
 #pragma mark - NetWork
-//检查升级 //循环调用是否要升级
-- (void)chekUpdate{
-    if (![USER_INFO isLogin] || self.devicesArray.count == 0) {
+//检查升级
+- (void)chekUpdat:(DeviceModel *)model{
+
+    if (![USER_INFO isLogin] || model.updatePackageUrl == nil) {
+        LiveViewController *LiveVC = [[LiveViewController alloc]init];
+        LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
+        [self.navigationController pushViewController:LiveVC animated:YES];
         return;
     }
-//    ZBWeak;
+    ZBWeak;
+    NSString *host = [NSString stringWithFormat:@"http://%@:80",model.deviceIp];
     [self.bondedDeviceViewModel setBlockWithReturnBlock:^(id returnValue) {
         [MBProgressHUD hideHUD];
         //要升级的话 cell里面显示要升级的按钮
-        
+        NSString* needUpdate_version =returnValue[@"new_version"];
+        if ([[returnValue objectForKey:@"upgradable"]boolValue] == NO){
+            LiveViewController *LiveVC = [[LiveViewController alloc]init];
+            LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
+            [weakSelf.navigationController pushViewController:LiveVC animated:YES];
+        }else{
+          
+            NSLog(@"need udpate");
+            QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+                LiveViewController *LiveVC = [[LiveViewController alloc]init];
+                LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
+                [weakSelf.navigationController pushViewController:LiveVC animated:YES];
+            }];
+            QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确认" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+                [weakSelf udpateDevice:host udpateUrl:model.updatePackageUrl version:needUpdate_version];
+            }]; //
+            QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"Version update" message:[NSString stringWithFormat:@"The camera needs to be upgraded to %@ Is it upgraded?",needUpdate_version] preferredStyle:QMUIAlertControllerStyleAlert];
+            [alertController addAction:action1];
+            [alertController addAction:action2];
+            [alertController showWithAnimated:YES];
+        };
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
+        LiveViewController *LiveVC = [[LiveViewController alloc]init];
+        LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
+        [weakSelf.navigationController pushViewController:LiveVC animated:YES];
     } WithFailureBlock:^(NSError *error) {
         [MBProgressHUD hideHUD];
+        LiveViewController *LiveVC = [[LiveViewController alloc]init];
+        LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
+        [weakSelf.navigationController pushViewController:LiveVC animated:YES];
     }];
-    [MBProgressHUD hideHUD];
-    [MBProgressHUD showActivityMessageInWindow:@""];
-    [self.bondedDeviceViewModel qrcheckVersion:@"host" udpateUrl:@""];
+    [self.bondedDeviceViewModel qrcheckVersion:host udpateUrl:model.updatePackageUrl];
     
-    
+  
+
 }
-
-
 /**
  升级设备
  */
-- (void)udpateDevice{
-    if (![USER_INFO isLogin] || self.devicesArray.count == 0) {
+- (void)udpateDevice:(NSString *)host udpateUrl:(NSString *)udpateUrl version:(NSString *)version{
+    if (![USER_INFO isLogin] || self.deviceArray.count == 0) {
         return;
     }
-//    ZBWeak;
+    ZBWeak;
     [self.bondedDeviceViewModel setBlockWithReturnBlock:^(id returnValue) {
         [MBProgressHUD hideHUD];
         //要用以后要loading 然后循环调用 chekUpdate 直到返回不需要升级或者需要升级为止
-        
+        [weakSelf.devicesTableView reloadData];
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
     } WithFailureBlock:^(NSError *error) {
@@ -151,26 +179,21 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
     }];
     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];
-    [self.bondedDeviceViewModel qrupgrade:@"" udpateUrl:@"" version:@""];
-    
-    
+    [self.bondedDeviceViewModel qrupgrade:host udpateUrl:udpateUrl version:version];
 }
 
-
 /**
- 广播获取设备
+ 广播获取设备信息 更新IP 确保链接成功
  */
 - (void)findDevices{
     if (self.deviceArray.count == 0) {
         return;
     }
-
     [UserDefaultUtil setObject:broadCastTypeCheckList forKey:broadCastType];
     ZBWeak;
     dispatch_async(dispatch_queue_create(0, 0), ^{
-        
         weakSelf.broadCastHandle = [BroadCastHandle shared];
-        [weakSelf.broadCastHandle sendBroadCastWithPort:13702 timeout:3  andCallBack:^(id sender, UInt16 port) {
+        [weakSelf.broadCastHandle sendBroadCastWithPort:13702 timeout:2  andCallBack:^(id sender, UInt16 port) {
             NSString *result = sender;
             if ([result rangeOfString:@"c=2"].location != NSNotFound) {
                 NSDictionary *resultDic = [UtilitesMethods sdpSeparatedString:result];
@@ -179,28 +202,24 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
                         //save data
                         NSLog(@"============ deviceIp %@  deviceSn %@  ",model.deviceIp,model.deviceSn);
                         model.deviceIp = resultDic[@"ip"];
+                        model.isConnectd = YES;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            // 通知主线程刷新
+                            [weakSelf.devicesTableView reloadData];
+                        });
                     }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        // 通知主线程刷新 神马的
-                        [weakSelf.broadCastHandle closeBroadCast];
-                        [weakSelf.devicesTableView reloadData];
-                    });
-                 
                 }
             };
         }];
         [[NSRunLoop currentRunLoop] run];
-        // 子线程执行任务（比如获取较大数据）
-        
-     
-        
     });
-
-
 }
 
 
 
+/**
+ 请求服务器获取设备
+ */
 - (void)requestDeviceListData{
     if (![USER_INFO isLogin]) {
         [self jumpTologin];
@@ -213,17 +232,36 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
         if(weakSelf.deviceArray.count!=0){
             [weakSelf.devicesTableView reloadData];
             [weakSelf findDevices];
+            [weakSelf saveHost];
         }
+         [weakSelf.devicesTableView.mj_header endRefreshing];
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
+         [weakSelf.devicesTableView.mj_header endRefreshing];
     } WithFailureBlock:^(NSError *error) {
         [MBProgressHUD hideHUD];
+         [weakSelf.devicesTableView.mj_header endRefreshing];
     }];
     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];
     [self.deviceViewModel fetchDeviceList];
 }
 
+
+/**
+ 存储图片
+ */
+- (void)saveHost{
+    if (self.deviceArray.count == 0) {
+        return;
+    }
+    NSMutableArray *tmpArray= [[NSMutableArray alloc]init];
+    for (DeviceModel *model in self.deviceArray) {
+        NSString *hostUrl = [NSString stringWithFormat:@"http://%@:80",model.deviceIp];
+        [tmpArray addObject:hostUrl];
+    }
+    [UserDefaultUtil setObject:tmpArray forKey:@"HostArray"];
+}
 
 #pragma mark - EVENT
 - (void)handleAddButtonEvent{
@@ -243,11 +281,8 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DeviceModel *model = self.deviceArray[indexPath.row];
-    if (!model.isConnectd) {
-        LiveViewController *LiveVC = [[LiveViewController alloc]init];
-        #pragma mark - 待完成
-        LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@:%@/main",model.deviceIp,model.devicePort];
-        [self.navigationController pushViewController:LiveVC animated:YES];
+    if (model.isConnectd) {
+        [self chekUpdat:model];
     }else{
         [MBProgressHUD showInfoMessage:@"设备连接失败"];
     }
@@ -284,7 +319,8 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 #pragma mark - refresh
 //刷新
 -(void)onRefresh{
-    [self.devicesTableView.mj_header endRefreshing];
+    [self requestDeviceListData];
+   
 }
 //下一页
 -(void)onNextPage{

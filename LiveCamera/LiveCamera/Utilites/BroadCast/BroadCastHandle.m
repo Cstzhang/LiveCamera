@@ -39,6 +39,10 @@ static BroadCastHandle * manager = nil;
    
 
     NSData * data = [@"v=1\r\nc=1\r\n" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //启动接收线程 - n?秒超时（-1表示死等）
+    [self.udpSocket receiveWithTimeout:timeout tag:0];
+    
     /*
      发送请求
      sendData:发送的内容
@@ -50,8 +54,7 @@ static BroadCastHandle * manager = nil;
                       toHost:@"255.255.255.255"
                         port:port
                  withTimeout:2000 tag:1];
-    //启动接收线程 - n?秒超时（-1表示死等）
-    [self.udpSocket receiveWithTimeout:timeout tag:0];
+   
 
 }
 
