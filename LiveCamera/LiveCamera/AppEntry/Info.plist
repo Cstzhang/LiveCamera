@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要获取相册查看权限</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>需要获取相册管理权限</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDFRfyok-lCQs4y2VqNluMqTfjdY9NLO8A</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -20,7 +24,6 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-    
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

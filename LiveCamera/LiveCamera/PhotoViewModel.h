@@ -7,10 +7,11 @@
 //
 
 #import "ViewModelClass.h"
-
+@class DeviceModel;
 @interface PhotoViewModel : ViewModelClass
 /**
 获取照片
  */
-- (void)snapshot:(NSString *)host;
+- (void)snapshot:(NSString *)host token:(NSString *)token;
 @end
+

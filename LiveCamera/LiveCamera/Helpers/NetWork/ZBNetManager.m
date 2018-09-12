@@ -79,7 +79,6 @@ static NSMutableArray *tasks;
     
     ZBNetManagerShare.requestSerializer = ZBHttpRequestSerializerJSON;
     ZBNetManagerShare.responseSerializer = ZBHttpResponseSerializerJSON;
-    
     /*! 设置请求超时时间，默认：15秒 */
     ZBNetManagerShare.timeoutInterval = 15;
     /*! 打开状态栏的等待菊花 */
@@ -103,7 +102,7 @@ static NSMutableArray *tasks;
  
 
     /*! 设置响应数据的基本类型 */
-    ZBNetManagerShare.sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/css", @"text/xml", @"text/plain", @"application/javascript", @"application/x-www-form-urlencoded", @"image/*", nil];
+    ZBNetManagerShare.sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/css", @"text/xml", @"text/plain", @"application/javascript", @"application/x-www-form-urlencoded", @"image/*",@"image/jpeg", nil];
     
     // 配置自建证书的Https请求
     [self zb_setupSecurityPolicy];
@@ -212,17 +211,26 @@ static NSMutableArray *tasks;
         [ZBNetManagerShare.sessionManager.requestSerializer
          setValue:[UserDefaultUtil valueForKey:SHIRO_COOKIE] forHTTPHeaderField:@"Cookie"];
     }
-    NSLog(@"[UserDefaultUtil valueForKey:YT_ACCESS_TOKEN] %@",[UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]);
+  
     if ([UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]) {
-        
+        //  NSLog(@"[UserDefaultUtil valueForKey:YT_ACCESS_TOKEN] %@",[UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]);
         NSString *authValue = [NSString stringWithFormat:@"Bearer %@", [UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]];
         
         [ZBNetManagerShare.sessionManager.requestSerializer setValue: authValue forHTTPHeaderField:@"Authorization"];
     }
     if ([UserDefaultUtil valueForKey:REQYEST_TOKEN]) {
-        
+         // NSLog(@"[UserDefaultUtil valueForKey:REQYEST_TOKEN] %@",[UserDefaultUtil valueForKey:REQYEST_TOKEN]);
         [ZBNetManagerShare.sessionManager.requestSerializer setValue: [UserDefaultUtil valueForKey:REQYEST_TOKEN] forHTTPHeaderField:@"RequestToken"];
+    
+        
     }
+    NSString * tempStr = [UserDefaultUtil valueForKey:HTTPResponse_Http];
+    if (tempStr.length != 0) {
+        ZBNetManagerShare.responseSerializer = ZBHttpResponseSerializerHTTP;
+    }else{
+        ZBNetManagerShare.responseSerializer = ZBHttpResponseSerializerJSON;
+    }
+    
 //    AFHTTPSessionManager *scc = ZBNetManagerShare.sessionManager;
 //        AFHTTPResponseSerializer *scc2 = scc.responseSerializer;
 //        AFHTTPRequestSerializer *scc3 = scc.requestSerializer;

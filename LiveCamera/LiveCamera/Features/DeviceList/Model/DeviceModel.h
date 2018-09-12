@@ -12,6 +12,7 @@
 @property (nonatomic,strong) NSString *channelCount;
 @property (nonatomic,strong) NSString *createTime;
 @property (nonatomic,strong) NSString *deviceAccount;
+@property (nonatomic,strong) NSString *devicePassword;
 @property (nonatomic,strong) NSString *deviceDescription;
 @property (nonatomic,strong) NSString *deviceId;
 @property (nonatomic,strong) NSString *deviceIp;
@@ -24,6 +25,7 @@
 @property (nonatomic,strong) NSString *deviceSv;
 @property (nonatomic,strong) NSString *deviceVersion;
 @property (nonatomic,strong) NSString *mfrsName;
+
 @property (nonatomic,strong) NSString *pictureUrl;
 @property (nonatomic,strong) NSString *updatePackageUrl;
 @property (nonatomic,strong) NSNumber *userId;

@@ -94,4 +94,9 @@
  */
 + (NSDictionary *)sdpSeparatedString:(NSString *)tmpString;
 
+// md5
++ (NSString *) md5WithString:(NSString *) str;
+
++ (NSString *)base64EncodeString:(NSString *)string;
+
 @end

@@ -7,20 +7,25 @@
 //
 
 #import "PhotoViewModel.h"
-
+#import "DeviceModel.h"
 @implementation PhotoViewModel
 /**
  获取照片
  */
-- (void)snapshot:(NSString *)host{
+- (void)snapshot:(NSString *)host token:(NSString *)token{
+    
+    [UserDefaultUtil setObject:token forKey:REQYEST_TOKEN];
+    [UserDefaultUtil setObject:HTTPResponse_Http forKey:HTTPResponse_Http];
     ZBDataEntity *entity = [ZBDataEntity new];
     entity.urlString = [NSString stringWithFormat:@"%@%@",host,QR_SNAPSHOT];
     entity.needCache = NO;
     entity.parameters = nil;
     [ZBNetManager zb_request_GETWithEntity:entity successBlock:^(id response) {
         [self snapshotSuccessWithDic:response];
+        [UserDefaultUtil setObject:@"" forKey:HTTPResponse_Http];
     } failureBlock:^(NSError *error) {
         [self netFailure:error];
+        [UserDefaultUtil setObject:@"" forKey:HTTPResponse_Http];
     } progressBlock:nil];
 }
 
@@ -29,15 +34,14 @@
  
  @param returnValue 设备列表数据
  */
-- (void)snapshotSuccessWithDic:(NSDictionary *)returnValue{
-    NSString * code = returnValue[@"code"];
-    if ([code isEqualToString:@"0"]) {
-        self.returnBlock(returnValue[@"data"]);
+- (void)snapshotSuccessWithDic:(id)returnValue{
+    UIImage *image = [[UIImage alloc] initWithData:returnValue];
+    if (image != nil) {
+        self.returnBlock(@"success");
+        [self save:image];
     }else{
-        [self errorWithMsg:returnValue[@"desc"]];
+         [self errorWithMsg:@"no photo"];
     }
-    
-    
 }
 
 

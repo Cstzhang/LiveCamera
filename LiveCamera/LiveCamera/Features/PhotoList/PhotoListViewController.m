@@ -8,6 +8,7 @@
 
 #import "PhotoListViewController.h"
 #import "PhotoViewModel.h"
+#import "DeviceModel.h"
 @interface PhotoListViewController ()
 @property (strong, nonatomic) PhotoViewModel *photoViewModel;
 @end
@@ -30,28 +31,30 @@
 }
 
 - (void)checkPhoto{
-    NSArray *hostArray = [UserDefaultUtil objectForKey:@"HostArray"];
-    if (hostArray.count == 0) {
+    NSDictionary *hostDic = [UserDefaultUtil objectForKey:@"HostArray"];
+    if (hostDic.count == 0) {
         return;
     }
-    for (NSString *host in hostArray) {
-        [self udpateDevice:host];
+    for (id key in hostDic) {
+        NSString * requst = [hostDic objectForKey:key];
+        [self getPhoto:key token:requst];
     }
+    
+
 }
 
 
 #pragma mark - http
 //获取摄像头照片 存入相册
 /**
- 升级设备
+get photo
  */
-- (void)udpateDevice:(NSString *)host{
+- (void)getPhoto:(NSString *)host token:(NSString *) token{
     if (![USER_INFO isLogin]) {
         return;
     }
     [self.photoViewModel setBlockWithReturnBlock:^(id returnValue) {
         [MBProgressHUD hideHUD];
-
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
     } WithFailureBlock:^(NSError *error) {
@@ -59,7 +62,7 @@
     }];
     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];
-    [self.photoViewModel snapshot:host];
+    [self.photoViewModel snapshot:host token:token];
 }
 
 

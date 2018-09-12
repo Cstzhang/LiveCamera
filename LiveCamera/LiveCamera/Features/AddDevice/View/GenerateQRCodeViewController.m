@@ -10,7 +10,7 @@
 #import "AddDeviceViewModel.h"
 #import "BondedDeviceViewModel.h"
 #import "BroadCastHandle.h"
-#import <CommonCrypto/CommonDigest.h>
+
 @interface GenerateQRCodeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *qrImageView;
 
@@ -81,6 +81,7 @@
                         weakSelf.deviveInfo = resultDic;
                         weakSelf.devivePort = port;
                         weakSelf.checkButton.enabled = YES;
+                        weakSelf.checkButton.selected = YES;
                         [weakSelf.broadCastHandle closeBroadCast];
                     });
                 }
@@ -92,40 +93,13 @@
 }
 
 
-#pragma mark ------- MD5加密
-#pragma mark - 32位 小写
-- (NSString *) md5WithString:(NSString *) str{
-    const char *cStr = [str UTF8String];
-    // 设置字符加密后存储的空间
-    unsigned char digest[CC_MD5_DIGEST_LENGTH];
-    // 参数三：编码的加密机制
-    CC_MD5(cStr, (UInt32)strlen(cStr), digest);
-    NSMutableString *result = [[NSMutableString alloc] initWithCapacity:16];
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i ++) {
-        [result appendFormat:@"%02x",digest[i]];
-    }
-    NSLog(@"md5WithString %@",result);
-    return result;
-}
 
-
-
-//把字符串转成Base64编码
-
-- (NSString *)base64EncodeString:(NSString *)string
-
-{
-    
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    
-    return [data base64EncodedStringWithOptions:0];
-    
-}
 
 
 - (void)saveRequstToken:(NSString *)name pw:(NSString *)pw{
    
-    NSString * requstToken =  [self base64EncodeString:[NSString stringWithFormat:@"%@ %@",name,[self md5WithString:pw]]];
+    NSString * requstToken =  [UtilitesMethods base64EncodeString:[NSString stringWithFormat:@"%@ %@",name, [UtilitesMethods md5WithString:pw]]];
+   
     [UserDefaultUtil setObject:requstToken forKey:REQYEST_TOKEN];
 }
 
@@ -136,7 +110,7 @@
                              @"deviceIp":info[@"ip"],
                              @"devicePort":[NSString stringWithFormat:@"%d",port],
                              @"deviceAccount":info[@"user"],
-                             @"devicePassword":info[@"spw"],
+                             @"devicePassword":info[@"pw"],
                              @"deviceSv":info[@"sv"],
                              @"deviceOnvif":info[@"ip"],
                              @"devicePn":info[@"pn"],

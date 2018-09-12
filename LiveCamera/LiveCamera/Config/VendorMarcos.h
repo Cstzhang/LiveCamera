@@ -14,5 +14,7 @@
 #define YT_ACCESS_TOKEN @"YTaccessToken"
 #define YT_SCOPES @"https://www.googleapis.com/auth/youtube"
 #define REQYEST_TOKEN @"RequestToken"
+#define HTTPResponse_Http @"AFHTTPResponseSerializer"
+
 
 #endif /* VendorMarcos_h */

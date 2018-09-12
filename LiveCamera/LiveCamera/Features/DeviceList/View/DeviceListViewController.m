@@ -31,7 +31,7 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 @property (strong, nonatomic) BondedDeviceViewModel *bondedDeviceViewModel;
 
-@property (strong, nonatomic) NSArray *deviceArray;
+@property (strong, nonatomic) NSMutableArray *deviceArray;
 
 @property (strong, nonatomic) BroadCastHandle *broadCastHandle;
 
@@ -226,14 +226,16 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
         return;
     }
     ZBWeak;
+    [self.deviceArray removeAllObjects];
     [self.deviceViewModel setBlockWithReturnBlock:^(id returnValue) {
         [MBProgressHUD hideHUD];
         weakSelf.deviceArray  = returnValue;
         if(weakSelf.deviceArray.count!=0){
-            [weakSelf.devicesTableView reloadData];
+
             [weakSelf findDevices];
             [weakSelf saveHost];
         }
+         [weakSelf.devicesTableView reloadData];
          [weakSelf.devicesTableView.mj_header endRefreshing];
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
@@ -255,12 +257,18 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
     if (self.deviceArray.count == 0) {
         return;
     }
-    NSMutableArray *tmpArray= [[NSMutableArray alloc]init];
+    NSMutableDictionary *tmpDic = [[NSMutableDictionary alloc]init];
     for (DeviceModel *model in self.deviceArray) {
-        NSString *hostUrl = [NSString stringWithFormat:@"http://%@:80",model.deviceIp];
-        [tmpArray addObject:hostUrl];
+        if (model.devicePassword != nil &&
+            model.deviceAccount != nil  &&
+            model.deviceIp != nil) {
+            NSString * requstToken = [UtilitesMethods base64EncodeString:[NSString stringWithFormat:@"%@ %@",model.deviceAccount ,[UtilitesMethods md5WithString:model.devicePassword]]];
+            NSString *hostUrl = [NSString stringWithFormat:@"http://%@:80",model.deviceIp];
+            [tmpDic setObject:requstToken forKey:hostUrl];
+        }
+        
     }
-    [UserDefaultUtil setObject:tmpArray forKey:@"HostArray"];
+    [UserDefaultUtil setObject:tmpDic forKey:@"HostArray"];
 }
 
 #pragma mark - EVENT
@@ -309,10 +317,14 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     DeviceViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
+  
     if (cell==nil) {
         cell=[[NSBundle mainBundle]loadNibNamed:cellReuseIdentifier owner:nil options:nil][0];
     }
-    [cell setValueWithDic:self.deviceArray[indexPath.row]];
+    if (self.deviceArray.count != 0) {
+         [cell setValueWithDic:self.deviceArray[indexPath.row]];
+    }
+   
     return cell;
 }
 
