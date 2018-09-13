@@ -27,6 +27,7 @@
         [self netFailure:error];
         [UserDefaultUtil setObject:@"" forKey:HTTPResponse_Http];
     } progressBlock:nil];
+    [UserDefaultUtil setObject:@"" forKey:HTTPResponse_Http];
 }
 
 /**

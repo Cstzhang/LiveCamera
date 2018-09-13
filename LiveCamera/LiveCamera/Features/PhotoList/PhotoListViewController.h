@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoViewModel.h"
+#import "DeviceModel.h"
+#import "RootNavigationController.h"
+#import "LGPhotoAssets.h"
+#import "LGPhoto.h"
+#import "LGPhotoPickerCollectionView.h"
+#import "LGPhotoPickerGroup.h"
+#import "LGPhotoPickerCollectionViewCell.h"
+#import "LGPhotoPickerFooterCollectionReusableView.h"
 
 @interface PhotoListViewController : QMUICommonViewController
 
+@property (assign, nonatomic) NSInteger maxCount;
+
+@property (copy, nonatomic) NSArray *selectPickerAssets;
+
+@property (nonatomic) LGPhotoPickerGroup *assetsGroup;
 @end

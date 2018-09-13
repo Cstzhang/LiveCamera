@@ -189,6 +189,7 @@ static NSMutableArray *tasks;
     NSString *URLString = [NSURL URLWithString:urlString] ? urlString : [self strUTF8Encoding:urlString];
     //设置请求头
     ZBNetManagerShare.requestSerializer = ZBHttpRequestSerializerJSON;
+    ZBNetManagerShare.responseSerializer = ZBHttpResponseSerializerJSON;
     NSString *requestType;
     switch (type) {
         case 0:
