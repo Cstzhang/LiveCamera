@@ -22,6 +22,12 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 //static NSString *inputUrl =@"rtsp://192.168.154.213/main";
 
 @interface LiveViewController ()<GIDSignInDelegate,GIDSignInUIDelegate>
+{
+    NSTimer * _timer;  //定时器
+    NSInteger _seconds;
+    
+}
+
 @property (nonatomic, strong) NodePlayer *clientPlayer;
 @property (nonatomic, strong) NSUserDefaults *defaults;
 @property (strong, nonatomic) QMUIGhostButton *YTLiveButton;
@@ -35,6 +41,9 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 @property (strong, nonatomic) NodeStreamer *nodeStreamer;
 @property (strong, nonatomic) GIDSignIn *YTSignIn;
 @property (copy, nonatomic)   NSMutableString *broadCastId;
+@property (strong, nonatomic) UIView *timeView;
+@property (strong, nonatomic) UIView *greenView;
+@property (strong, nonatomic) UILabel *timeLable;
 @property (nonatomic) LiveStatus currentLiveStatus;
 
 @end
@@ -108,6 +117,23 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 //    [self.recordingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview: self.recordingButton];
     
+    self.timeView = [[UIView alloc]init];
+    self.timeView .frame = CGRectMake((SCREEN_WIDTH -100)/2, 140, 100, 32);
+    self.timeView .backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1/1.0];
+    [self.view addSubview:self.timeView];
+    
+    self.greenView = [[UIView alloc] init];
+    self.greenView.frame = CGRectMake(0, 14, 6, 6);
+    self.greenView .backgroundColor = [UIColor colorWithRed:22/255.0 green:182/255.0 blue:45/255.0 alpha:1/1.0];
+    [self.timeView addSubview:self.greenView ];
+ 
+    self.timeLable = [[UILabel alloc] init];
+    self.timeLable.text = @"00:00:00";
+    self.timeLable.frame = CGRectMake(10, 5, 80, 21);
+    self.timeLable.font = [UIFont fontWithName:@"MicrosoftYaHeiUI" size:17];
+    self.timeLable.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1/1.0];
+    [self.timeView addSubview:self.timeLable];
+
 }
 
 - (void)viewDidLayoutSubviews{
@@ -159,12 +185,12 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (void)handleBeginLiveEvent{
     switch (self.currentLiveStatus) {
         case LiveStatusFBPrepare:{
-            self.currentLiveStatus = LiveStatusLive;
-            [self geginToFBLive];
+           
+            [self beginToFBLive];
              break;
         }
         case LiveStatusYTPrepare:{
-            self.currentLiveStatus = LiveStatusLive;
+      
             [self beginToYTLive];
             break;
         }
@@ -205,6 +231,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             self.beginLiveButton.hidden = YES;
             self.livingButton.hidden = YES;
             self.recordingButton.hidden = YES;
+            self.timeView.hidden = YES;
             break;
         }
         case LiveStatusYTPrepare:{
@@ -215,6 +242,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
                 self.beginLiveButton.hidden = NO;
                 self.livingButton.hidden = YES;
                 self.recordingButton.hidden = YES;
+                self.timeView.hidden = YES;
             }
         
             break;
@@ -227,6 +255,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
                 self.beginLiveButton.hidden = NO;
                 self.livingButton.hidden = YES;
                 self.recordingButton.hidden = YES;
+                self.timeView.hidden = YES;
             }
          
             break;
@@ -238,6 +267,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             self.beginLiveButton.hidden = YES;
             self.livingButton.hidden = NO;
             self.recordingButton.hidden = YES;
+            self.timeView.hidden = NO;
             break;
         }
         case LiveStatusRecord:{
@@ -247,6 +277,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             self.beginLiveButton.hidden = YES;
             self.livingButton.hidden = YES;
             self.recordingButton.hidden = YES;
+            self.timeView.hidden = YES;
             break;
         }
             
@@ -271,7 +302,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     
 }
 
-- (void)geginToFBLive{
+- (void)beginToFBLive{
     NSDictionary *param = @{
                             @"description":@"Hello World",
                             @"title":@"Hello World!",
@@ -283,6 +314,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             [MBProgressHUD hideHUD];
             NSString *outUrl = returnValue[@"stream_url"];
             [MBProgressHUD showTipMessageInWindow:@"Broadcast Starting" timer:2];
+             weakSelf.currentLiveStatus = LiveStatusLive;
             [weakSelf startPushRTMPWithURL:outUrl];
         } WithErrorBlock:^(NSString *error) {
             [MBProgressHUD hideHUD];
@@ -346,7 +378,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             [weakSelf startPushRTMPWithURL:outUrl];
             //开启计时，3秒后 获取直播间状态，如果是测试状态 ，改成直播状态即可 循环获取知道直播状态为liveStarting
             [weakSelf countdownToLive:broadCastDict status:@"testing"];
-            
+            weakSelf.currentLiveStatus = LiveStatusLive;
         } WithErrorBlock:^(NSString *error) {
             [MBProgressHUD hideHUD];
             [weakSelf loginYoutube];
@@ -475,7 +507,10 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
         [self finishYoutuLive];
     }
     [self.nodeStreamer stopStreaming];
-  
+    if (_timer) {
+         [self stopTimer];
+    }
+   
 }
 
 
@@ -550,9 +585,11 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
         [self.nodeStreamer startStreamingWithInput:self.rtspUrl
                                             output:stream_url];
         [[NSRunLoop currentRunLoop] run];
+    
         // 子线程执行任务（比如获取较大数据）
     });
-
+    [self setTimerInfo];
+    
 
 }
 #pragma mark - Notification
@@ -606,11 +643,36 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     }
 }
 
-#pragma mark - save Image Video
+#pragma mark - time label
+/**
+ 设置计时器
+ */
+- (void)setTimerInfo{
+    //计时器
+    if (_timer) {
+        [_timer invalidate];
+    }
+    _timer=[NSTimer scheduledTimerWithTimeInterval:1
+                                            target:self
+                                          selector:@selector(runAction)
+                                          userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    
+}
+- (void)stopTimer{
+    [_timer invalidate];   //停止计时器
+    _timer = nil;
+    _seconds = 0;//计时重置为0
+}
 
-
-
-
+//时间统计
+- (void)runAction{
+    _seconds++;
+    //动态改变开始时间
+    NSString * startTime=[NSString stringWithFormat:@"%02li:%02li:%02li",
+                          _seconds/60/60%60,_seconds/60%60,_seconds%60];
+    self.timeLable.text=startTime;
+}
 
 
 @end
