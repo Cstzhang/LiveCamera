@@ -168,7 +168,9 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-
+    if (_clientPlayer) {
+        [_clientPlayer start];
+    }
 }
 
 
@@ -206,9 +208,10 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (void)handleCloseLivingEvent{
 //    [self.clientPlayer start];
 //    [self.clientPlayer stop];
+    [MBProgressHUD hideHUD];
     self.currentLiveStatus = LiveStatusWait;
     [self stopLive];
-    [MBProgressHUD showInfoMessage:@"Finish Broadcast"];
+  
 }
 
 - (void)handleCloseRecordingEvent{
@@ -256,6 +259,18 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
                 self.livingButton.hidden = YES;
                 self.recordingButton.hidden = YES;
                 self.timeView.hidden = YES;
+            }else{
+                [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+                    NSLog(@"login success %@",returnValue);
+                    [MBProgressHUD hideHUD];
+                } WithErrorBlock:^(NSString *error) {
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showTipMessageInWindow:error timer:1.5];
+                } WithFailureBlock:^(NSError *error) {
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
+                }];
+                [self.loginViewModel FBlogin:self];
             }
          
             break;
@@ -289,8 +304,6 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
  */
 - (void)handleFBButtonLiveEvent{
     self.currentLiveStatus = LiveStatusFBPrepare;
-    
-    
 }
 
 
@@ -314,7 +327,8 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             [MBProgressHUD hideHUD];
             NSString *outUrl = returnValue[@"stream_url"];
             [MBProgressHUD showTipMessageInWindow:@"Broadcast Starting" timer:2];
-             weakSelf.currentLiveStatus = LiveStatusLive;
+            weakSelf.currentLiveStatus = LiveStatusLive;
+            [weakSelf setTimerInfo];
             [weakSelf startPushRTMPWithURL:outUrl];
         } WithErrorBlock:^(NSString *error) {
             [MBProgressHUD hideHUD];
@@ -375,7 +389,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             NSString* streamName = streamDict[@"cdn"][@"ingestionInfo"][@"streamName"];
             NSString *outUrl = [NSString stringWithFormat:@"%@/%@",ingestionAddress,streamName];
             //开始推流
-            [weakSelf startPushRTMPWithURL:outUrl];
+           [weakSelf startPushRTMPWithURL:outUrl];
             //开启计时，3秒后 获取直播间状态，如果是测试状态 ，改成直播状态即可 循环获取知道直播状态为liveStarting
             [weakSelf countdownToLive:broadCastDict status:@"testing"];
             weakSelf.currentLiveStatus = LiveStatusLive;
@@ -456,6 +470,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             [MBProgressHUD hideHUD];
             NSLog(@"!!!开始正式直播！！！！！！！！！！！！！！！");
             weakSelf.broadCastId = broadCastDict[@"id"];
+             [weakSelf setTimerInfo];
             [MBProgressHUD showTipMessageInWindow:@"Broadcast Starting" timer:2];
        }else{
            [weakSelf countdownToLive:broadCastDict status:@"live"];
@@ -484,7 +499,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
         
         [MBProgressHUD hideHUD];
         NSLog(@"直播结束: %@",lifeCycleStatus);
-        [MBProgressHUD showTipMessageInWindow:@"直播结束" timer:2];
+//        [MBProgressHUD showTipMessageInWindow:@"直播结束" timer:2];
         
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
@@ -503,6 +518,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 
 
 - (void)stopLive{
+    [MBProgressHUD hideHUD];
     if(_clientPlayer && _nodeStreamer && _broadCastId){
         [self finishYoutuLive];
     }
@@ -588,7 +604,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     
         // 子线程执行任务（比如获取较大数据）
     });
-    [self setTimerInfo];
+  
     
 
 }
@@ -663,6 +679,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     [_timer invalidate];   //停止计时器
     _timer = nil;
     _seconds = 0;//计时重置为0
+    self.timeLable.text = @"00:00:00";
 }
 
 //时间统计
