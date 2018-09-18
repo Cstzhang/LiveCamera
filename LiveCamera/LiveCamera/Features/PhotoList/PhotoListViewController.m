@@ -121,9 +121,11 @@ get photo
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
         [weakSelf setupAssets];
+        [weakSelf.collectionView reloadData];
     } WithFailureBlock:^(NSError *error) {
         [MBProgressHUD hideHUD];
         [weakSelf setupAssets];
+       
     }];
     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];
@@ -313,26 +315,24 @@ get photo
     [datas getAllGroupWithPhotos:^(NSArray *groups) {
         if(groups.count != 0){
             weakSelf.assetsGroup = [[groups reverseObjectEnumerator] allObjects][0];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[LGPhotoPickerDatas defaultPicker] getGroupPhotosWithGroup:weakSelf.assetsGroup finished:^(NSArray *assets) {
+                    
+                    [assets enumerateObjectsUsingBlock:^(ALAsset *asset, NSUInteger idx, BOOL *stop) {
+                        LGPhotoAssets *lgAsset = [[LGPhotoAssets alloc] init];
+                        lgAsset.asset = asset;
+                        [assetsM addObject:lgAsset];
+                    }];
+                    weakSelf.collectionView.dataArray = assetsM;
+                    [self.assets setArray:assetsM];
+                }];
+                
+                [self.collectionView reloadData];
+            });
         }
     }];
     
-    if (self.assetsGroup == nil){
-        return;
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[LGPhotoPickerDatas defaultPicker] getGroupPhotosWithGroup:self.assetsGroup finished:^(NSArray *assets) {
-            
-            [assets enumerateObjectsUsingBlock:^(ALAsset *asset, NSUInteger idx, BOOL *stop) {
-                LGPhotoAssets *lgAsset = [[LGPhotoAssets alloc] init];
-                lgAsset.asset = asset;
-                [assetsM addObject:lgAsset];
-            }];
-            weakSelf.collectionView.dataArray = assetsM;
-            [self.assets setArray:assetsM];
-        }];
-        
-        [self.collectionView reloadData];
-    });
+  
 }
 
 #pragma mark - LGPhotoPickerCollectionViewDelegate
