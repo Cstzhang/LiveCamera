@@ -20,8 +20,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUf-Uf-vKq">
-                        <rect key="frame" x="20" y="12" width="99" height="27"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <rect key="frame" x="20" y="12" width="247" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -47,6 +47,7 @@
                     <constraint firstAttribute="trailing" secondItem="ZTr-s0-nPO" secondAttribute="trailing" constant="20" id="ISL-ny-CAj"/>
                     <constraint firstItem="nUf-Uf-vKq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="SBI-2u-h9A"/>
                     <constraint firstItem="nUf-Uf-vKq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="mOR-nf-cjg"/>
+                    <constraint firstAttribute="trailing" secondItem="nUf-Uf-vKq" secondAttribute="trailing" constant="100" id="pas-1U-rG0"/>
                     <constraint firstAttribute="bottom" secondItem="rA9-yg-1Ap" secondAttribute="bottom" constant="15" id="wpk-on-ThC"/>
                 </constraints>
             </tableViewCellContentView>
