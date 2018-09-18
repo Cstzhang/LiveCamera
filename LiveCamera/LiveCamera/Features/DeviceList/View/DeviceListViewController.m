@@ -118,6 +118,7 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
         [self.navigationController pushViewController:LiveVC animated:YES];
         return;
     }
+
     ZBWeak;
     NSString *host = [NSString stringWithFormat:@"http://%@:80",model.deviceIp];
     [self.bondedDeviceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -129,14 +130,13 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
             LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
             [weakSelf.navigationController pushViewController:LiveVC animated:YES];
         }else{
-          
             NSLog(@"need udpate");
-            QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"cancel" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 LiveViewController *LiveVC = [[LiveViewController alloc]init];
                 LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
                 [weakSelf.navigationController pushViewController:LiveVC animated:YES];
             }];
-            QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确认" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"confirm" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 [weakSelf udpateDevice:host udpateUrl:model.updatePackageUrl version:needUpdate_version];
             }]; //
             QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"Version update" message:[NSString stringWithFormat:@"The camera needs to be upgraded to %@ Is it upgraded?",needUpdate_version] preferredStyle:QMUIAlertControllerStyleAlert];
@@ -155,6 +155,7 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
         LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
         [weakSelf.navigationController pushViewController:LiveVC animated:YES];
     }];
+    [MBProgressHUD showActivityMessageInView:@""];
     [self.bondedDeviceViewModel qrcheckVersion:host udpateUrl:model.updatePackageUrl];
     
   
@@ -221,7 +222,8 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
  请求服务器获取设备
  */
 - (void)requestDeviceListData{
-    if (![USER_INFO isLogin]) {
+    if (![USER_INFO isLogin] ||!USER_INFO.placeUserId) {
+        [USER_INFO loginOutAndDeleteUsrInfo];
         [self jumpTologin];
         return;
     }
@@ -239,10 +241,10 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
          [weakSelf.devicesTableView.mj_header endRefreshing];
     } WithErrorBlock:^(NSString *error) {
         [MBProgressHUD hideHUD];
-         [weakSelf.devicesTableView.mj_header endRefreshing];
+        [weakSelf.devicesTableView.mj_header endRefreshing];
     } WithFailureBlock:^(NSError *error) {
         [MBProgressHUD hideHUD];
-         [weakSelf.devicesTableView.mj_header endRefreshing];
+        [weakSelf.devicesTableView.mj_header endRefreshing];
     }];
     [MBProgressHUD hideHUD];
     [MBProgressHUD showActivityMessageInWindow:@""];

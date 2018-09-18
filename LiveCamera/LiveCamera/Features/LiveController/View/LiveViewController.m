@@ -46,6 +46,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 #pragma mark - UI
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self.clientPlayer start];
     [self.clientPlayer start];
     //facebook监听
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -53,6 +54,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
                                                  name:FBSDKAccessTokenDidChangeNotification
                                                object:nil];
     self.currentLiveStatus = LiveStatusWait;
+    NSLog(@"===== rtsp url  ===== : \n%@",self.rtspUrl);
 }
 
 - (void)initSubviews{
@@ -75,15 +77,15 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     [self.FBLiveButton addTarget:self action:@selector(handleFBButtonLiveEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.FBLiveButton];
     
-    self.recordButton = [[QMUIGhostButton alloc] initWithGhostColor:UIColorWhite];
-    self.recordButton.titleLabel.font = UIFontMake(14);
-    [self.recordButton setTitle:@"Record Video" forState:UIControlStateNormal];
-    [self.recordButton setImage:UIImageMake(@"ic_登陆_录制视频") forState:UIControlStateNormal];
-    self.recordButton.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 8);
-    self.recordButton.adjustsImageWithGhostColor = YES;
-    [self.recordButton addTarget:self action:@selector(handleRCButtonLiveEvent) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.recordButton];
-    
+//    self.recordButton = [[QMUIGhostButton alloc] initWithGhostColor:UIColorWhite];
+//    self.recordButton.titleLabel.font = UIFontMake(14);
+//    [self.recordButton setTitle:@"Record Video" forState:UIControlStateNormal];
+//    [self.recordButton setImage:UIImageMake(@"ic_登陆_录制视频") forState:UIControlStateNormal];
+//    self.recordButton.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 8);
+//    self.recordButton.adjustsImageWithGhostColor = YES;
+//    [self.recordButton addTarget:self action:@selector(handleRCButtonLiveEvent) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:self.recordButton];
+//
     
     self.beginLiveButton = [[QMUIFillButton alloc] initWithFillType:QMUIFillButtonColorRed];
     self.beginLiveButton.titleLabel.font = UIFontMake(14);
@@ -98,12 +100,13 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     [self.livingButton addTarget:self action:@selector(handleCloseLivingEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview: self.livingButton];
     
-    self.recordingButton = [[UIButton alloc]init];
-    [self.recordingButton setImage:[UIImage imageNamed:@"ic_录制视频"] forState:UIControlStateNormal];
-    self.recordingButton.clipsToBounds = YES;
-    self.recordingButton.layer.cornerRadius = 25;
-    [self.recordingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview: self.recordingButton];
+//    self.recordingButton = [[UIButton alloc]init];
+//    [self.recordingButton setImage:[UIImage imageNamed:@"ic_录制视频"] forState:UIControlStateNormal];
+//    self.recordingButton.clipsToBounds = YES;
+//    self.recordingButton.layer.cornerRadius = 25;
+//    self.recordingButton.hidden = YES;
+//    [self.recordingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview: self.recordingButton];
     
 }
 
@@ -116,17 +119,17 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     CGFloat buttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), buttonSize.width);
     CGFloat livebuttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), livebuttonSize.width);
     
-    self.YTLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height *3) - (buttonSpacing *2), buttonSize.width, buttonSize.height);
+    self.YTLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height *2) - (buttonSpacing *2), buttonSize.width, buttonSize.height);
 
-    self.FBLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height *2) - buttonSpacing, buttonSize.width, buttonSize.height);
+    self.FBLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height ) - buttonSpacing, buttonSize.width, buttonSize.height);
 
-    self.recordButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height ), buttonSize.width, buttonSize.height);
+    //self.recordButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height ), buttonSize.width, buttonSize.height);
 
     self.beginLiveButton.frame = CGRectFlatMake(buttonMinX, buttonMinY - (buttonSize.height ), buttonSize.width, buttonSize.height);
     
     self.livingButton.frame = CGRectFlatMake(livebuttonMinX, buttonMinY - (livebuttonSize.height ), livebuttonSize.width , livebuttonSize.height);
     
-    self.recordingButton.frame = CGRectFlatMake(livebuttonMinX, buttonMinY - (livebuttonSize.height ), livebuttonSize.width , livebuttonSize.height);
+//    self.FBLiveButton.frame = CGRectFlatMake(livebuttonMinX, buttonMinY - (livebuttonSize.height ), livebuttonSize.width , livebuttonSize.height);
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -139,9 +142,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if(_clientPlayer){
-     [self.clientPlayer start];
-    }
+
 }
 
 
@@ -162,8 +163,6 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             [self geginToFBLive];
              break;
         }
-            
-           
         case LiveStatusYTPrepare:{
             self.currentLiveStatus = LiveStatusLive;
             [self beginToYTLive];
@@ -179,10 +178,11 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 }
 
 - (void)handleCloseLivingEvent{
-    [self.clientPlayer start];
+//    [self.clientPlayer start];
 //    [self.clientPlayer stop];
     self.currentLiveStatus = LiveStatusWait;
- 
+    [self stopLive];
+    [MBProgressHUD showInfoMessage:@"Finish Broadcast"];
 }
 
 - (void)handleCloseRecordingEvent{
@@ -208,21 +208,27 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             break;
         }
         case LiveStatusYTPrepare:{
-            self.FBLiveButton.hidden =YES;
-            self.YTLiveButton.hidden =YES;
-            self.recordButton.hidden =YES;
-            self.beginLiveButton.hidden = NO;
-            self.livingButton.hidden = YES;
-            self.recordingButton.hidden = YES;
+            if ([USER_INFO isYTLogin]) {
+                self.FBLiveButton.hidden =YES;
+                self.YTLiveButton.hidden =YES;
+                self.recordButton.hidden =YES;
+                self.beginLiveButton.hidden = NO;
+                self.livingButton.hidden = YES;
+                self.recordingButton.hidden = YES;
+            }
+        
             break;
         }
         case LiveStatusFBPrepare:{
-            self.FBLiveButton.hidden =YES;
-            self.YTLiveButton.hidden =YES;
-            self.recordButton.hidden =YES;
-            self.beginLiveButton.hidden = NO;
-            self.livingButton.hidden = YES;
-            self.recordingButton.hidden = YES;
+            if ([USER_INFO isFBLogin]) {
+                self.FBLiveButton.hidden =YES;
+                self.YTLiveButton.hidden =YES;
+                self.recordButton.hidden =YES;
+                self.beginLiveButton.hidden = NO;
+                self.livingButton.hidden = YES;
+                self.recordingButton.hidden = YES;
+            }
+         
             break;
         }
         case LiveStatusLive:{
@@ -240,7 +246,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             self.recordButton.hidden =YES;
             self.beginLiveButton.hidden = YES;
             self.livingButton.hidden = YES;
-            self.recordingButton.hidden = NO;
+            self.recordingButton.hidden = YES;
             break;
         }
             
@@ -267,8 +273,8 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 
 - (void)geginToFBLive{
     NSDictionary *param = @{
-                            @"description":@"CVTE直播间",
-                            @"title":@"CVTE Hello World!",
+                            @"description":@"Hello World",
+                            @"title":@"Hello World!",
                             @"privacy":@{@"value":@"EVERYONE"},
                             };
     ZBWeak;
@@ -276,6 +282,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
         [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
             [MBProgressHUD hideHUD];
             NSString *outUrl = returnValue[@"stream_url"];
+            [MBProgressHUD showTipMessageInWindow:@"Broadcast Starting" timer:2];
             [weakSelf startPushRTMPWithURL:outUrl];
         } WithErrorBlock:^(NSString *error) {
             [MBProgressHUD hideHUD];
@@ -312,19 +319,19 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     NSDate *dateEightHoursAhead = [[NSDate date] dateByAddingTimeInterval:secondsInEightHours];
     NSString *dateString = [formatter stringFromDate:dateEightHoursAhead];
     NSString *time = [NSString stringWithFormat:@"%@+00:00",dateString];
-    NSDictionary *broadcastParameters = @{ @"snippet": @{ @"title":@"CVTE Hello World!",
+    NSDictionary *broadcastParameters = @{ @"snippet": @{ @"title":@" Hello World!",
                                                           @"scheduledStartTime":time,
-                                                          @"description":@"CVTE直播间"},
+                                                          @"description":@"Hello World"},
                                            @"status": @{ @"privacyStatus": @"public" }
                                            
                                            };
     NSDictionary *liveStreamParameters = @{
                                            @"snippet": @{ @"title": @"CVTE Hello World!",
-                                                          @"description": @"CVTE直播间" },
+                                                          @"description": @"Hello World" },
                                            @"cdn": @{ @"resolution": @"720p",
                                                       @"frameRate": @"60fps" ,
                                                       @"ingestionType":@"rtmp"},
-                                           @"ingestionInfo": @{ @"streamName": @"CVTE" }
+                                           @"ingestionInfo": @{ @"streamName": @"HelloWorld" }
                                            };
     if ([UserDefaultUtil valueForKey:YT_ACCESS_TOKEN]) {
         ZBWeak;
@@ -360,14 +367,14 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 
 
 /**
- 倒计时10秒，然后检查直播状态 YT 等待客户端推流到youtube服务器
+ 倒计时3秒，然后检查直播状态 YT 等待客户端推流到youtube服务器
  */
 - (void)countdownToLive:(NSDictionary *)broadCastDict status:(NSString *)status{
     ZBWeak;
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC));
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
         if ([status isEqualToString:@"live"]){
-            [weakSelf startFacebookLive:broadCastDict];
+            [weakSelf startYouTubeLive:broadCastDict];
         }else{
            [weakSelf changeYouTubeLiveStatus:broadCastDict status:status];
         }
@@ -409,7 +416,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
  
  @param broadCastDict broadcast id
  */
-- (void)startFacebookLive:(NSDictionary *)broadCastDict{
+- (void)startYouTubeLive:(NSDictionary *)broadCastDict{
         ZBWeak;
     [self.liveViewModel setBlockWithReturnBlock:^(id returnValue) {
        NSString *lifeCycleStatus =returnValue[@"status"][@"lifeCycleStatus"];
@@ -417,7 +424,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
             [MBProgressHUD hideHUD];
             NSLog(@"!!!开始正式直播！！！！！！！！！！！！！！！");
             weakSelf.broadCastId = broadCastDict[@"id"];
-            [MBProgressHUD showTipMessageInWindow:@"直播开始" timer:2];
+            [MBProgressHUD showTipMessageInWindow:@"Broadcast Starting" timer:2];
        }else{
            [weakSelf countdownToLive:broadCastDict status:@"live"];
        }
@@ -538,10 +545,14 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 #pragma mark - live streamer
 
 - (void)startPushRTMPWithURL:(NSString *)stream_url{
-//    [self.clientPlayer stop];
     NSLog(@"=====  startPushRTMP ===== %@",stream_url);
-    [self.nodeStreamer startStreamingWithInput:self.rtspUrl
-                                        output:stream_url];
+    dispatch_async(dispatch_queue_create(0, 0), ^{
+        [self.nodeStreamer startStreamingWithInput:self.rtspUrl
+                                            output:stream_url];
+        [[NSRunLoop currentRunLoop] run];
+        // 子线程执行任务（比如获取较大数据）
+    });
+
 
 }
 #pragma mark - Notification
@@ -589,7 +600,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
      withError:(NSError *)error{
     if (error != nil) {
         NSLog(@"error %@",error);
-        [MBProgressHUD showErrorMessage:@"登录失败,请检查网络"];
+        [MBProgressHUD showErrorMessage:@"login fail"];
     }else{
         [self SignInServer:user];
     }

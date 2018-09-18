@@ -103,6 +103,16 @@
 }
 
 - (void)facebookSignIn{
+    [self.viewModel setBlockWithReturnBlock:^(id returnValue) {
+        NSLog(@"login success %@",returnValue);
+        [MBProgressHUD hideHUD];
+    } WithErrorBlock:^(NSString *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:error];
+    } WithFailureBlock:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:error.domain];
+    }];
     NSInteger slot = 0;
     FBSDKAccessToken *token = [SUCache itemForSlot:slot].token;
     if (token) {//是否已经登录

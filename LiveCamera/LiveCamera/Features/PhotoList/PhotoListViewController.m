@@ -38,7 +38,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 //
 //@end
 
-@interface PhotoListViewController ()<LGPhotoPickerCollectionViewDelegate,UICollectionViewDataSource>
+@interface PhotoListViewController ()<LGPhotoPickerCollectionViewDelegate,UICollectionViewDataSource,FBSDKSharingDelegate>
 
 @property (nonatomic, assign) NSUInteger privateTempMaxCount;
 @property (nonatomic) NSMutableArray *assets;
@@ -64,11 +64,13 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (void)setupNavigationItems {
     [super setupNavigationItems];
     self.title  = @"Photo Album";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem qmui_itemWithTitle:@"Share" target:self action:@selector(shareImage)];
   
 }
 
 - (void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:animated];
+     [MBProgressHUD hideHUD];
      [self checkPhoto];
      self.maxCount = 1;
 }
@@ -230,7 +232,7 @@ get photo
     
     _assetsGroup = assetsGroup;
     
-    self.title = assetsGroup.groupName;
+//    self.title = assetsGroup.groupName;
     
     // 获取Assets
     //    [self setupAssets];
@@ -309,8 +311,14 @@ get photo
     LGPhotoPickerDatas *datas = [LGPhotoPickerDatas defaultPicker];
     // 获取所有的图片URLs
     [datas getAllGroupWithPhotos:^(NSArray *groups) {
-        weakSelf.assetsGroup = [[groups reverseObjectEnumerator] allObjects][0];
+        if(groups.count != 0){
+            weakSelf.assetsGroup = [[groups reverseObjectEnumerator] allObjects][0];
+        }
     }];
+    
+    if (self.assetsGroup == nil){
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [[LGPhotoPickerDatas defaultPicker] getGroupPhotosWithGroup:self.assetsGroup finished:^(NSArray *assets) {
             
@@ -386,10 +394,88 @@ get photo
 
 
 
+/*
+ sendBtn
+ - (void) sendBtnTouched {
+ [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_DONE object:nil userInfo:@{@"selectAssets":self.selectAssets,@"isOriginal":@(self.isOriginal)}];
+ NSLog(@"%@",@(self.isOriginal));
+ [self dismissViewControllerAnimated:NO completion:nil];
+ }
+
+ */
+
+    
+#pragma mark - share image
+- (void)shareImage{
+    NSLog(@"分享图片");
+    [MBProgressHUD showActivityMessageInView:@""];
+    if (self.selectAssets.count > 0){
+        UIImage *image= [self.selectAssets[0] thumbImage];
+        [self facebookShareWithImage:image];
+
+    }
+
+}
 
 
+- (void)facebookShareWithImage:(UIImage *)image {
 
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = image;
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    
+    
+    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+    dialog.shareContent = content;
+    dialog.fromViewController = self;
+    dialog.delegate = self;
+    dialog.mode = FBSDKShareDialogModeNative;
+    [dialog show];
+}
 
+#pragma mark - FaceBook Share Delegate
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+    NSString *postId = results[@"postId"];
+    FBSDKShareDialog *dialog = (FBSDKShareDialog *)sharer;
+    
+    if (dialog.mode == FBSDKShareDialogModeBrowser && (postId == nil || [postId isEqualToString:@""])) {
+        // 如果使用webview分享的，但postId是空的，
+        // 这种情况是用户点击了『完成』按钮，并没有真的分享
+        NSLog(@"Cancel");
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showInfoMessage:@"Cancel Share"];
+       
+    } else {
+        NSLog(@"Success");
+         [MBProgressHUD hideHUD];
+        [MBProgressHUD showInfoMessage:@"Share Success"];
+    }
+    
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
+    FBSDKShareDialog *dialog = (FBSDKShareDialog *)sharer;
+   
+    if (error == nil && dialog.mode == FBSDKShareDialogModeNative) {
+        // 如果使用原生登录失败，但error为空，那是因为用户没有安装Facebook app
+        // 重设dialog的mode，再次弹出对话框
+
+        dialog.mode = FBSDKShareDialogModeBrowser;
+        [dialog show];
+    } else {
+        NSLog(@"Failure");
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showInfoMessage:@"Share Failure"];
+    }
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
+    NSLog(@"===  Cancel === ");
+     [MBProgressHUD hideHUD];
+    [MBProgressHUD showInfoMessage:@"Cancel Share"];
+}
 
 
 

@@ -144,11 +144,11 @@
         // 1 判断图片数超过最大数或者小于0
         NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;
         if (self.selectAssets.count >= maxCount) {
-            NSString *format = [NSString stringWithFormat:@"最多只能选择%zd张图片",maxCount];
+            NSString *format = [NSString stringWithFormat:@"You can only select %lu images at most",(unsigned long)maxCount];
             if (maxCount == 0) {
-                format = [NSString stringWithFormat:@"您最多只能选择9张图片"];
+                format = [NSString stringWithFormat:@"You can only select 9 images at most"];
             }
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:format delegate:self cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WARNING" message:format delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
             [alertView show];
             return;
         }
@@ -239,4 +239,7 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
+
 @end

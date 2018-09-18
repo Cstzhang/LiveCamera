@@ -59,7 +59,7 @@
                   viewController:(UIViewController *)viewController{
     self.result = result;
     self.LoginVc = viewController;
-    NSDictionary*params= @{@"fields":@"id,name,email,age_range,first_name,last_name,link,gender,locale,picture,timezone,updated_time,verified,token"};
+    NSDictionary*params= @{@"fields":@"id,name,email,age_range,first_name,last_name,link,gender,locale,picture,timezone,updated_time,verified"};
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                   initWithGraphPath:result.token.userID
@@ -86,7 +86,7 @@
             
             
         }else{
-            [self netFailure:error];
+            [self errorWithMsg:@"login fail"];
         }
         
     }];

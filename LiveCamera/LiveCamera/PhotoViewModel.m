@@ -78,11 +78,11 @@
             {
                 if (lastStatus == PHAuthorizationStatusNotDetermined) {
                     //说明，用户之前没有做决定，在弹出授权框中，选择了拒绝
-                    [MBProgressHUD showErrorMessage:@"保存失败"];
+                    [MBProgressHUD showErrorMessage:@"save fail"];
                     return;
                 }
                 // 说明，之前用户选择拒绝过，现在又点击保存按钮，说明想要使用该功能，需要提示用户打开授权
-                 [MBProgressHUD showInfoMessage:@"失败！请在系统设置中开启访问相册权限"];
+                 [MBProgressHUD showInfoMessage:@"Please open access album permissions in system Settings"];
             }
             else if(status == PHAuthorizationStatusAuthorized) //用户允许
             {
@@ -91,7 +91,7 @@
             }
             else if (status == PHAuthorizationStatusRestricted)
             {
-                  [MBProgressHUD showErrorMessage:@"系统原因，无法访问相册"];
+                  [MBProgressHUD showErrorMessage:@"System reason, unable to access album"];
             }
         });
     }];
@@ -128,10 +128,10 @@
     
     
     if (error) {
-         [MBProgressHUD showErrorMessage:@"保存失败"];
+         [MBProgressHUD showErrorMessage:@"save fail"];
         return;
     }
-    [MBProgressHUD showSuccessMessage:@"保存成功"];
+    [MBProgressHUD showSuccessMessage:@"save success"];
 }
 
 /**拥有与 APP 同名的自定义相册--如果没有则创建*/
@@ -158,10 +158,10 @@
         createID = request.placeholderForCreatedAssetCollection.localIdentifier;
     } error:&error];
     if (error) {
-          [MBProgressHUD showErrorMessage:@"创建失败"];
+          [MBProgressHUD showErrorMessage:@"Create  failure"];
         return nil;
     }else{
-           [MBProgressHUD showSuccessMessage:@"创建成功"];
+           [MBProgressHUD showSuccessMessage:@"Create success"];
         //通过 ID 获取创建完成的相册 -- 是一个数组
         return [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[createID] options:nil].firstObject;
     }

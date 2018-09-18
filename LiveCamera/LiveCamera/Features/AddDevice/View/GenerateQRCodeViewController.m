@@ -37,6 +37,7 @@
     self.checkButton.selected = NO;
     [self addDevicesbroadCast];
     self.checkButton.enabled = NO;
+    self.addButton.enabled  = NO;
 }
 -(void)setupNavigationItems{
     [super setupNavigationItems];
@@ -53,7 +54,7 @@
 
 - (IBAction)addEvent:(id)sender {
     if(!self.checkButton.isSelected){
-        [MBProgressHUD showWarnMessage:@"请确认指示灯已经是绿色"];
+        [MBProgressHUD showWarnMessage:@"Please make sure the light is green"];
         return;
     }
     [self bindDevice:self.deviveInfo port:self.devivePort];
@@ -64,11 +65,10 @@
 - (void)addDevicesbroadCast{
     self.broadCastHandle = [BroadCastHandle shared];
     [UserDefaultUtil setObject:broadCastTypeAdd forKey:broadCastType];
-
     ZBWeak;
     dispatch_async(dispatch_queue_create(0, 0), ^{
         weakSelf.broadCastHandle = [BroadCastHandle shared];
-        [weakSelf.broadCastHandle sendBroadCastWithPort:13702 timeout:180 andCallBack:^(id sender, UInt16 port) {
+        [weakSelf.broadCastHandle sendBroadCastWithPort:13702 timeout:240 andCallBack:^(id sender, UInt16 port) {
             NSString *result = sender;
             if ([result rangeOfString:@"c=4"].location != NSNotFound) {
                 NSDictionary *resultDic = [UtilitesMethods sdpSeparatedString:result];
@@ -82,6 +82,7 @@
                         weakSelf.devivePort = port;
                         weakSelf.checkButton.enabled = YES;
                         weakSelf.checkButton.selected = YES;
+                        weakSelf.addButton.enabled  = YES;
                         [weakSelf.broadCastHandle closeBroadCast];
                     });
                 }

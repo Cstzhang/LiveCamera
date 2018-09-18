@@ -11,6 +11,10 @@
 @implementation DeviceListViewModel
 
 - (void)fetchDeviceList{
+    if (!USER_INFO.placeUserId) {
+        [self errorWithMsg:@"lose msg"];
+        return;
+    }
     NSDictionary *params = @{
                              @"placeUserId":USER_INFO.placeUserId
                              };

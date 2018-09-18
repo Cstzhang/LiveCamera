@@ -17,7 +17,7 @@
 
 #ifdef DEBUG
 //do sth.
-#define SERVER @"http://172.18.223.207:80"
+#define SERVER @"https://live.opssee.com.cn"
 
 
 #else
