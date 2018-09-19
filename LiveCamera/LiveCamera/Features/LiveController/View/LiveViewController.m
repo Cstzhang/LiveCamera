@@ -189,7 +189,6 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (void)handleBeginLiveEvent{
     switch (self.currentLiveStatus) {
         case LiveStatusFBPrepare:{
-           
             [self beginToFBLive];
              break;
         }
@@ -248,6 +247,8 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
                 self.livingButton.hidden = YES;
                 self.recordingButton.hidden = YES;
                 self.timeView.hidden = YES;
+            }else{
+                 [self loginYoutube];
             }
         
             break;
@@ -262,17 +263,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
                 self.recordingButton.hidden = YES;
                 self.timeView.hidden = YES;
             }else{
-                [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
-                    NSLog(@"login success %@",returnValue);
-                    [MBProgressHUD hideHUD];
-                } WithErrorBlock:^(NSString *error) {
-                    [MBProgressHUD hideHUD];
-                    [MBProgressHUD showTipMessageInWindow:error timer:1.5];
-                } WithFailureBlock:^(NSError *error) {
-                    [MBProgressHUD hideHUD];
-                    [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
-                }];
-                [self.loginViewModel FBlogin:self];
+                [self loginFaceBook];
             }
          
             break;
@@ -632,6 +623,24 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (void)loginYoutube{
     [self.YTSignIn signIn];
 }
+
+- (void)loginFaceBook{
+    
+    [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+        NSLog(@"login success %@",returnValue);
+        [MBProgressHUD hideHUD];
+    } WithErrorBlock:^(NSString *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showTipMessageInWindow:error timer:1.5];
+    } WithFailureBlock:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
+    }];
+    [self.loginViewModel FBlogin:self];
+    
+}
+
+
 
 - (void)SignInServer:(GIDGoogleUser *)user{
     [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
