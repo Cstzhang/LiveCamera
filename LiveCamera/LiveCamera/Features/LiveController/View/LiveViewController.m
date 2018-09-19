@@ -125,6 +125,8 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     self.greenView = [[UIView alloc] init];
     self.greenView.frame = CGRectMake(0, 14, 6, 6);
     self.greenView .backgroundColor = [UIColor colorWithRed:22/255.0 green:182/255.0 blue:45/255.0 alpha:1/1.0];
+    self.greenView.layer.cornerRadius = 3;
+    self.greenView.clipsToBounds = YES;
     [self.timeView addSubview:self.greenView ];
  
     self.timeLable = [[UILabel alloc] init];
@@ -159,10 +161,10 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    [self stopLive];
-    [self stopPlayer];
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [self stopLive];
+    [self stopPlayer];
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -535,7 +537,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     if (!_clientPlayer) {
         _clientPlayer = [[NodePlayer alloc]init];
         _clientPlayer.playerView = self.view;
-        _clientPlayer.rtspTransport = RTSP_TRANSPORT_TCP;
+        _clientPlayer.rtspTransport = RTSP_TRANSPORT_UDP;
         [_clientPlayer setInputUrl:self.rtspUrl];
         [_clientPlayer setContentMode:1];
     }
@@ -559,7 +561,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (NodeStreamer *)nodeStreamer{
     if (!_nodeStreamer) {
         _nodeStreamer  = [[NodeStreamer alloc]init];
-        _nodeStreamer.rtspTransport = RTSP_TRANSPORT_TCP;
+        _nodeStreamer.rtspTransport = RTSP_TRANSPORT_UDP;
     }
     return _nodeStreamer;
 }

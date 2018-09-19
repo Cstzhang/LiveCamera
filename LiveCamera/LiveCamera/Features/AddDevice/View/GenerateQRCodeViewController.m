@@ -41,7 +41,7 @@
 }
 -(void)setupNavigationItems{
     [super setupNavigationItems];
-    self.title = @"Scan QR Code";
+    self.title = @"Add Device";
 }
 
 

@@ -130,13 +130,13 @@ static NSString *cellReuseIdentifier = @"DeviceViewCell";
             LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
             [weakSelf.navigationController pushViewController:LiveVC animated:YES];
         }else{
-            NSLog(@"need udpate");
-            QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"cancel" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            NSLog(@"Upgrade to remind");
+            QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"NO" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 LiveViewController *LiveVC = [[LiveViewController alloc]init];
                 LiveVC.rtspUrl =[NSString stringWithFormat:@"rtsp://%@/main",model.deviceIp];
                 [weakSelf.navigationController pushViewController:LiveVC animated:YES];
             }];
-            QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"confirm" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"YES" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 [weakSelf udpateDevice:host udpateUrl:model.updatePackageUrl version:needUpdate_version];
             }]; //
             QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"Version update" message:[NSString stringWithFormat:@"The camera needs to be upgraded to %@ Is it upgraded?",needUpdate_version] preferredStyle:QMUIAlertControllerStyleAlert];
