@@ -7,7 +7,7 @@
 //
 
 #import "PhotoListViewController.h"
-
+#import "LoginViewModel.h"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -53,6 +53,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 @property (strong, nonatomic) PhotoViewModel *photoViewModel;
 @property (strong, nonatomic) NSMutableArray *photoArray;
 @property (nonatomic) LGPhotoPickerCollectionView *collectionView;
+@property (strong, nonatomic) LoginViewModel *loginViewModel;
 @end
 
 @implementation PhotoListViewController
@@ -209,6 +210,7 @@ get photo
     }
     return _collectionView;
 }
+
 - (PhotoViewModel *)photoViewModel{
     if (!_photoViewModel) {
         _photoViewModel= [[PhotoViewModel alloc]init];
@@ -216,6 +218,12 @@ get photo
     return _photoViewModel;
 }
 
+- (LoginViewModel *)loginViewModel{
+    if (!_loginViewModel) {
+        _loginViewModel = [[LoginViewModel alloc]init];
+    }
+    return _loginViewModel;
+}
 - (NSMutableArray *)selectAssets {
     if (!_selectAssets) {
         _selectAssets = [NSMutableArray array];
@@ -408,6 +416,9 @@ get photo
 #pragma mark - share image
 - (void)shareImage{
     NSLog(@"分享图片");
+    if (![USER_INFO isFBLogin]) {
+        [self loginFaceBook];
+    }
     [MBProgressHUD showActivityMessageInView:@""];
     if (self.selectAssets.count > 0){
         UIImage *image= [self.selectAssets[0] thumbImage];
@@ -478,6 +489,20 @@ get photo
 }
 
 
-
-
+#pragma mark - facebook login
+- (void)loginFaceBook{
+    
+    [self.loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+        NSLog(@"login success %@",returnValue);
+        [MBProgressHUD hideHUD];
+    } WithErrorBlock:^(NSString *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showTipMessageInWindow:error timer:1.5];
+    } WithFailureBlock:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showTipMessageInWindow:error.domain timer:1.5];
+    }];
+    [self.loginViewModel FBlogin:self];
+    
+}
 @end
