@@ -36,7 +36,16 @@
 
  */
 - (void)BondedDevice:(NSDictionary *)info{
-    
+    NSString *deviceSn = info[@"deviceSn"];
+    //截取SN后四位作为deviceName
+    NSString *deviceName;
+    if (!kObjectIsEmpty(info[@"deviceSn"])){
+        NSString *idNum = [deviceSn substringFromIndex:deviceSn.length-4];
+        deviceName = [NSString stringWithFormat:@"Device%@",idNum];
+    }else{
+        deviceName = @"Device0000";
+    }
+ 
     NSDictionary *params = @{
                              @"placeUserId":USER_INFO.placeUserId,
                              @"deviceSn":info[@"deviceSn"] ? info[@"deviceSn"]:@"",
@@ -48,7 +57,9 @@
                              @"deviceSv":info[@"deviceSv"] ? info[@"deviceSv"]:@"",
                              @"deviceOnvif":info[@"deviceOnvif"] ? info[@"deviceOnvif"]:@"",
                              @"devicePn":info[@"devicePn"] ? info[@"devicePn"]:@"",
-                             @"deviceName":info[@"deviceSn"] ? info[@"deviceSn"]:@"",};
+                             @"deviceName":deviceName,
+                             
+                             };
     ZBDataEntity *entity = [ZBDataEntity new];
     entity.urlString = [NSString stringWithFormat:@"%@%@",SERVER,API_BIND_DEVICE];
     entity.needCache = NO;

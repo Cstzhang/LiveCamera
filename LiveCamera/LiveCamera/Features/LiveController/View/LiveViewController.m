@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
                                                  name:FBSDKAccessTokenDidChangeNotification
                                                object:nil];
     self.currentLiveStatus = LiveStatusWait;
-    NSLog(@"===== rtsp url  ===== : \n%@",self.rtspUrl);
+
 }
 
 - (void)initSubviews{
@@ -116,6 +116,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 //    self.recordingButton.hidden = YES;
 //    [self.recordingButton addTarget:self action:@selector(handleCloseRecordingEvent) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview: self.recordingButton];
+    
     
     self.timeView = [[UIView alloc]init];
     self.timeView .frame = CGRectMake((SCREEN_WIDTH -100)/2, 140, 100, 32);
