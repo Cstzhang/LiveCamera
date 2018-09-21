@@ -529,7 +529,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
     if (!_clientPlayer) {
         _clientPlayer = [[NodePlayer alloc]init];
         _clientPlayer.playerView = self.view;
-        _clientPlayer.rtspTransport = RTSP_TRANSPORT_UDP;
+        _clientPlayer.rtspTransport = RTSP_TRANSPORT_UDP_MULTICAST;
         [_clientPlayer setInputUrl:self.rtspUrl];
         [_clientPlayer setContentMode:1];
     }
@@ -553,7 +553,7 @@ typedef NS_ENUM(NSUInteger,LiveStatus){
 - (NodeStreamer *)nodeStreamer{
     if (!_nodeStreamer) {
         _nodeStreamer  = [[NodeStreamer alloc]init];
-        _nodeStreamer.rtspTransport = RTSP_TRANSPORT_UDP;
+        _nodeStreamer.rtspTransport = RTSP_TRANSPORT_UDP_MULTICAST;
     }
     return _nodeStreamer;
 }
